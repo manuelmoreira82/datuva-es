@@ -21,7 +21,7 @@ const features = [
     icon: QrCode,
     title: "QR Inteligentes",
     description:
-      "Etiquetado automático. Generamos códigos QR para tus depósitos y botellas.",
+      "Etiquetado automático. Generamos códigos QR para tus depósitos y barricas.",
     color: "accent",
     size: "normal",
   },
