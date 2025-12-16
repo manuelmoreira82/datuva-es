@@ -11,9 +11,9 @@ const features = [
   },
   {
     icon: Database,
-    title: "Bodega Visual",
+    title: "Movimientos de Vino",
     description:
-      "Mueve vino arrastrando el dedo entre depósitos. Trazabilidad total garantizada.",
+      "Apunta movimientos de vinos entre depósitos y barricas solo con la cámara de tu móvil o tablet.",
     color: "primary",
     size: "normal",
   },
