@@ -1,4 +1,4 @@
-import { AlertTriangle, Monitor, Package } from "lucide-react";
+import { AlertTriangle, Monitor, Package, FileX } from "lucide-react";
 
 const painPoints = [
   {
@@ -18,6 +18,12 @@ const painPoints = [
     title: "Stock a ciegas",
     description:
       "No te quedes sin corchos ni botellas en mitad de una campaña por un error de Excel.",
+  },
+  {
+    icon: FileX,
+    title: "Papeles que desaparecen",
+    description:
+      "Se mojan, se ensucian, no se leen... Con Datuva, todos los movimientos en la palma de tu mano.",
   },
 ];
 
