@@ -1,5 +1,9 @@
-import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/hero-bodega.jpg";
+import appScreenshotMenu from "@/assets/app-screenshot-menu.jpg";
+import appScreenshotMap from "@/assets/app-screenshot-map.jpg";
+import appScreenshotLogin from "@/assets/app-screenshot-login.jpg";
+import appScreenshotAnalytics from "@/assets/app-screenshot-analytics.jpg";
+import { useState, useEffect } from "react";
 
 const HeroSection = () => {
   return (
@@ -30,17 +34,20 @@ const HeroSection = () => {
             Móvil sin instalaciones complejas.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-up-delay-2">
-            <Button variant="contact" size="lg">
-              Empezar Prueba Piloto
-            </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"
-            >
-              Ver Funcionalidades
-            </Button>
+          {/* App Screenshots Carousel */}
+          <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide animate-fade-in-up-delay-2">
+            {[appScreenshotLogin, appScreenshotMenu, appScreenshotMap, appScreenshotAnalytics].map((screenshot, index) => (
+              <div
+                key={index}
+                className="flex-shrink-0 w-40 md:w-48 rounded-xl overflow-hidden shadow-2xl border border-primary-foreground/20"
+              >
+                <img
+                  src={screenshot}
+                  alt={`Captura de la app ${index + 1}`}
+                  className="w-full h-auto object-cover"
+                />
+              </div>
+            ))}
           </div>
 
           {/* Trust indicators */}
