@@ -34,21 +34,6 @@ const HeroSection = () => {
             Móvil sin instalaciones complejas.
           </p>
 
-          {/* App Screenshots Carousel */}
-          <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide animate-fade-in-up-delay-2">
-            {[appScreenshotLogin, appScreenshotMenu, appScreenshotMap, appScreenshotAnalytics].map((screenshot, index) => (
-              <div
-                key={index}
-                className="flex-shrink-0 w-40 md:w-48 rounded-xl overflow-hidden shadow-2xl border border-primary-foreground/20"
-              >
-                <img
-                  src={screenshot}
-                  alt={`Captura de la app ${index + 1}`}
-                  className="w-full h-auto object-cover"
-                />
-              </div>
-            ))}
-          </div>
 
           {/* Trust indicators */}
           <div className="mt-12 flex flex-wrap gap-8 text-primary-foreground/60 text-sm animate-fade-in-up-delay-3">
