@@ -47,15 +47,23 @@ const FuncionalidadesSection = () => {
         <div className="flex flex-col lg:flex-row-reverse items-center gap-12 lg:gap-20">
           <div className="flex-1 text-center lg:text-left">
             <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-6">
-              Control Total de{" "}
-              <span className="text-primary">Bodega.</span>
+              Bodega Inteligente:{" "}
+              <span className="text-primary">Trazabilidad y Seguridad QR.</span>
             </h3>
-            <p className="text-lg text-muted-foreground leading-relaxed max-w-xl mx-auto lg:mx-0">
-              Trazabilidad absoluta. Analíticas de laboratorio y litros reales 
-              vinculados a cada depósito{" "}
-              <strong className="text-foreground">en tiempo real</strong>. 
-              {" "}Sin hojas de Excel, sin errores.
-            </p>
+            <div className="text-lg text-muted-foreground leading-relaxed max-w-xl mx-auto lg:mx-0 space-y-4">
+              <p>
+                Digitaliza tu bodega y elimina los errores humanos en los trasiegos.
+              </p>
+              <p>
+                <strong className="text-foreground">Información al instante:</strong>{" "}
+                Escanea cualquier depósito para ver sus litros y analíticas en tiempo real.
+              </p>
+              <p>
+                <strong className="text-foreground">Movimientos Blindados:</strong>{" "}
+                ¿Miedo a mezclar vinos por error? Nuestro sistema obliga a escanear el QR de Origen y el de Destino para validar cada movimiento.{" "}
+                <span className="text-primary font-semibold">Si no escaneas, no se mueve.</span>
+              </p>
+            </div>
           </div>
           
           <div className="flex-1 w-full max-w-md lg:max-w-none">
