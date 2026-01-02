@@ -19,10 +19,10 @@ const Footer = () => {
           <div className="flex items-center gap-3 text-primary-foreground/80">
             <Mail className="w-5 h-5" />
             <a 
-              href="mailto:manuel@datuva.es" 
+              href="mailto:Manuelmoreira@datuva.es" 
               className="hover:text-primary-foreground transition-colors"
             >
-              manuel@datuva.es
+              Manuelmoreira@datuva.es
             </a>
           </div>
         </div>
