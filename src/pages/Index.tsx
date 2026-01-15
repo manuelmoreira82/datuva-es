@@ -2,6 +2,7 @@ import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import OfflineModeSection from "@/components/OfflineModeSection";
 import FuncionalidadesSection from "@/components/FuncionalidadesSection";
+import AppShowcaseSection from "@/components/AppShowcaseSection";
 import FacilidadUsoSection from "@/components/FacilidadUsoSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
@@ -13,6 +14,7 @@ const Index = () => {
       <HeroSection />
       <OfflineModeSection />
       <FuncionalidadesSection />
+      <AppShowcaseSection />
       <FacilidadUsoSection />
       <ContactSection />
       <Footer />
