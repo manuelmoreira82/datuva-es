@@ -1,6 +1,6 @@
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
-import VisionGlobalSection from "@/components/VisionGlobalSection";
+import OfflineModeSection from "@/components/OfflineModeSection";
 import FuncionalidadesSection from "@/components/FuncionalidadesSection";
 import FacilidadUsoSection from "@/components/FacilidadUsoSection";
 import ContactSection from "@/components/ContactSection";
@@ -11,7 +11,7 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       <HeroSection />
-      <VisionGlobalSection />
+      <OfflineModeSection />
       <FuncionalidadesSection />
       <FacilidadUsoSection />
       <ContactSection />
