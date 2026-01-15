@@ -1,81 +1,88 @@
-import appScreenshotMap from "@/assets/app-screenshot-map.jpg";
-import appScreenshotAnalytics from "@/assets/app-screenshot-analytics.jpg";
+import { FileText, QrCode, Grape, Clock } from "lucide-react";
 
 const FuncionalidadesSection = () => {
+  const features = [
+    {
+      icon: FileText,
+      title: "Tu Libro SILICIE, listo en un clic.",
+      description: "Tú mueve el vino, nosotros organizamos los datos. El sistema genera automáticamente el Libro de Movimientos con el formato exacto que pide Hacienda, listo para que tú o tu asesor lo presentéis sin perder tiempo cuadrando litros.",
+      accent: "primary"
+    },
+    {
+      icon: QrCode,
+      title: "Implantación física con QRs industriales.",
+      description: "No es solo software. Vamos a tu bodega, identificamos tus depósitos y barricas con pegatinas QR resistentes y formamos a tu equipo in situ.",
+      accent: "vineyard"
+    },
+    {
+      icon: Grape,
+      title: "De la báscula a la botella.",
+      description: "Registra entradas de uva con foto al ticket de pesaje, gestiona el cuaderno de campo y controla qué uva de qué viticultor ha ido a cada depósito. Trazabilidad total sin complicaciones.",
+      accent: "gold"
+    },
+    {
+      icon: Clock,
+      title: "Control horario y fichajes GPS.",
+      description: "Cumple la ley sin complicaciones. Tus operarios fichan desde el móvil geolocalizados o desde una tablet en la entrada de la nave.",
+      accent: "primary"
+    }
+  ];
+
   return (
-    <section className="py-24 md:py-32 bg-background">
+    <section id="funcionalidades" className="py-24 md:py-32 bg-muted/30">
       <div className="container mx-auto px-4">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-20">
+        <div className="text-center max-w-3xl mx-auto mb-16">
           <span className="inline-block text-sm font-semibold text-vineyard uppercase tracking-wider mb-4">
-            Funcionalidades Clave
+            Funcionalidades
           </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground">
-            Todo lo que necesitas,{" "}
-            <span className="text-primary">nada que sobre.</span>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6">
+            Herramientas reales para{" "}
+            <span className="text-primary">problemas reales.</span>
           </h2>
+          <p className="text-lg text-muted-foreground">
+            Diseñado por y para bodegas. Sin funciones de relleno, solo lo que necesitas.
+          </p>
         </div>
 
-        {/* Block A: Text Left / Image Right */}
-        <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20 mb-24 lg:mb-32">
-          <div className="flex-1 text-center lg:text-left">
-            <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-6">
-              Campo Inteligente y{" "}
-              <span className="text-vineyard">Mapas 3D.</span>
-            </h3>
-            <p className="text-lg text-muted-foreground leading-relaxed max-w-xl mx-auto lg:mx-0">
-              Geolocalización real de parcelas. El clima y los tratamientos se 
-              registran solos al tocar la viña. Cumple con el{" "}
-              <strong className="text-foreground">Cuaderno de Campo Digital</strong> 
-              {" "}sin esfuerzo.
-            </p>
-          </div>
-          
-          <div className="flex-1 w-full max-w-md lg:max-w-none">
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-vineyard/20 to-primary/10 blur-3xl scale-90 opacity-40" />
-              <img
-                src={appScreenshotMap}
-                alt="Mapa 3D satelital con parcelas de viñedos geolocalizadas"
-                className="relative w-full h-auto rounded-2xl shadow-[0_25px_60px_-15px_rgba(0,0,0,0.2)] border border-border/50"
-              />
+        {/* Features Grid */}
+        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          {features.map((feature, index) => (
+            <div
+              key={index}
+              className="bg-background rounded-2xl p-8 shadow-sm border border-border/50 hover:shadow-lg hover:border-border transition-all duration-300 group"
+            >
+              {/* Icon */}
+              <div className={`w-14 h-14 rounded-xl flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110 ${
+                feature.accent === "primary" ? "bg-primary/10 text-primary" :
+                feature.accent === "vineyard" ? "bg-vineyard/10 text-vineyard" :
+                "bg-gold/10 text-gold"
+              }`}>
+                <feature.icon className="w-7 h-7" />
+              </div>
+
+              {/* Content */}
+              <h3 className="text-xl md:text-2xl font-bold text-foreground mb-4">
+                {feature.title}
+              </h3>
+              <p className="text-muted-foreground leading-relaxed">
+                {feature.description}
+              </p>
             </div>
-          </div>
+          ))}
         </div>
 
-        {/* Block B: Image Left / Text Right */}
-        <div className="flex flex-col lg:flex-row-reverse items-center gap-12 lg:gap-20">
-          <div className="flex-1 text-center lg:text-left">
-            <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-6">
-              Bodega Inteligente:{" "}
-              <span className="text-primary">Trazabilidad y Seguridad QR.</span>
-            </h3>
-            <div className="text-lg text-muted-foreground leading-relaxed max-w-xl mx-auto lg:mx-0 space-y-4">
-              <p>
-                Digitaliza tu bodega y elimina los errores humanos en los trasiegos.
-              </p>
-              <p>
-                <strong className="text-foreground">Información al instante:</strong>{" "}
-                Escanea cualquier depósito para ver sus litros y analíticas en tiempo real.
-              </p>
-              <p>
-                <strong className="text-foreground">Movimientos Blindados:</strong>{" "}
-                ¿Miedo a mezclar vinos por error? Nuestro sistema obliga a escanear el QR de Origen y el de Destino para validar cada movimiento.{" "}
-                <span className="text-primary font-semibold">Si no escaneas, no se mueve.</span>
-              </p>
-            </div>
-          </div>
-          
-          <div className="flex-1 w-full max-w-md lg:max-w-none">
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-gold/10 blur-3xl scale-90 opacity-40" />
-              <img
-                src={appScreenshotAnalytics}
-                alt="Listado de depósitos con analíticas y datos en tiempo real"
-                className="relative w-full h-auto rounded-2xl shadow-[0_25px_60px_-15px_rgba(0,0,0,0.2)] border border-border/50"
-              />
-            </div>
-          </div>
+        {/* Bottom CTA */}
+        <div className="text-center mt-16">
+          <p className="text-muted-foreground mb-4">
+            ¿Quieres ver cómo funciona en tu bodega?
+          </p>
+          <a
+            href="#contacto"
+            className="inline-flex items-center gap-2 text-primary font-semibold hover:underline"
+          >
+            Solicitar una demo personalizada →
+          </a>
         </div>
       </div>
     </section>

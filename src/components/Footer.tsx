@@ -5,8 +5,18 @@ const Footer = () => {
   return (
     <footer className="bg-foreground text-primary-foreground py-16">
       <div className="container mx-auto px-4">
-        {/* Main Footer Content */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-8 mb-12">
+        {/* Main Message */}
+        <div className="max-w-3xl mx-auto text-center mb-12">
+          <p className="text-lg md:text-xl text-primary-foreground/90 leading-relaxed italic">
+            "Software del Bierzo para el mundo. Datuva no se ha probado en oficinas, 
+            se ha probado en bodegas reales, con mangueras en el suelo y durante 
+            vendimias caóticas.{" "}
+            <span className="text-gold font-medium not-italic">Sabemos lo que necesitas.</span>"
+          </p>
+        </div>
+
+        {/* Logo and Contact */}
+        <div className="flex flex-col md:flex-row items-center justify-between gap-8 mb-12 pt-8 border-t border-primary-foreground/10">
           <div className="flex items-center gap-4">
             <img
               src={datuvaLogo}
@@ -56,7 +66,7 @@ const Footer = () => {
 
             {/* Origin Text */}
             <p className="text-sm text-primary-foreground/50">
-              Tecnología desarrollada en El Bierzo.
+              Hecho en El Bierzo 🍇
             </p>
           </div>
 
