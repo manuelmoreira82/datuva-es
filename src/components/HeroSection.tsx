@@ -26,15 +26,13 @@ const HeroSection = () => {
       <div className="container mx-auto relative z-10">
         <div className="max-w-3xl">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground leading-tight mb-6 animate-fade-in-up">
-            Haz vino,{" "}
-            <span className="text-gold">no papeleo.</span>
+            Gestión Integral de Bodega y Viñedos:{" "}
+            <span className="text-gold">De la Viña a tu Copa.</span>
           </h1>
 
           <p className="text-lg md:text-xl text-primary-foreground/85 mb-8 max-w-2xl animate-fade-in-up-delay-1 leading-relaxed">
-            La gestión integral para bodegas que funciona incluso sin internet. 
-            Controla la trazabilidad, el campo, los fichajes de personal y prepara 
-            tus datos para SILICIE desde el móvil.{" "}
-            <span className="text-gold font-medium">Probado en el Bierzo, no en Silicon Valley.</span>
+            La plataforma unificada que centraliza producción, campo, trazabilidad y RRHH. 
+            Funciona incluso sin internet y prepara automáticamente tus datos para SILICIE y Agricultura.
           </p>
 
           {/* CTA Button */}
@@ -42,7 +40,7 @@ const HeroSection = () => {
             onClick={scrollToContact}
             className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 animate-fade-in-up-delay-2"
           >
-            Solicitar Demo en mi Bodega
+            Solicitar Auditoría para mi Bodega
           </button>
 
           {/* Trust indicators */}
