@@ -6,6 +6,7 @@ import AppShowcaseSection from "@/components/AppShowcaseSection";
 import FacilidadUsoSection from "@/components/FacilidadUsoSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
+import CookieBanner from "@/components/CookieBanner";
 
 const Index = () => {
   return (
@@ -18,6 +19,7 @@ const Index = () => {
       <FacilidadUsoSection />
       <ContactSection />
       <Footer />
+      <CookieBanner />
     </div>
   );
 };
