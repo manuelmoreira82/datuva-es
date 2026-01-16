@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import datuvaLogo from "@/assets/datuva-logo.jpg";
 import { Mail } from "lucide-react";
 
@@ -42,26 +43,26 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             {/* Legal Links */}
             <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-primary-foreground/60">
-              <a
-                href="#"
+              <Link
+                to="/terminos"
                 className="hover:text-primary-foreground transition-colors"
               >
-                Aviso Legal
-              </a>
+                Términos y Condiciones
+              </Link>
               <span className="hidden sm:inline text-primary-foreground/30">|</span>
-              <a
-                href="#"
+              <Link
+                to="/privacidad"
                 className="hover:text-primary-foreground transition-colors"
               >
                 Política de Privacidad
-              </a>
+              </Link>
               <span className="hidden sm:inline text-primary-foreground/30">|</span>
-              <a
-                href="#"
+              <Link
+                to="/terminos"
                 className="hover:text-primary-foreground transition-colors"
               >
-                Cookies
-              </a>
+                Aviso Legal
+              </Link>
             </div>
 
             {/* Origin Text */}
