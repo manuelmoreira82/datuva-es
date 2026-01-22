@@ -7,11 +7,12 @@ const ContactSection = () => {
       <div className="container mx-auto">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6 animate-fade-in-up">
-            Pide una demo y comprueba cómo funciona DATUVA en una bodega real
+            ¿Hablamos de tu bodega?
           </h2>
           <p className="text-primary-foreground/80 text-lg mb-12 max-w-xl mx-auto animate-fade-in-up-delay-1">
-            Te lo enseñamos en una llamada corta, sin rodeos. Si encaja con tu
-            forma de trabajar, lo verás en minutos.
+            Sé que cada campaña es un mundo. Llámame directamente y vemos si
+            Datuva encaja en tu forma de trabajar. Trato directo, sin
+            intermediarios.
           </p>
 
           <div className="bg-primary-foreground/10 backdrop-blur-sm rounded-3xl p-8 md:p-12 animate-fade-in-up-delay-2">
@@ -68,7 +69,7 @@ const ContactSection = () => {
                 className="mt-6"
                 asChild
               >
-                <a href="tel:+34627130891">Ver una demo / Solicitar llamada</a>
+                <a href="tel:+34627130891">Llamar Ahora</a>
               </Button>
             </div>
           </div>
