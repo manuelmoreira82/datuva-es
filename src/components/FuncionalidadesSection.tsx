@@ -22,8 +22,8 @@ const FuncionalidadesSection = () => {
     },
     {
       icon: Clock,
-      title: "Control horario y fichajes GPS.",
-      description: "Cumple la ley sin complicaciones. Tus operarios fichan desde el móvil geolocalizados o desde una tablet en la entrada de la nave.",
+      title: "Control horario y fichajes.",
+      description: "Cumple la ley sin complicaciones. Tus operarios fichan desde el móvil o desde una tablet en la entrada de la nave.",
       accent: "primary"
     }
   ];
