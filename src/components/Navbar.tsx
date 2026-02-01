@@ -55,8 +55,10 @@ const Navbar = () => {
           <Button variant="heroOutline" size="default">
             Acceso Clientes
           </Button>
-          <Button variant="hero" size="default">
-            Solicitar Demo
+          <Button variant="hero" size="default" asChild>
+            <a href="https://wa.me/34627130891?text=Hola%2C%20quiero%20solicitar%20una%20demo%20de%20Datuva" target="_blank" rel="noopener noreferrer">
+              Solicitar Demo
+            </a>
           </Button>
         </div>
 
@@ -88,8 +90,10 @@ const Navbar = () => {
             <Button variant="heroOutline" className="w-full">
               Acceso Clientes
             </Button>
-            <Button variant="hero" className="w-full">
-              Solicitar Demo
+            <Button variant="hero" className="w-full" asChild>
+              <a href="https://wa.me/34627130891?text=Hola%2C%20quiero%20solicitar%20una%20demo%20de%20Datuva" target="_blank" rel="noopener noreferrer">
+                Solicitar Demo
+              </a>
             </Button>
           </div>
         </div>
