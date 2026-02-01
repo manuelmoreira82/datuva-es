@@ -36,12 +36,14 @@ const HeroSection = () => {
           </p>
 
           {/* CTA Button */}
-          <button
-            onClick={scrollToContact}
-            className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 animate-fade-in-up-delay-2"
+          <a
+            href="https://wa.me/34627130891?text=Hola%2C%20quiero%20solicitar%20una%20auditor%C3%ADa%20para%20mi%20bodega"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 animate-fade-in-up-delay-2"
           >
             Solicitar Auditoría para mi Bodega
-          </button>
+          </a>
 
           {/* Trust indicators */}
           <div className="mt-12 flex flex-wrap gap-8 text-primary-foreground/60 text-sm animate-fade-in-up-delay-3">
