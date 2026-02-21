@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import datuvaLogo from "@/assets/datuva-logo.jpg";
+import datuvaLogo from "@/assets/datuva-logo-new.webp";
 import { Mail } from "lucide-react";
 
 const Footer = () => {

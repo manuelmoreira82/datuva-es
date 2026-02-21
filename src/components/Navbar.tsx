@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import datuvaLogo from "@/assets/datuva-logo.jpg";
+import datuvaLogo from "@/assets/datuva-logo-new.webp";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
