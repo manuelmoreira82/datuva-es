@@ -1,10 +1,13 @@
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
-import OfflineModeSection from "@/components/OfflineModeSection";
-import FuncionalidadesSection from "@/components/FuncionalidadesSection";
+import ProblemasSection from "@/components/ProblemasSection";
+import SolucionSection from "@/components/SolucionSection";
 import AppShowcaseSection from "@/components/AppShowcaseSection";
-import FacilidadUsoSection from "@/components/FacilidadUsoSection";
-import ContactSection from "@/components/ContactSection";
+import ComparativaSection from "@/components/ComparativaSection";
+import TestimoniosSection from "@/components/TestimoniosSection";
+import ROISection from "@/components/ROISection";
+import FAQSection from "@/components/FAQSection";
+import CTAFinalSection from "@/components/CTAFinalSection";
 import Footer from "@/components/Footer";
 import CookieBanner from "@/components/CookieBanner";
 
@@ -13,11 +16,14 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       <HeroSection />
-      <OfflineModeSection />
-      <FuncionalidadesSection />
+      <ProblemasSection />
+      <SolucionSection />
       <AppShowcaseSection />
-      <FacilidadUsoSection />
-      <ContactSection />
+      <ComparativaSection />
+      <TestimoniosSection />
+      <ROISection />
+      <FAQSection />
+      <CTAFinalSection />
       <Footer />
       <CookieBanner />
     </div>

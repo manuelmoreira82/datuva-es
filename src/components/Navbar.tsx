@@ -16,9 +16,10 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { label: "Inicio", href: "#inicio" },
-    { label: "Funcionalidades", href: "#funcionalidades" },
-    { label: "Contacto", href: "#contacto" },
+    { label: "Problema", href: "#inicio" },
+    { label: "Solución", href: "#solucion" },
+    { label: "Comparativa", href: "#comparativa" },
+    { label: "FAQ", href: "#faq" },
   ];
 
   return (

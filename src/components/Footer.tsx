@@ -9,9 +9,8 @@ const Footer = () => {
         {/* Main Message */}
         <div className="max-w-3xl mx-auto text-center mb-12">
           <p className="text-lg md:text-xl text-primary-foreground/90 leading-relaxed italic">
-            "Software del Bierzo para el mundo. Datuva no se ha probado en oficinas, 
-            se ha probado en bodegas reales, con mangueras en el suelo y durante 
-            vendimias caóticas.{" "}
+            "Hecho en El Bierzo. Probado en bodegas reales, con mangueras en el suelo 
+            y durante vendimias caóticas.{" "}
             <span className="text-gold font-medium not-italic">Sabemos lo que necesitas.</span>"
           </p>
         </div>
