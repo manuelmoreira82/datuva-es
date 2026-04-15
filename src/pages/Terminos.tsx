@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
-import datuvaLogo from "@/assets/datuva-logo.jpg";
+import datuvaLogo from "@/assets/datuva-logo-new.webp";
 
 const Terminos = () => {
   return (
