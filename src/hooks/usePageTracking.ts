@@ -3,10 +3,17 @@ import { supabase } from "@/integrations/supabase/client";
 
 export const usePageTracking = () => {
   useEffect(() => {
-    supabase.from("page_visits").insert({
-      page: window.location.pathname,
-      user_agent: navigator.userAgent,
-      referrer: document.referrer || null,
-    });
+    const trackVisit = async () => {
+      try {
+        await supabase.from("page_visits").insert([{
+          page: window.location.pathname,
+          user_agent: navigator.userAgent,
+          referrer: document.referrer || null,
+        }]);
+      } catch (e) {
+        // Silent fail - tracking should never break the site
+      }
+    };
+    trackVisit();
   }, []);
 };
