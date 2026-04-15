@@ -163,6 +163,7 @@ const sections: SectionCard[] = [
 ];
 
 const Index = () => {
+  usePageTracking();
   const [activeCard, setActiveCard] = useState<SectionCard | null>(null);
 
   return (
