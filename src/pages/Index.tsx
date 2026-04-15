@@ -6,6 +6,7 @@ import SectionDetailModal from "@/components/SectionDetailModal";
 import CTAFinalSection from "@/components/CTAFinalSection";
 import Footer from "@/components/Footer";
 import CookieBanner from "@/components/CookieBanner";
+import WhatsAppButton from "@/components/WhatsAppButton";
 
 import {
   MapPin, BookOpen, Leaf, Sun, Bug, Tractor, CloudRain, FlaskConical, Clock, Euro,
