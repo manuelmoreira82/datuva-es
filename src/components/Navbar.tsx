@@ -16,10 +16,10 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { label: "Problema", href: "#inicio" },
-    { label: "Solución", href: "#solucion" },
-    { label: "Comparativa", href: "#comparativa" },
-    { label: "FAQ", href: "#faq" },
+    { label: "Campo", href: "#campo" },
+    { label: "Bodega", href: "#bodega" },
+    { label: "Normativa", href: "#normativa" },
+    { label: "Costes", href: "#costes" },
   ];
 
   return (
@@ -35,37 +35,36 @@ const Navbar = () => {
           <img
             src={datuvaLogo}
             alt="Datuva Logo"
-            className="h-12 w-auto rounded-lg"
+            className="h-10 w-auto rounded-lg"
           />
         </a>
 
-        {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
             <a
               key={link.label}
               href={link.href}
-              className="text-foreground/80 hover:text-primary font-medium transition-colors duration-200"
+              className={`font-medium transition-colors duration-200 ${
+                isScrolled
+                  ? "text-foreground/80 hover:text-primary"
+                  : "text-primary-foreground/80 hover:text-primary-foreground"
+              }`}
             >
               {link.label}
             </a>
           ))}
         </div>
 
-        <div className="hidden md:flex items-center gap-4">
-          <Button variant="heroOutline" size="default">
-            Acceso Clientes
-          </Button>
-          <Button variant="hero" size="default" asChild>
-            <a href="https://wa.me/34627130891?text=Hola%2C%20quiero%20solicitar%20una%20demo%20de%20Datuva" target="_blank" rel="noopener noreferrer">
-              Solicitar Demo
+        <div className="hidden md:flex items-center">
+          <Button variant="contact" size="default" asChild>
+            <a href="mailto:manuelmoreira@datuva.es?subject=Solicitud%20de%20demostraci%C3%B3n%20Datuva">
+              Solicitar demostración
             </a>
           </Button>
         </div>
 
-        {/* Mobile Menu Button */}
         <button
-          className="md:hidden p-2 text-foreground"
+          className={`md:hidden p-2 ${isScrolled ? "text-foreground" : "text-primary-foreground"}`}
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label="Toggle menu"
         >
@@ -73,7 +72,6 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <div className="md:hidden absolute top-full left-0 right-0 bg-card shadow-card p-6 animate-fade-in-up">
           <div className="flex flex-col gap-4">
@@ -88,12 +86,9 @@ const Navbar = () => {
               </a>
             ))}
             <hr className="border-border my-2" />
-            <Button variant="heroOutline" className="w-full">
-              Acceso Clientes
-            </Button>
-            <Button variant="hero" className="w-full" asChild>
-              <a href="https://wa.me/34627130891?text=Hola%2C%20quiero%20solicitar%20una%20demo%20de%20Datuva" target="_blank" rel="noopener noreferrer">
-                Solicitar Demo
+            <Button variant="contact" className="w-full" asChild>
+              <a href="mailto:manuelmoreira@datuva.es?subject=Solicitud%20de%20demostraci%C3%B3n%20Datuva">
+                Solicitar demostración
               </a>
             </Button>
           </div>
