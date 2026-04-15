@@ -178,6 +178,7 @@ const Index = () => {
       <CTAFinalSection />
       <Footer />
       <CookieBanner />
+      <WhatsAppButton />
     </div>
   );
 };
