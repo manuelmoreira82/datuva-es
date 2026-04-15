@@ -2,57 +2,54 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
 
 @layer base {
   :root {
-    --background: 210 20% 98%;
-    --foreground: 215 25% 15%;
+    --background: 37 33% 95%;
+    --foreground: 280 30% 15%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 215 25% 15%;
+    --card: 37 33% 98%;
+    --card-foreground: 280 30% 15%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 215 25% 15%;
+    --popover: 37 33% 98%;
+    --popover-foreground: 280 30% 15%;
 
-    --primary: 0 52% 23%;
-    --primary-foreground: 0 0% 98%;
+    --primary: 301 37% 18%;
+    --primary-foreground: 37 33% 95%;
 
-    --secondary: 120 37% 25%;
-    --secondary-foreground: 0 0% 98%;
+    --secondary: 40 50% 54%;
+    --secondary-foreground: 280 30% 15%;
 
-    --muted: 210 20% 96%;
-    --muted-foreground: 215 16% 47%;
+    --muted: 37 20% 90%;
+    --muted-foreground: 280 15% 45%;
 
-    --accent: 40 70% 50%;
-    --accent-foreground: 215 25% 15%;
+    --accent: 40 50% 54%;
+    --accent-foreground: 280 30% 15%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 214 32% 91%;
-    --input: 214 32% 91%;
-    --ring: 0 52% 23%;
+    --border: 37 20% 85%;
+    --input: 37 20% 85%;
+    --ring: 301 37% 18%;
 
-    --radius: 0.625rem;
+    --radius: 0.5rem;
 
     /* Custom Datuva tokens */
-    --bordeaux: 0 52% 23%;
-    --bordeaux-light: 0 45% 30%;
+    --bordeaux: 301 37% 18%;
+    --bordeaux-light: 301 30% 28%;
     --vineyard: 120 37% 25%;
     --vineyard-light: 120 30% 35%;
-    --gold: 40 70% 50%;
-    --cream: 40 30% 96%;
-    
-    /* Gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(0 52% 23% / 0.95), hsl(0 45% 18% / 0.98));
-    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%), hsl(210 20% 98%));
-    --gradient-vineyard: linear-gradient(135deg, hsl(120 37% 25%), hsl(120 30% 35%));
+    --gold: 40 50% 54%;
+    --gold-light: 40 55% 65%;
+    --cream: 37 33% 95%;
+    --cream-dark: 37 25% 88%;
 
     /* Shadows */
-    --shadow-soft: 0 4px 20px -4px hsl(0 52% 23% / 0.15);
-    --shadow-card: 0 8px 30px -8px hsl(0 52% 23% / 0.12);
-    --shadow-hover: 0 12px 40px -12px hsl(0 52% 23% / 0.2);
+    --shadow-soft: 0 4px 20px -4px hsl(301 37% 18% / 0.1);
+    --shadow-card: 0 8px 30px -8px hsl(301 37% 18% / 0.08);
+    --shadow-hover: 0 12px 40px -12px hsl(301 37% 18% / 0.15);
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -62,41 +59,6 @@
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  .dark {
-    --background: 0 20% 8%;
-    --foreground: 0 0% 95%;
-
-    --card: 0 20% 12%;
-    --card-foreground: 0 0% 95%;
-
-    --popover: 0 20% 12%;
-    --popover-foreground: 0 0% 95%;
-
-    --primary: 0 52% 35%;
-    --primary-foreground: 0 0% 98%;
-
-    --secondary: 120 30% 30%;
-    --secondary-foreground: 0 0% 98%;
-
-    --muted: 0 15% 18%;
-    --muted-foreground: 0 10% 65%;
-
-    --accent: 40 70% 50%;
-    --accent-foreground: 0 0% 98%;
-
-    --destructive: 0 62% 30%;
-    --destructive-foreground: 0 0% 98%;
-
-    --border: 0 15% 20%;
-    --input: 0 15% 20%;
-    --ring: 0 52% 35%;
-
-    --bordeaux: 0 52% 35%;
-    --bordeaux-light: 0 45% 45%;
-    --vineyard: 120 30% 35%;
-    --vineyard-light: 120 25% 45%;
   }
 }
 
@@ -115,32 +77,23 @@
 }
 
 @layer utilities {
-  .text-gradient-bordeaux {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/80;
-  }
-
   .animate-fade-in-up {
     animation: fadeInUp 0.6s ease-out forwards;
     opacity: 0;
   }
 
   .animate-fade-in-up-delay-1 {
-    animation: fadeInUp 0.6s ease-out 0.1s forwards;
+    animation: fadeInUp 0.6s ease-out 0.15s forwards;
     opacity: 0;
   }
 
   .animate-fade-in-up-delay-2 {
-    animation: fadeInUp 0.6s ease-out 0.2s forwards;
-    opacity: 0;
-  }
-
-  .animate-fade-in-up-delay-3 {
     animation: fadeInUp 0.6s ease-out 0.3s forwards;
     opacity: 0;
   }
 
-  .animate-fade-in-up-delay-4 {
-    animation: fadeInUp 0.6s ease-out 0.4s forwards;
+  .animate-fade-in-up-delay-3 {
+    animation: fadeInUp 0.6s ease-out 0.45s forwards;
     opacity: 0;
   }
 }
@@ -148,23 +101,10 @@
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(24px);
   }
   to {
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-.animate-float {
-  animation: float 3s ease-in-out infinite;
 }

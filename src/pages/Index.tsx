@@ -1,12 +1,15 @@
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
-import ProblemasSection from "@/components/ProblemasSection";
-import SolucionSection from "@/components/SolucionSection";
-import AppShowcaseSection from "@/components/AppShowcaseSection";
-import ComparativaSection from "@/components/ComparativaSection";
-import TestimoniosSection from "@/components/TestimoniosSection";
-import ROISection from "@/components/ROISection";
-import FAQSection from "@/components/FAQSection";
+import CampoSection from "@/components/CampoSection";
+import VendimiaSection from "@/components/VendimiaSection";
+import BodegaSection from "@/components/BodegaSection";
+import LaboratorioSection from "@/components/LaboratorioSection";
+import EmbotilladoSection from "@/components/EmbotilladoSection";
+import ExpedicionesSection from "@/components/ExpedicionesSection";
+import NormativaSection from "@/components/NormativaSection";
+import CostesSection from "@/components/CostesSection";
+import RRHHSection from "@/components/RRHHSection";
+import ProveedoresSection from "@/components/ProveedoresSection";
 import CTAFinalSection from "@/components/CTAFinalSection";
 import Footer from "@/components/Footer";
 import CookieBanner from "@/components/CookieBanner";
@@ -16,13 +19,16 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       <HeroSection />
-      <ProblemasSection />
-      <SolucionSection />
-      <AppShowcaseSection />
-      <ComparativaSection />
-      <TestimoniosSection />
-      <ROISection />
-      <FAQSection />
+      <CampoSection />
+      <VendimiaSection />
+      <BodegaSection />
+      <LaboratorioSection />
+      <EmbotilladoSection />
+      <ExpedicionesSection />
+      <NormativaSection />
+      <CostesSection />
+      <RRHHSection />
+      <ProveedoresSection />
       <CTAFinalSection />
       <Footer />
       <CookieBanner />
