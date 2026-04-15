@@ -1,42 +1,98 @@
 import { ArrowRight, Monitor, Smartphone, Tablet } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
+import sectionCampo from "@/assets/section-campo.jpg";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, delay: i * 0.15, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
+  }),
+};
 
 const HeroSection = () => {
   return (
-    <section
-      id="inicio"
-      className="relative min-h-screen flex items-center pt-24 pb-16 bg-primary"
-    >
-      {/* Subtle pattern overlay */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,hsl(var(--gold)/0.15),transparent_60%)]" />
+    <section id="inicio" className="relative h-screen flex items-end overflow-hidden">
+      {/* Background image */}
+      <div className="absolute inset-0">
+        <img
+          src={sectionCampo}
+          alt="Viñedos españoles"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20" />
       </div>
 
-      <div className="container mx-auto relative z-10">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-primary-foreground leading-[1.1] mb-8 animate-fade-in-up">
-            Del campo a la botella.{" "}
-            <span className="text-accent">Todo bajo control.</span>
-          </h1>
+      <div className="container mx-auto px-4 relative z-10 pb-16 md:pb-24">
+        <div className="max-w-4xl">
+          <motion.p
+            custom={0}
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+            className="text-accent font-medium tracking-[0.3em] uppercase text-xs md:text-sm mb-4"
+          >
+            Gestión integral para bodegas
+          </motion.p>
 
-          <p className="text-lg md:text-xl text-primary-foreground/75 mb-12 max-w-3xl mx-auto animate-fade-in-up-delay-1 leading-relaxed">
+          <motion.h1
+            custom={1}
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+            className="font-serif text-4xl md:text-6xl lg:text-7xl font-bold leading-[0.95] tracking-tight mb-6 text-white"
+          >
+            Del campo a la botella.
+            <br />
+            <span className="text-accent">Todo bajo control.</span>
+          </motion.h1>
+
+          <motion.p
+            custom={2}
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+            className="text-white/75 text-base md:text-lg max-w-2xl mb-8 leading-relaxed"
+          >
             Plataforma de gestión integral diseñada para bodegas españolas. 
             Viñedo, bodega, laboratorio, embotellado, normativa y costes — en una sola app.
-          </p>
+          </motion.p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up-delay-2">
-            <Button variant="contact" size="lg" asChild>
+          <motion.div
+            custom={3}
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+            className="flex flex-col sm:flex-row gap-4"
+          >
+            <Button variant="contact" size="lg" asChild className="text-base group">
               <a
                 href="mailto:manuelmoreira@datuva.es?subject=Solicitud%20de%20demostraci%C3%B3n%20Datuva"
-                className="gap-3"
+                className="gap-2"
               >
                 Solicitar demostración
-                <ArrowRight className="w-5 h-5" />
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </a>
             </Button>
-          </div>
+            <Button
+              variant="outline"
+              size="lg"
+              asChild
+              className="text-base border-white/40 text-white hover:bg-white/15 hover:text-white"
+            >
+              <a href="#modulos">Ver módulos</a>
+            </Button>
+          </motion.div>
 
-          <div className="mt-10 flex items-center justify-center gap-6 text-primary-foreground/50 text-sm animate-fade-in-up-delay-3">
+          <motion.div
+            custom={4}
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+            className="mt-10 flex items-center gap-6 text-white/50 text-sm"
+          >
             <div className="flex items-center gap-2">
               <Smartphone className="w-4 h-4" />
               <span>Móvil</span>
@@ -49,9 +105,9 @@ const HeroSection = () => {
               <Monitor className="w-4 h-4" />
               <span>Ordenador</span>
             </div>
-            <span className="text-primary-foreground/30">|</span>
+            <span className="text-white/20">|</span>
             <span>Instalable como app</span>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
