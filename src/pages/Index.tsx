@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { usePageTracking } from "@/hooks/usePageTracking";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import { ScrollDrivenCards, type SectionCard } from "@/components/ScrollDrivenCards";
@@ -162,6 +163,7 @@ const sections: SectionCard[] = [
 ];
 
 const Index = () => {
+  usePageTracking();
   const [activeCard, setActiveCard] = useState<SectionCard | null>(null);
 
   return (
