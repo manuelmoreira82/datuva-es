@@ -336,7 +336,7 @@ const SCENES = [
     headline:'Olvídate de\nprogramas\ncomplicados.',
     body:'Datuva es tan fácil como usar el móvil. Tu equipo lo aprende en minutos, sin formación técnica.',
     pills:['Fácil de usar','iOS & Android','Sin instalación'],
-    images:[IMGS.home, IMGS.modules],
+    images:[IMGS.modules],
     imgInterval:4,
     glow:'radial-gradient(ellipse 60% 80% at 80% 50%, rgba(201,168,76,0.05) 0%, transparent 60%)',
     glowColor:'rgba(201,168,76,0.15)',
@@ -515,7 +515,7 @@ function IntroScene({ t }) {
           const logoP = easeOutBack(clamp((t-0.6)/1.8,0,1));
           return (
             <img
-              src="uploads/1000047716.jpg"
+              src="/uploads/1000047716.jpg"
               alt="Datuva"
               style={{
                 width:460, height:'auto',
