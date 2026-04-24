@@ -171,6 +171,7 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       <HeroSection />
+      <DemoAppSection />
       
       <div id="modulos">
         <ScrollDrivenCards cards={sections} onCardClick={setActiveCard} />
