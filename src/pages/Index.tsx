@@ -2,6 +2,7 @@ import { useState } from "react";
 import { usePageTracking } from "@/hooks/usePageTracking";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
+import DemoAppSection from "@/components/DemoAppSection";
 import { ScrollDrivenCards, type SectionCard } from "@/components/ScrollDrivenCards";
 import SectionDetailModal from "@/components/SectionDetailModal";
 import CTAFinalSection from "@/components/CTAFinalSection";
