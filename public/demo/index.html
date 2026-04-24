@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Datuva — Demo App</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background:#0e0b06;
+  display:flex; align-items:center; justify-content:center;
+  min-height:100vh;
+  font-family:'DM Sans', sans-serif;
+}
+
+/* ── Stage ── */
+.stage-wrap {
+  position: relative;
+  width: 1280px; height: 720px;
+  transform-origin: top left;
+}
+.stage {
+  width: 1280px; height: 720px;
+  background: #1A1208;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ── Backgrounds ── */
+.bg-dots {
+  position:absolute; inset:0;
+  background-image: radial-gradient(circle, rgba(201,168,76,0.07) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events:none;
+}
+.bg-glow {
+  position:absolute; inset:0;
+  pointer-events:none;
+  transition: opacity 1s;
+}
+
+/* ── Left panel ── */
+.left-panel {
+  position:absolute;
+  left:0; top:0; bottom:80px;
+  width:560px;
+  display:flex; flex-direction:column;
+  justify-content:center;
+  padding: 60px 70px;
+}
+
+.scene-tag {
+  font-size:11px; letter-spacing:5px; text-transform:uppercase;
+  color:#C9A84C;
+  margin-bottom:20px;
+  transition: opacity 0.6s, transform 0.6s;
+}
+
+.scene-headline {
+  font-family:'Playfair Display', serif;
+  font-size:52px; font-weight:900; line-height:1.1;
+  color:#F5F0E8;
+  margin-bottom:20px;
+  transition: opacity 0.6s, transform 0.6s;
+}
+.scene-headline em {
+  font-style:italic; font-weight:400;
+  color:#C9A84C;
+}
+
+.scene-body {
+  font-size:17px; font-weight:300; line-height:1.7;
+  color:#9A8A72;
+  max-width:400px;
+  transition: opacity 0.6s, transform 0.6s;
+}
+
+.scene-divider {
+  width:48px; height:2px;
+  background:#7C2D3E;
+  margin: 28px 0;
+  transition: width 0.8s;
+}
+
+/* ── Feature pills ── */
+.feature-pills {
+  display:flex; flex-wrap:wrap; gap:8px;
+  margin-top:24px;
+}
+.pill {
+  background:rgba(124,45,62,0.2);
+  border:1px solid rgba(124,45,62,0.4);
+  border-radius:20px;
+  padding:6px 14px;
+  font-size:12px; color:#E8A0A8;
+  transition: opacity 0.4s, transform 0.4s;
+}
+
+/* ── Phone frame ── */
+.phone-wrap {
+  position:absolute;
+  right:80px; top:30px;
+  width:300px; height:640px;
+  transition: transform 0.8s cubic-bezier(.2,.8,.3,1), opacity 0.6s;
+}
+
+.phone-shadow {
+  position:absolute; inset:0;
+  border-radius:44px;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.08),
+    0 40px 80px rgba(0,0,0,0.8),
+    0 0 60px rgba(201,168,76,0.08);
+}
+
+.phone-frame {
+  width:100%; height:100%;
+  border-radius:44px;
+  overflow:hidden;
+  background:#111;
+  position:relative;
+}
+
+/* Notch */
+.phone-notch {
+  position:absolute; top:0; left:50%; transform:translateX(-50%);
+  width:100px; height:28px;
+  background:#111;
+  border-radius:0 0 16px 16px;
+  z-index:10;
+}
+
+/* Status bar */
+.phone-status {
+  position:absolute; top:0; left:0; right:0; height:44px;
+  background:rgba(17,17,17,0.95);
+  z-index:9;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 18px;
+  font-size:12px; font-weight:600;
+  color:#fff;
+}
+
+/* Screen images */
+.phone-screen {
+  position:absolute;
+  top:0; left:0; right:0; bottom:0;
+  overflow:hidden;
+}
+
+.phone-img {
+  position:absolute;
+  top:0; left:0; width:100%; height:100%;
+  object-fit:cover; object-position:top;
+  transition: opacity 0.5s ease, transform 0.7s cubic-bezier(.2,.8,.3,1);
+}
+.phone-img.active  { opacity:1;  transform:translateY(0); }
+.phone-img.exiting { opacity:0;  transform:translateY(-20px); }
+.phone-img.waiting { opacity:0;  transform:translateY(30px); }
+
+/* Home button bar */
+.phone-home-bar {
+  position:absolute; bottom:8px; left:50%; transform:translateX(-50%);
+  width:120px; height:4px; background:rgba(255,255,255,0.3);
+  border-radius:2px;
+  z-index:10;
+}
+
+/* Glow ring around phone */
+.phone-glow {
+  position:absolute; inset:-20px;
+  border-radius:64px;
+  pointer-events:none;
+  transition: box-shadow 1s;
+}
+
+/* ── Intro scene ── */
+.intro-scene {
+  position:absolute; inset:0;
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  pointer-events:none;
+}
+
+.intro-logo {
+  font-family:'Playfair Display', serif;
+  font-size:130px; font-weight:900;
+  letter-spacing:-0.02em;
+  line-height:1;
+  transition: opacity 0.6s, transform 0.6s;
+}
+.intro-logo .u { color:#7C2D3E; }
+
+.intro-tagline {
+  font-size:20px; font-weight:300; letter-spacing:2px;
+  color:#9A8A72;
+  margin-top:16px;
+  transition: opacity 0.8s;
+}
+
+.intro-gold-line {
+  width:80px; height:2px;
+  background:linear-gradient(90deg, transparent, #C9A84C, transparent);
+  margin: 24px auto 0;
+  transition: width 1.2s;
+}
+
+/* ── CTA scene ── */
+.cta-btn {
+  display:inline-block;
+  margin-top:32px;
+  padding:16px 40px;
+  background:#7C2D3E;
+  color:#F5F0E8;
+  border-radius:100px;
+  font-size:16px; font-weight:500;
+  letter-spacing:0.5px;
+  text-decoration:none;
+  transition: opacity 0.6s, transform 0.6s;
+}
+.cta-contact {
+  margin-top:16px;
+  font-size:14px; font-weight:300;
+  color:#6B5B47;
+  transition: opacity 0.6s;
+}
+
+/* ── Progress bar ── */
+.progress-bar {
+  position:absolute; bottom:0; left:0; right:0; height:3px;
+  background:rgba(255,255,255,0.06);
+}
+.progress-fill {
+  height:100%;
+  background:linear-gradient(90deg, #7C2D3E, #C9A84C);
+  transition: width 0.1s linear;
+}
+
+/* ── Controls ── */
+.controls {
+  position:absolute; bottom:16px; left:50%; transform:translateX(-50%);
+  display:flex; align-items:center; gap:16px;
+  z-index:100;
+}
+.ctrl-btn {
+  width:40px; height:40px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.12);
+  color:#F5F0E8;
+  font-size:14px;
+  cursor:pointer; display:flex; align-items:center; justify-content:center;
+  transition:background 0.2s;
+}
+.ctrl-btn:hover { background:rgba(255,255,255,0.16); }
+.ctrl-time {
+  font-size:12px; color:rgba(255,255,255,0.35);
+  min-width:60px; text-align:center;
+}
+.ctrl-scrubber {
+  width:300px; height:3px;
+  background:rgba(255,255,255,0.1);
+  border-radius:2px;
+  cursor:pointer;
+  position:relative;
+}
+.ctrl-scrubber-fill {
+  height:100%;
+  background:linear-gradient(90deg,#7C2D3E,#C9A84C);
+  border-radius:2px;
+  pointer-events:none;
+}
+
+/* ── Fade transitions ── */
+.fade-in  { animation: fadeIn 0.5s forwards; }
+.fade-out { animation: fadeOut 0.5s forwards; }
+@keyframes fadeIn  { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+@keyframes fadeOut { from{opacity:1} to{opacity:0} }
+
+/* ── Scene overlay transition ── */
+.scene-text-enter { opacity:0; transform:translateY(16px); }
+.scene-text-active { opacity:1; transform:translateY(0); transition:opacity 0.7s, transform 0.7s; }
+.scene-text-exit  { opacity:0; transition:opacity 0.4s; }
+</style>
+<template id="__bundler_thumbnail" data-bg-color="#1A1208">
+  <svg viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1280" height="720" fill="#1A1208"/>
+    <radialGradient id="g" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#3D1520"/>
+      <stop offset="100%" stop-color="#1A1208"/>
+    </radialGradient>
+    <rect width="1280" height="720" fill="url(#g)"/>
+    <text x="640" y="380" text-anchor="middle" font-family="serif" font-size="140" font-weight="900" fill="#F5F0E8">Dat<tspan fill="#7C2D3E">u</tspan>va</text>
+    <text x="640" y="440" text-anchor="middle" font-family="sans-serif" font-size="22" fill="#C9A84C" letter-spacing="6">SOFTWARE PARA BODEGAS</text>
+  </svg>
+</template>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const { useState, useEffect, useRef, useCallback } = React;
+
+const DURATION = 52; // seconds
+
+// ── Image map ──────────────────────────────────────────────────────────────
+const IMGS = {
+  home:       '/uploads/1000051767.jpg',
+  modules:    '/uploads/1000051768.jpg',
+  depositos:  '/uploads/1000051769.jpg',
+  barricas:   '/uploads/1000051770.jpg',
+  estadoBodega:'/uploads/1000051771.jpg',
+  embotellado:'/uploads/1000051772.jpg',
+  etiquetado: '/uploads/1000051773.jpg',
+  campo:      '/uploads/1000051774.jpg',
+  mapa:       '/uploads/1000051775.jpg',
+  mapaAcciones:'/uploads/1000051776.jpg',
+  proteccion: '/uploads/1000051777.jpg',
+  analitica:  '/uploads/1000051778.jpg',
+  adminCom:   '/uploads/1000051779.jpg',
+  adminLibros:'/uploads/1000051780.jpg',
+};
+
+// ── Scene data ─────────────────────────────────────────────────────────────
+const SCENES = [
+  {
+    id:'intro', start:0, end:6,
+    type:'intro',
+    glow:'radial-gradient(ellipse 80% 60% at 50% 50%, #3D1520 0%, transparent 70%)',
+  },
+  {
+    id:'app', start:6, end:14,
+    tag:'FÁCIL · SENCILLO · INTUITIVO',
+    headline:'Olvídate de\nprogramas\ncomplicados.',
+    body:'Datuva es tan fácil como usar el móvil. Tu equipo lo aprende en minutos, sin formación técnica.',
+    pills:['Fácil de usar','iOS & Android','Sin instalación'],
+    images:[IMGS.home, IMGS.modules],
+    imgInterval:4,
+    glow:'radial-gradient(ellipse 60% 80% at 80% 50%, rgba(201,168,76,0.05) 0%, transparent 60%)',
+    glowColor:'rgba(201,168,76,0.15)',
+  },
+  {
+    id:'bodega', start:14, end:22,
+    tag:'MÓDULO BODEGA',
+    headline:'Control\ntotal de\ntu bodega.',
+    body:'Depósitos, barricas y estado al instante. Sin hojas de cálculo.',
+    pills:['15 depósitos','15 barricas','Estado en tiempo real'],
+    images:[IMGS.estadoBodega, IMGS.depositos, IMGS.barricas],
+    imgInterval:2.7,
+    glow:'radial-gradient(ellipse 60% 80% at 80% 50%, rgba(90,31,44,0.15) 0%, transparent 60%)',
+    glowColor:'rgba(124,45,62,0.2)',
+  },
+  {
+    id:'campo', start:22, end:30,
+    tag:'GESTIÓN DE CAMPO',
+    headline:'Tu viñedo,\nen tiempo\nreal.',
+    body:'Mapa 3D de parcelas, protección fitosanitaria y registros desde el campo.',
+    pills:['Mapa 3D','13 parcelas','Protección 85%'],
+    images:[IMGS.campo, IMGS.mapa, IMGS.mapaAcciones, IMGS.proteccion],
+    imgInterval:2,
+    glow:'radial-gradient(ellipse 60% 80% at 80% 50%, rgba(42,90,74,0.12) 0%, transparent 60%)',
+    glowColor:'rgba(60,120,90,0.2)',
+  },
+  {
+    id:'proceso', start:30, end:38,
+    tag:'EMBOTELLADO · ETIQUETADO · LAB',
+    headline:'De la\nbarrica a\nla botella.',
+    body:'Trazabilidad completa. Analíticas de laboratorio. Stock etiquetado al momento.',
+    pills:['Trazabilidad QR','e-label EU','Analíticas'],
+    images:[IMGS.embotellado, IMGS.etiquetado, IMGS.analitica],
+    imgInterval:2.7,
+    glow:'radial-gradient(ellipse 60% 80% at 80% 50%, rgba(122,90,42,0.12) 0%, transparent 60%)',
+    glowColor:'rgba(180,140,60,0.2)',
+  },
+  {
+    id:'normativa', start:38, end:46,
+    tag:'CUMPLIMIENTO NORMATIVO',
+    headline:'Normativa.\nAutomática.\nSin esfuerzo.',
+    body:'SILICIE, INFOVI, Junta CyL, Cuaderno de Campo. Generados con un clic.',
+    pills:['SILICIE','INFOVI','JCYL','CUE','e-label'],
+    images:[IMGS.adminLibros, IMGS.adminCom],
+    imgInterval:4,
+    glow:'radial-gradient(ellipse 60% 80% at 80% 50%, rgba(90,31,44,0.12) 0%, transparent 60%)',
+    glowColor:'rgba(124,45,62,0.2)',
+  },
+  {
+    id:'cta', start:46, end:52,
+    type:'cta',
+    glow:'radial-gradient(ellipse 80% 60% at 50% 50%, #3D1520 0%, transparent 70%)',
+  },
+];
+
+// ── Helpers ────────────────────────────────────────────────────────────────
+function clamp(v,a,b){ return Math.max(a,Math.min(b,v)); }
+function prog(t,s,e){ return clamp((t-s)/(e-s),0,1); }
+function easeOut(t){ return 1-(1-t)*(1-t); }
+function easeIn(t){ return t*t; }
+function easeOutBack(t){
+  const c1=1.70158,c3=c1+1;
+  return 1+c3*Math.pow(t-1,3)+c1*Math.pow(t-1,2);
+}
+
+// ── Phone component ────────────────────────────────────────────────────────
+function Phone({ scene, t, visible }) {
+  const imgs = scene?.images || [];
+  // Which image index to show
+  const interval = scene?.imgInterval || 4;
+  const elapsed = scene ? t - scene.start : 0;
+  const imgIdx = imgs.length > 0 ? Math.floor(elapsed / interval) % imgs.length : 0;
+
+  const enterP = easeOut(prog(t, (scene?.start||0), (scene?.start||0)+1.2));
+  const exitP  = easeIn(prog(t, (scene?.end||0)-1, (scene?.end||0)));
+
+  const opacity = visible ? enterP * (1 - exitP) : 0;
+  const ty = visible ? (1 - enterP) * 60 : 30;
+
+  const glowColor = scene?.glowColor || 'rgba(201,168,76,0.1)';
+
+  return (
+    <div className="phone-wrap" style={{
+      opacity,
+      transform:`translateY(${ty}px)`,
+    }}>
+      <div className="phone-glow" style={{
+        boxShadow:`0 0 80px 20px ${glowColor}`,
+      }}></div>
+      <div className="phone-shadow"></div>
+      <div className="phone-frame">
+        <div className="phone-status">
+          <span>18:21</span>
+          <span style={{letterSpacing:'1px'}}>● ▲ ◆ 86</span>
+        </div>
+        <div className="phone-screen">
+          {imgs.map((src, i) => (
+            <img
+              key={src}
+              src={src}
+              className={`phone-img ${i===imgIdx?'active':'waiting'}`}
+              alt=""
+            />
+          ))}
+        </div>
+        <div className="phone-home-bar"></div>
+      </div>
+    </div>
+  );
+}
+
+// ── Scene text ─────────────────────────────────────────────────────────────
+function SceneText({ scene, t }) {
+  if (!scene || scene.type) return null;
+
+  const enterP = easeOut(prog(t, scene.start, scene.start+1.2));
+  const exitP  = easeIn(prog(t, scene.end-0.8, scene.end));
+  const op = enterP * (1-exitP);
+  const ty = (1-enterP)*20;
+
+  const pillDelays = [0, 0.1, 0.2, 0.3, 0.4];
+
+  return (
+    <div className="left-panel">
+      <div className="scene-tag" style={{opacity:op, transform:`translateY(${ty}px)`}}>
+        {scene.tag}
+      </div>
+      <div className="scene-headline" style={{opacity:op, transform:`translateY(${ty+4}px)`}}>
+        {scene.headline.split('\n').map((l,i) => (
+          <span key={i}>{l}{i < scene.headline.split('\n').length-1 && <br/>}</span>
+        ))}
+      </div>
+      <div className="scene-divider" style={{opacity:op}}></div>
+      <div className="scene-body" style={{opacity:op, transform:`translateY(${ty+8}px)`}}>
+        {scene.body}
+      </div>
+      <div className="feature-pills" style={{marginTop:24}}>
+        {(scene.pills||[]).map((p, i) => {
+          const pillP = easeOut(prog(t, scene.start+0.5+i*0.12, scene.start+1.4+i*0.12));
+          const pillOp = pillP*(1-exitP);
+          return (
+            <div key={p} className="pill" style={{
+              opacity: pillOp,
+              transform:`translateY(${(1-pillP)*10}px)`
+            }}>{p}</div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+// ── Intro scene ────────────────────────────────────────────────────────────
+function IntroScene({ t }) {
+  const letterArr = ['D','a','t','u','v','a'];
+  const enterEnd = 3.5;
+  const exitP = easeIn(prog(t, 4.5, 6));
+  const tagP  = easeOut(prog(t, 0.3, 1.8)) * (1-exitP);
+  const lineP = easeOut(prog(t, 2, 3.5)) * (1-exitP);
+
+  return (
+    <div className="intro-scene" style={{pointerEvents:'none'}}>
+      {/* Particle dots */}
+      <div style={{
+        position:'absolute', inset:0,
+        background:'radial-gradient(ellipse 80% 60% at 50% 50%, #3D1520 0%, transparent 70%)',
+        opacity: easeOut(prog(t,0,2)) * (1-exitP),
+      }}></div>
+
+      <div style={{position:'relative',textAlign:'center'}}>
+        <div className="scene-tag" style={{opacity:tagP, marginBottom:16, textAlign:'center'}}>
+          SOFTWARE DE GESTIÓN PARA BODEGAS · BIERZO
+        </div>
+
+        {(() => {
+          const logoP = easeOutBack(clamp((t-0.6)/1.8,0,1));
+          return (
+            <img
+              src="uploads/1000047716.jpg"
+              alt="Datuva"
+              style={{
+                width:460, height:'auto',
+                borderRadius:16,
+                opacity: logoP*(1-exitP),
+                transform:`scale(${0.85+0.15*logoP}) translateY(${(1-logoP)*30}px)`,
+                display:'block', margin:'0 auto',
+                filter:'drop-shadow(0 0 50px rgba(201,168,76,0.5))',
+              }}
+            />
+          );
+        })()}
+
+        <div style={{
+          width: `${lineP*120}px`, height:'2px',
+          background:'linear-gradient(90deg,transparent,#C9A84C,transparent)',
+          margin:'20px auto 16px',
+          transition:'none',
+        }}></div>
+
+        <div className="intro-tagline" style={{opacity: easeOut(prog(t,2.5,4))*(1-exitP)}}>
+          De la viña a la botella — gestión completa
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── CTA scene ──────────────────────────────────────────────────────────────
+function CTAScene({ t }) {
+  const enterP = easeOut(prog(t,46,48));
+  const line1P = easeOutBack(prog(t,46.2,47.5));
+  const line2P = easeOutBack(prog(t,46.7,48));
+  const line3P = easeOutBack(prog(t,47.2,48.5));
+  const btnP   = easeOut(prog(t,48.5,50));
+  const ctcP   = easeOut(prog(t,49.5,51));
+
+  return (
+    <div style={{
+      position:'absolute', inset:0,
+      display:'flex', flexDirection:'column',
+      alignItems:'center', justifyContent:'center',
+      pointerEvents:'none',
+      opacity: enterP,
+    }}>
+      <div style={{
+        position:'absolute', inset:0,
+        background:'radial-gradient(ellipse 80% 60% at 50% 50%, #3D1520 0%, transparent 70%)',
+      }}></div>
+
+      <div style={{position:'relative', textAlign:'center'}}>
+        <div style={{
+          fontFamily:"'Playfair Display',serif",
+          fontWeight:900, fontSize:96,
+          lineHeight:1.05,
+          color:'#F5F0E8',
+          opacity:line1P, transform:`translateY(${(1-line1P)*30}px)`,
+          transition:'none',
+        }}>Tu bodega.</div>
+        <div style={{
+          fontFamily:"'Playfair Display',serif",
+          fontWeight:900, fontSize:96,
+          color:'#7C2D3E',
+          lineHeight:1.05,
+          opacity:line2P, transform:`translateY(${(1-line2P)*30}px)`,
+          transition:'none',
+        }}>Tu datos.</div>
+        <div style={{
+          fontFamily:"'Playfair Display',serif",
+          fontWeight:900, fontSize:96,
+          color:'#F5F0E8',
+          lineHeight:1.05,
+          opacity:line3P, transform:`translateY(${(1-line3P)*30}px)`,
+          transition:'none',
+        }}>Tu control.</div>
+
+        <div style={{
+          width:`${btnP*100}px`, height:'2px',
+          background:'linear-gradient(90deg,transparent,#C9A84C,transparent)',
+          margin:'24px auto 20px',
+        }}></div>
+
+        <div style={{
+          display:'inline-block',
+          padding:'16px 44px',
+          background:'#7C2D3E',
+          borderRadius:100,
+          fontFamily:"'DM Sans',sans-serif",
+          fontSize:18, fontWeight:500,
+          color:'#F5F0E8',
+          opacity:btnP, transform:`translateY(${(1-btnP)*16}px)`,
+          pointerEvents:'all',
+        }}>Solicita información para tu bodega</div>
+
+        <div style={{
+          marginTop:16, fontSize:14, fontWeight:300,
+          color:'#6B5B47',
+          opacity:ctcP,
+        }}>manuelmoreira@datuva.es · 627 130 891 · datuva.es</div>
+      </div>
+    </div>
+  );
+}
+
+// ── Transition flash ───────────────────────────────────────────────────────
+function SceneFlash({ scenes, t }) {
+  // Flash between scenes
+  const transitions = scenes.slice(0,-1).map(s => s.end);
+  const flashOp = transitions.reduce((acc, te) => {
+    const p = prog(t, te-0.1, te+0.3);
+    const flash = p < 0.5 ? p*2 : (1-p)*2;
+    return Math.max(acc, flash * 0.15);
+  }, 0);
+
+  return (
+    <div style={{
+      position:'absolute', inset:0,
+      background:'#fff',
+      opacity:flashOp,
+      pointerEvents:'none',
+    }}></div>
+  );
+}
+
+// ── Epic Music Engine ──────────────────────────────────────────────────────
+function createEpicMusic(ctx) { // disabled
+  return { start:()=>{}, pause:()=>{}, resume:()=>{}, stop:()=>{} };
+}
+function createEpicMusic_UNUSED(ctx) {
+  // Master chain: gain → compressor → destination
+  const master = ctx.createGain();
+  master.gain.value = 0;
+  const comp = ctx.createDynamicsCompressor();
+  comp.threshold.value = -18; comp.ratio.value = 4;
+  master.connect(comp); comp.connect(ctx.destination);
+
+  // Simple reverb via delay feedback
+  function makeReverb() {
+    const delay = ctx.createDelay(0.5);
+    const fb = ctx.createGain(); fb.gain.value = 0.45;
+    const wet = ctx.createGain(); wet.gain.value = 0.35;
+    delay.delayTime.value = 0.28;
+    delay.connect(fb); fb.connect(delay); delay.connect(wet);
+    return { input: delay, output: wet };
+  }
+  const rev = makeReverb();
+  rev.output.connect(master);
+
+  // Chord progression: Dm → Bb → F → C (each 4s, loop 16s)
+  const CHORDS = [
+    [73.42, 146.83, 174.61, 220.00, 293.66],   // Dm: D2,D3,F3,A3,D4
+    [58.27, 116.54, 146.83, 174.61, 233.08],   // Bb: Bb1,Bb2,D3,F3,Bb3
+    [87.31, 130.81, 174.61, 220.00, 349.23],   // F:  F2,C3,F3,A3,F4
+    [65.41, 130.81, 164.81, 196.00, 261.63],   // C:  C2,C3,E3,G3,C4
+  ];
+
+  // Pad oscillators (4 per chord voice)
+  const PAD_COUNT = 5;
+  const padOscs = Array.from({length: PAD_COUNT}, (_, vi) => {
+    const oscs = Array.from({length: 3}, () => {
+      const o = ctx.createOscillator();
+      o.type = 'sawtooth';
+      return o;
+    });
+    const filter = ctx.createBiquadFilter();
+    filter.type = 'lowpass'; filter.frequency.value = vi === 0 ? 180 : 900; filter.Q.value = 1.5;
+    const gain = ctx.createGain();
+    gain.gain.value = vi === 0 ? 0.22 : 0.045;
+    oscs.forEach(o => { o.connect(filter); o.start(); });
+    filter.connect(gain);
+    gain.connect(master);
+    gain.connect(rev.input);
+    return { oscs, gain };
+  });
+
+  // Rhythmic pulse (low thump every beat)
+  function triggerPulse() {
+    const osc = ctx.createOscillator();
+    const g   = ctx.createGain();
+    osc.type = 'sine'; osc.frequency.value = 55;
+    g.gain.setValueAtTime(0.6, ctx.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.35);
+    osc.connect(g); g.connect(master);
+    osc.start(); osc.stop(ctx.currentTime + 0.35);
+  }
+
+  // High shimmer hit on downbeats
+  function triggerShimmer(freq) {
+    const osc = ctx.createOscillator();
+    const g   = ctx.createGain();
+    osc.type = 'triangle'; osc.frequency.value = freq * 4;
+    g.gain.setValueAtTime(0.04, ctx.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.2);
+    osc.connect(g); g.connect(rev.input);
+    osc.start(); osc.stop(ctx.currentTime + 1.2);
+  }
+
+  let chordIdx = 0;
+  let beatCount = 0;
+  let intervalId = null;
+  let started = false;
+
+  function setChord(idx) {
+    const freqs = CHORDS[idx % CHORDS.length];
+    freqs.forEach((freq, vi) => {
+      if (!padOscs[vi]) return;
+      padOscs[vi].oscs.forEach((o, di) => {
+        o.frequency.setTargetAtTime(freq * (1 + di*0.002 - 0.001), ctx.currentTime, 0.15);
+      });
+    });
+  }
+
+  function onBeat() {
+    triggerPulse();
+    if (beatCount % 4 === 0) {
+      setChord(chordIdx);
+      triggerShimmer(CHORDS[chordIdx % CHORDS.length][2]);
+      chordIdx++;
+    }
+    beatCount++;
+  }
+
+  function start() {
+    if (started) { master.gain.setTargetAtTime(0.72, ctx.currentTime, 1.2); return; }
+    started = true;
+    setChord(0);
+    master.gain.setTargetAtTime(0.72, ctx.currentTime, 2.5);
+    onBeat();
+    intervalId = setInterval(onBeat, 1000); // 60 BPM
+  }
+
+  function pause() { master.gain.setTargetAtTime(0, ctx.currentTime, 0.5); }
+  function resume() { master.gain.setTargetAtTime(0.72, ctx.currentTime, 0.5); }
+  function stop() { clearInterval(intervalId); master.gain.setTargetAtTime(0, ctx.currentTime, 0.3); }
+
+  return { start, pause, resume, stop };
+}
+
+// ── Main App ───────────────────────────────────────────────────────────────
+function App() {
+  const [t, setT] = useState(() => {
+    try { return parseFloat(localStorage.getItem('datuva_demo_t')||'0'); } catch(e){return 0;}
+  });
+  const [playing, setPlaying] = useState(true);
+  const rafRef = useRef(null);
+  const lastRef = useRef(null);
+  const tRef = useRef(t);
+  tRef.current = t;
+
+  // ── Audio ──────────────────────────────────────────────────────────────
+  const audioRef = useRef(null);
+
+  // Audio deshabilitado en la integración web
+
+  // Scale to viewport
+  const [scale, setScale] = useState(1);
+  useEffect(() => {
+    function resize(){
+      const sx = window.innerWidth / 1280;
+      const sy = window.innerHeight / 720;
+      setScale(Math.min(sx,sy));
+    }
+    resize();
+    window.addEventListener('resize', resize);
+    return ()=>window.removeEventListener('resize',resize);
+  },[]);
+
+  // Playback
+  const tick = useCallback((now) => {
+    if (lastRef.current == null) lastRef.current = now;
+    const dt = (now - lastRef.current) / 1000;
+    lastRef.current = now;
+    setT(prev => {
+      const next = prev + dt;
+      if (next >= DURATION) { lastRef.current = null; return 0; }
+      try { localStorage.setItem('datuva_demo_t', next); } catch(e){}
+      return next;
+    });
+    rafRef.current = requestAnimationFrame(tick);
+  }, []);
+
+  useEffect(() => {
+    if (playing) {
+      rafRef.current = requestAnimationFrame(tick);
+    } else {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      lastRef.current = null;
+    }
+    return () => { if(rafRef.current) cancelAnimationFrame(rafRef.current); };
+  }, [playing, tick]);
+
+  const currentScene = SCENES.find(s => t >= s.start && t < s.end) || SCENES[SCENES.length-1];
+  const isIntro = currentScene.id === 'intro';
+  const isCTA   = currentScene.id === 'cta';
+  const isContent = !isIntro && !isCTA;
+
+  // Background
+  const bgGlow = currentScene.glow || '';
+
+  // Scrubber interaction
+  const scrubberRef = useRef(null);
+  function onScrubberClick(e) {
+    const rect = scrubberRef.current.getBoundingClientRect();
+    const ratio = clamp((e.clientX - rect.left) / rect.width, 0, 1);
+    const newT = ratio * DURATION;
+    setT(newT);
+    lastRef.current = null;
+    try { localStorage.setItem('datuva_demo_t', newT); } catch(e){}
+  }
+
+  const pct = (t / DURATION) * 100;
+  const mm = Math.floor(t/60).toString().padStart(2,'0');
+  const ss = Math.floor(t%60).toString().padStart(2,'0');
+
+  return (
+    <div style={{
+      width:'100vw', height:'100vh',
+      display:'flex', alignItems:'center', justifyContent:'center',
+      background:'#0e0b06',
+    }}>
+      <div className="stage-wrap" style={{
+        transform:`scale(${scale})`,
+        transformOrigin:'center center',
+      }}>
+        <div className="stage">
+
+          {/* Background */}
+          <div className="bg-dots"></div>
+          <div style={{
+            position:'absolute', inset:0,
+            background:bgGlow,
+            transition:'background 1.2s',
+            pointerEvents:'none',
+          }}></div>
+
+          {/* Intro */}
+          {isIntro && <IntroScene t={t} />}
+
+          {/* Content scenes */}
+          {isContent && (
+            <>
+              <SceneText scene={currentScene} t={t} />
+              <Phone scene={currentScene} t={t} visible={true} />
+            </>
+          )}
+
+          {/* CTA */}
+          {isCTA && <CTAScene t={t} />}
+
+          {/* Scene flash */}
+          <SceneFlash scenes={SCENES} t={t} />
+
+          {/* Progress bar */}
+          <div className="progress-bar">
+            <div className="progress-fill" style={{width:`${pct}%`}}></div>
+          </div>
+
+          {/* Controls */}
+          <div className="controls">
+            <button className="ctrl-btn" onClick={()=>{setT(0); lastRef.current=null;}}>⏮</button>
+            <button className="ctrl-btn" onClick={()=>setPlaying(p=>!p)}>
+              {playing ? '⏸' : '▶'}
+            </button>
+            <span className="ctrl-time">{mm}:{ss} / 0:52</span>
+            <div
+              className="ctrl-scrubber"
+              ref={scrubberRef}
+              onClick={onScrubberClick}
+            >
+              <div className="ctrl-scrubber-fill" style={{width:`${pct}%`}}></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>
