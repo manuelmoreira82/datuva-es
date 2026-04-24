@@ -158,6 +158,10 @@ body {
   object-fit:cover; object-position:top;
   transition: opacity 0.5s ease, transform 0.7s cubic-bezier(.2,.8,.3,1);
 }
+.phone-img.cover-logo {
+  object-fit:cover; object-position:center;
+  background:#0e0b06;
+}
 .phone-img.active  { opacity:1;  transform:translateY(0); }
 .phone-img.exiting { opacity:0;  transform:translateY(-20px); }
 .phone-img.waiting { opacity:0;  transform:translateY(30px); }
@@ -433,7 +437,7 @@ function Phone({ scene, t, visible }) {
             <img
               key={src}
               src={src}
-              className={`phone-img ${i===imgIdx?'active':'waiting'}`}
+              className={`phone-img ${src===IMGS.home?'cover-logo':''} ${i===imgIdx?'active':'waiting'}`}
               alt=""
             />
           ))}
