@@ -769,21 +769,7 @@ function App() {
   // ── Audio ──────────────────────────────────────────────────────────────
   const audioRef = useRef(null);
 
-  useEffect(() => {
-    const audio = new Audio('/uploads/silent.mp3');
-    audio.loop = true;
-    audio.volume = 0.5;
-    audioRef.current = audio;
-    function tryPlay() { audio.play().catch(()=>{}); }
-    document.addEventListener('click', tryPlay, { once: true });
-    return () => { audio.pause(); document.removeEventListener('click', tryPlay); };
-  }, []);
-
-  useEffect(() => {
-    if (!audioRef.current) return;
-    if (playing) audioRef.current.play().catch(()=>{});
-    else audioRef.current.pause();
-  }, [playing]);
+  // Audio deshabilitado en la integración web
 
   // Scale to viewport
   const [scale, setScale] = useState(1);
