@@ -42,11 +42,12 @@ const HeroSection = () => {
             variants={fadeUp}
             initial="hidden"
             animate="visible"
-            className="font-serif text-4xl md:text-6xl lg:text-7xl font-bold leading-[0.95] tracking-tight mb-6 text-white"
+            className="font-serif text-[2rem] sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] md:leading-[0.95] tracking-tight mb-6 text-white"
           >
-            Elimina el papeleo de tu bodega.
-            <br />
-            <span className="text-accent">Conecta el campo con tu ERP.</span>
+            Elimina el papeleo de tu bodega.{" "}
+            <span className="text-accent block sm:inline mt-2 sm:mt-0">
+              Conecta el campo con tu ERP.
+            </span>
           </motion.h1>
 
           <motion.p
