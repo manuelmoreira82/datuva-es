@@ -37,7 +37,7 @@ const modulos = [
   {
     icon: BarChart3,
     title: "INFOVI integrado",
-    benefit: "Los datos de tu producción fluyen directamente al sistema INFOVI. Sin re-teclear, sin errores de transcripción.",
+    benefit: "Los datos de tu producción se preparan listos para INFOVI. Sin re-teclear, sin transcripciones manuales.",
     accent: "vineyard",
   },
   {

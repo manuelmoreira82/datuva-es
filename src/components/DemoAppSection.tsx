@@ -10,7 +10,7 @@ const DemoAppSection = () => {
             Esto es lo que vas a usar cada día
           </h2>
           <p className="text-muted-foreground text-base md:text-lg leading-relaxed">
-            Bodega, campo, embotellado y SILICIE automático. Sin Excel, sin papeles, sin sustos.
+            Bodega, campo, embotellado y cumplimiento normativo. Sin Excel y sin papeles.
           </p>
         </div>
 
