@@ -34,7 +34,7 @@ const HeroSection = () => {
             animate="visible"
             className="text-accent font-medium tracking-[0.3em] uppercase text-xs md:text-sm mb-4"
           >
-            Conecta tu bodega con tu ERP · Sin papel · Sin Excel
+            Del papel al ERP · Exportación CSV y Excel · Sin reescribir nada
           </motion.p>
 
           <motion.h1
@@ -57,9 +57,10 @@ const HeroSection = () => {
             animate="visible"
             className="text-white/80 text-base md:text-lg max-w-2xl mb-8 leading-relaxed"
           >
-            Olvídate de pasar horas trasladando datos del papel al Excel y del Excel al ERP.
-            Con Datuva tienes el estado de tus depósitos, barricas, trabajos realizados
-            y el viñedo en tu móvil, y todo se conecta directo con tu ERP.
+            Olvídate de pasar horas trasladando datos del papel al Excel.
+            Con Datuva controlas depósitos, barricas, trabajos del viñedo y de bodega
+            desde el móvil, y exportas los datos en CSV o Excel listos para
+            subirlos a tu ERP.
           </motion.p>
 
           <motion.div
