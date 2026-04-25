@@ -34,7 +34,7 @@ const HeroSection = () => {
             animate="visible"
             className="text-accent font-medium tracking-[0.3em] uppercase text-xs md:text-sm mb-4"
           >
-            Del papel al ERP · Exportación CSV y Excel · Sin reescribir nada
+            Campo y bodega · Cumplimiento normativo · Control de costes
           </motion.p>
 
           <motion.h1
@@ -59,8 +59,8 @@ const HeroSection = () => {
           >
             Olvídate de pasar horas trasladando datos del papel al Excel.
             Con Datuva controlas depósitos, barricas, trabajos del viñedo y de bodega
-            desde el móvil, y exportas los datos en CSV o Excel listos para
-            subirlos a tu ERP.
+            desde el móvil. SILICIE, INFOVI y libros oficiales JCYL se generan solos,
+            listos para presentar.
           </motion.p>
 
           <motion.div

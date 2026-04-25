@@ -7,10 +7,10 @@ const CTAFinalSection = () => {
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight">
-            Deja de mover papeles entre el viñedo, la bodega y tu ERP.
+            Deja de mover papeles entre el viñedo y la bodega.
           </h2>
           <p className="text-primary-foreground/70 text-lg mb-10 max-w-2xl mx-auto">
-            Datuva captura cada dato donde se genera y lo entrega listo a SILICIE, INFOVI y a tu software de gestión.
+            Datuva captura cada dato donde se genera y lo entrega listo para SILICIE, INFOVI y los libros oficiales JCYL.
             Te lo enseñamos funcionando en 20 minutos. Sin compromiso.
           </p>
           <Button

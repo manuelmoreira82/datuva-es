@@ -35,7 +35,7 @@ import sectionCostes from "@/assets/section-costes.jpg";
 const sections: SectionCard[] = [
   {
     id: "normativa",
-    title: "Tu SILICIE se escribe solo. Sin errores. Sin sanciones.",
+    title: "Tu SILICIE se genera solo desde los movimientos reales de tu bodega.",
     subtitle: "Cumplimiento normativo · SILICIE automático",
     image: sectionNormativa,
     features: [
