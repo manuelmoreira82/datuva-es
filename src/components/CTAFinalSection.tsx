@@ -7,10 +7,11 @@ const CTAFinalSection = () => {
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight">
-            ¿Quieres verlo funcionando?
+            Deja de perder horas con Excel y SILICIE.
           </h2>
           <p className="text-primary-foreground/70 text-lg mb-10 max-w-2xl mx-auto">
-            Le organizamos una demostración en directo donde verá el sistema funcionando con datos reales.
+            Te enseñamos Datuva funcionando con datos reales en una llamada de 20 minutos.
+            Sin compromiso. Sin tarjeta. Sin rollos.
           </p>
           <Button
             variant="contact"
@@ -22,7 +23,7 @@ const CTAFinalSection = () => {
               href="mailto:manuelmoreira@datuva.es?subject=Solicitud%20de%20demostraci%C3%B3n%20Datuva"
               className="gap-3"
             >
-              Solicitar demostración
+              Quiero ver la demo
               <ArrowRight className="w-5 h-5" />
             </a>
           </Button>
