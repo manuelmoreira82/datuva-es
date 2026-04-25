@@ -1,16 +1,16 @@
 const DemoAppSection = () => {
   return (
-    <section id="demo" className="relative bg-background py-20 md:py-28">
+    <section id="demo-app" className="relative bg-background py-20 md:py-28">
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center mb-12">
           <p className="text-accent font-medium tracking-[0.3em] uppercase text-xs md:text-sm mb-4">
-            Demo interactiva
+            Demo interactiva · 2 minutos
           </p>
           <h2 className="font-serif text-3xl md:text-5xl font-bold leading-tight mb-4 text-foreground">
-            Mira Datuva en acción
+            Esto es lo que vas a usar cada día
           </h2>
           <p className="text-muted-foreground text-base md:text-lg leading-relaxed">
-            Un recorrido visual por los módulos principales: bodega, campo, embotellado y normativa.
+            Bodega, campo, embotellado y SILICIE automático. Sin Excel, sin papeles, sin sustos.
           </p>
         </div>
 
