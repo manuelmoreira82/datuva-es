@@ -14,7 +14,7 @@ const fadeUp = {
 
 const HeroSection = () => {
   return (
-    <section id="inicio" className="relative h-screen flex items-end overflow-hidden">
+    <section id="inicio" className="relative min-h-screen flex items-end overflow-hidden pt-28 md:pt-32">
       {/* Background image */}
       <div className="absolute inset-0">
         <img
@@ -22,7 +22,7 @@ const HeroSection = () => {
           alt="Viñedos españoles"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/50 to-black/60" />
       </div>
 
       <div className="container mx-auto px-4 relative z-10 pb-16 md:pb-24">
