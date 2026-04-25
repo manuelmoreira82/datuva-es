@@ -140,29 +140,6 @@ const sections: SectionCard[] = [
     ],
   },
   {
-    id: "normativa",
-    title: "Tu SILICIE se escribe solo",
-    subtitle: "Cumplimiento normativo",
-    image: sectionNormativa,
-    features: [
-      { icon: ShieldCheck, text: "SILICIE automático: cada movimiento de vino genera el asiento contable con código NC (TARIC) correcto. El libro queda listo para presentar en la sede electrónica de la AEAT." },
-      { icon: CalendarDays, text: "Declaraciones INFOVI mensuales." },
-      { icon: BookOpen, text: "Libros JCYL (Orden AGR/1616/2022): elaboración, envasado, etiquetado, entradas y salidas." },
-      { icon: AlertTriangle, text: "Alertas de rendimiento, lías, mermas y subproductos fuera de rango." },
-    ],
-  },
-  {
-    id: "costes",
-    title: "¿Sabes cuánto te cuesta cada botella?",
-    subtitle: "Control de costes",
-    image: sectionCostes,
-    features: [
-      { icon: Euro, text: "Coste de producción desde la uva hasta la botella: uva, tratamientos, materiales, mano de obra, mermas, roturas, costes fijos estructurales." },
-      { icon: BarChart3, text: "Coste por litro en cada depósito y barrica en tiempo real." },
-      { icon: Calculator, text: "Coste final por botella con desglose completo." },
-    ],
-  },
-  {
     id: "rrhh",
     title: "Tu equipo, organizado",
     subtitle: "Recursos humanos",
