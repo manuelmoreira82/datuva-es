@@ -34,7 +34,7 @@ const HeroSection = () => {
             animate="visible"
             className="text-accent font-medium tracking-[0.3em] uppercase text-xs md:text-sm mb-4"
           >
-            Gestión integral para bodegas
+            SILICIE automático · Trazabilidad total · Cero Excel
           </motion.p>
 
           <motion.h1
@@ -44,9 +44,9 @@ const HeroSection = () => {
             animate="visible"
             className="font-serif text-4xl md:text-6xl lg:text-7xl font-bold leading-[0.95] tracking-tight mb-6 text-white"
           >
-            Del campo a la botella.
+            Automatiza tu bodega y
             <br />
-            <span className="text-accent">Todo bajo control.</span>
+            <span className="text-accent">olvídate del SILICIE.</span>
           </motion.h1>
 
           <motion.p
@@ -54,10 +54,10 @@ const HeroSection = () => {
             variants={fadeUp}
             initial="hidden"
             animate="visible"
-            className="text-white/75 text-base md:text-lg max-w-2xl mb-8 leading-relaxed"
+            className="text-white/80 text-base md:text-lg max-w-2xl mb-8 leading-relaxed"
           >
-            Plataforma de gestión integral diseñada para bodegas españolas. 
-            Viñedo, bodega, laboratorio, embotellado, normativa y costes — en una sola app.
+            Gestiona viñedo, bodega y costes en una sola herramienta.
+            Cumple normativa sin errores, sin sanciones y sin depender de nadie.
           </motion.p>
 
           <motion.div
@@ -68,11 +68,8 @@ const HeroSection = () => {
             className="flex flex-col sm:flex-row gap-4"
           >
             <Button variant="contact" size="lg" asChild className="text-base group">
-              <a
-                href="mailto:manuelmoreira@datuva.es?subject=Solicitud%20de%20demostraci%C3%B3n%20Datuva"
-                className="gap-2"
-              >
-                Solicitar demostración
+              <a href="#demo-app" className="gap-2">
+                Ver demo en 2 minutos
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </a>
             </Button>
@@ -82,7 +79,7 @@ const HeroSection = () => {
               asChild
               className="text-base border-white/40 text-white hover:bg-white/15 hover:text-white"
             >
-              <a href="#modulos">Ver módulos</a>
+              <a href="#modulos">Ver cómo funciona</a>
             </Button>
           </motion.div>
 
