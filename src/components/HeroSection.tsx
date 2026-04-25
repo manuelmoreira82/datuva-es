@@ -34,7 +34,7 @@ const HeroSection = () => {
             animate="visible"
             className="text-accent font-medium tracking-[0.3em] uppercase text-xs md:text-sm mb-4"
           >
-            SILICIE automático · Trazabilidad total · Cero Excel
+            Adiós al papeleo · Del viñedo al ERP, sin Excel
           </motion.p>
 
           <motion.h1
@@ -44,9 +44,9 @@ const HeroSection = () => {
             animate="visible"
             className="font-serif text-4xl md:text-6xl lg:text-7xl font-bold leading-[0.95] tracking-tight mb-6 text-white"
           >
-            Automatiza tu bodega y
+            Elimina el papeleo de tu bodega.
             <br />
-            <span className="text-accent">olvídate del SILICIE.</span>
+            <span className="text-accent">Conecta el campo con tu ERP.</span>
           </motion.h1>
 
           <motion.p
@@ -56,8 +56,9 @@ const HeroSection = () => {
             animate="visible"
             className="text-white/80 text-base md:text-lg max-w-2xl mb-8 leading-relaxed"
           >
-            Gestiona viñedo, bodega y costes en una sola herramienta.
-            Cumple normativa sin errores, sin sanciones y sin depender de nadie.
+            Datuva es el puente que faltaba entre tu día a día en viñedo y bodega
+            y los grandes software de gestión. Captura cada dato en el momento,
+            elimina el Excel y entrega la información lista para SILICIE, INFOVI y tu ERP.
           </motion.p>
 
           <motion.div
