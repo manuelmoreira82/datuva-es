@@ -34,7 +34,7 @@ const HeroSection = () => {
             animate="visible"
             className="text-accent font-medium tracking-[0.3em] uppercase text-xs md:text-sm mb-4"
           >
-            Adiós al papeleo · Del viñedo al ERP, sin Excel
+            Conecta tu bodega con tu ERP · Sin papel · Sin Excel
           </motion.p>
 
           <motion.h1
@@ -44,9 +44,9 @@ const HeroSection = () => {
             animate="visible"
             className="font-serif text-[2rem] sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] md:leading-[0.95] tracking-tight mb-6 text-white"
           >
-            Elimina el papeleo de tu bodega.{" "}
+            Toda tu bodega{" "}
             <span className="text-accent block sm:inline mt-2 sm:mt-0">
-              Conecta el campo con tu ERP.
+              a golpe de clic.
             </span>
           </motion.h1>
 
@@ -57,9 +57,9 @@ const HeroSection = () => {
             animate="visible"
             className="text-white/80 text-base md:text-lg max-w-2xl mb-8 leading-relaxed"
           >
-            Datuva es el puente que faltaba entre tu día a día en viñedo y bodega
-            y los grandes software de gestión. Captura cada dato en el momento,
-            elimina el Excel y entrega la información lista para SILICIE, INFOVI y tu ERP.
+            Olvídate de pasar horas trasladando datos del papel al Excel y del Excel al ERP.
+            Con Datuva tienes el estado de tus depósitos, barricas, trabajos realizados
+            y el viñedo en tu móvil, y todo se conecta directo con tu ERP.
           </motion.p>
 
           <motion.div
