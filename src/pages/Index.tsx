@@ -34,7 +34,7 @@ import sectionCostes from "@/assets/section-costes.jpg";
 
 const sections: SectionCard[] = [
   {
-    id: "campo",
+    id: "campoPLACEHOLDER",
     title: "Tu viñedo, documentado",
     subtitle: "Campo y viñedo",
     image: sectionCampo,
