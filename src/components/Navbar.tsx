@@ -4,77 +4,96 @@ import { Button } from "@/components/ui/button";
 import datuvaLogo from "@/assets/datuva-logo-new.webp";
 
 const Navbar = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 bg-carbon text-cream transition-all duration-300 ${
-        scrolled ? "py-2 shadow-[0_4px_24px_-12px_rgba(0,0,0,0.6)]" : "py-3"
+      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
+        isScrolled
+          ? "bg-card/95 backdrop-blur-md shadow-sm py-3"
+          : "bg-transparent py-5"
       }`}
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
-        <a href="#inicio" className="flex items-center gap-3 group" aria-label="Datuva — Inicio">
+        <a href="#inicio" className="flex items-center gap-3">
           <img
             src={datuvaLogo}
-            alt="Datuva"
-            className="h-9 md:h-10 w-auto rounded-md"
+            alt="Datuva Logo"
+            className="h-10 w-auto rounded-lg"
           />
         </a>
 
-        <div className="hidden md:flex items-center gap-10">
-          <a href="#problema" className="text-cream/70 hover:text-cream text-sm font-medium tracking-wide transition-colors">
-            El problema
+        <div className="hidden md:flex items-center gap-8">
+          <a
+            href="#modulos"
+            className={`font-medium transition-colors duration-200 ${
+              isScrolled
+                ? "text-foreground/80 hover:text-primary"
+                : "text-white/80 hover:text-white"
+            }`}
+          >
+            Módulos
           </a>
-          <a href="#ciclo" className="text-cream/70 hover:text-cream text-sm font-medium tracking-wide transition-colors">
-            El ciclo
-          </a>
-          <a href="#cumplimiento" className="text-cream/70 hover:text-cream text-sm font-medium tracking-wide transition-colors">
-            Cumplimiento
-          </a>
-          <a href="#quien" className="text-cream/70 hover:text-cream text-sm font-medium tracking-wide transition-colors">
-            Quién somos
+          <a
+            href="#demo"
+            className={`font-medium transition-colors duration-200 ${
+              isScrolled
+                ? "text-foreground/80 hover:text-primary"
+                : "text-white/80 hover:text-white"
+            }`}
+          >
+            Contacto
           </a>
         </div>
 
         <div className="hidden md:flex items-center">
-          <Button
-            asChild
-            className="bg-mostaza text-carbon hover:bg-mostaza/90 font-semibold rounded-md h-10 px-5 shadow-none hover:shadow-[0_8px_24px_-8px_hsl(var(--mostaza)/0.5)] transition-all"
-          >
-            <a href="#contacto">Reserva una demo</a>
+          <Button variant="contact" size="default" asChild>
+            <a href="mailto:manuelmoreira@datuva.es?subject=Solicitud%20de%20demostraci%C3%B3n%20Datuva">
+              Solicitar demo
+            </a>
           </Button>
         </div>
 
         <button
-          className="md:hidden p-2 text-cream"
+          className={`md:hidden p-2 ${isScrolled ? "text-foreground" : "text-white"}`}
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          aria-label="Abrir menú"
+          aria-label="Toggle menu"
         >
-          {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
       {isMobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-carbon border-t border-cream/10 p-6 animate-fade-in-up">
+        <div className="md:hidden absolute top-full left-0 right-0 bg-card shadow-lg p-6 animate-fade-in">
           <div className="flex flex-col gap-4">
-            <a href="#problema" className="text-cream/80 py-1.5" onClick={() => setIsMobileMenuOpen(false)}>El problema</a>
-            <a href="#ciclo" className="text-cream/80 py-1.5" onClick={() => setIsMobileMenuOpen(false)}>El ciclo</a>
-            <a href="#cumplimiento" className="text-cream/80 py-1.5" onClick={() => setIsMobileMenuOpen(false)}>Cumplimiento</a>
-            <a href="#quien" className="text-cream/80 py-1.5" onClick={() => setIsMobileMenuOpen(false)}>Quién somos</a>
-            <Button
-              asChild
-              className="bg-mostaza text-carbon hover:bg-mostaza/90 font-semibold w-full mt-2"
+            <a
+              href="#modulos"
+              className="text-foreground/80 hover:text-primary font-medium py-2"
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              <a href="#contacto">Reserva una demo</a>
+              Módulos
+            </a>
+            <a
+              href="#demo"
+              className="text-foreground/80 hover:text-primary font-medium py-2"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Contacto
+            </a>
+            <hr className="border-border my-2" />
+            <Button variant="contact" className="w-full" asChild>
+              <a href="mailto:manuelmoreira@datuva.es?subject=Solicitud%20de%20demostraci%C3%B3n%20Datuva">
+                Solicitar demo
+              </a>
             </Button>
           </div>
         </div>

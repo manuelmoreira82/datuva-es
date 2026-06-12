@@ -9,14 +9,13 @@ export default {
       center: true,
       padding: "1.5rem",
       screens: {
-        "2xl": "1320px",
+        "2xl": "1280px",
       },
     },
     extend: {
       fontFamily: {
-        sans: ['Instrument Sans', 'Inter', 'system-ui', 'sans-serif'],
-        serif: ['Fraunces', 'Cormorant Garamond', 'Georgia', 'serif'],
-        display: ['Fraunces', 'Cormorant Garamond', 'Georgia', 'serif'],
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+        serif: ['Playfair Display', 'Georgia', 'serif'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -52,16 +51,21 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        carbon: "hsl(var(--carbon))",
-        tinta: "hsl(var(--tinta))",
-        mostaza: {
-          DEFAULT: "hsl(var(--mostaza))",
-          soft: "hsl(var(--mostaza-soft))",
+        bordeaux: {
+          DEFAULT: "hsl(var(--bordeaux))",
+          light: "hsl(var(--bordeaux-light))",
         },
-        vino: "hsl(var(--vino))",
+        vineyard: {
+          DEFAULT: "hsl(var(--vineyard))",
+          light: "hsl(var(--vineyard-light))",
+        },
+        gold: {
+          DEFAULT: "hsl(var(--gold))",
+          light: "hsl(var(--gold-light))",
+        },
         cream: {
           DEFAULT: "hsl(var(--cream))",
-          soft: "hsl(var(--cream-soft))",
+          dark: "hsl(var(--cream-dark))",
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
@@ -93,15 +97,10 @@ export default {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-        "fade-in-up": {
-          "0%": { opacity: "0", transform: "translateY(20px)" },
-          "100%": { opacity: "1", transform: "translateY(0)" },
-        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "fade-in-up": "fade-in-up 0.6s ease-out forwards",
       },
     },
   },

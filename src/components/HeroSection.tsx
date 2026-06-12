@@ -1,104 +1,113 @@
-import { ArrowRight } from "lucide-react";
-import DensityCurve from "@/components/DensityCurve";
+import { ArrowRight, Monitor, Smartphone, Tablet } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
+import sectionCampo from "@/assets/section-campo.jpg";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, delay: i * 0.15, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
+  }),
+};
 
 const HeroSection = () => {
   return (
-    <section
-      id="inicio"
-      className="relative bg-carbon text-cream overflow-hidden min-h-[100svh] flex flex-col"
-    >
-      {/* Textura sutil */}
-      <div
-        aria-hidden
-        className="absolute inset-0 opacity-[0.06] pointer-events-none"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle at 20% 30%, hsl(var(--mostaza)) 0, transparent 45%), radial-gradient(circle at 80% 70%, hsl(var(--vino)) 0, transparent 50%)",
-        }}
-      />
-
-      <div className="flex-1 flex items-center pt-32 md:pt-36 pb-16">
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-5xl">
-            {/* Eyebrow */}
-            <p
-              className="text-mostaza text-[11px] md:text-xs font-medium tracking-[0.32em] uppercase mb-8 opacity-0 animate-fade-in-up"
-              style={{ animationDelay: "120ms" }}
-            >
-              Bodega · Viñedo · Cumplimiento
-            </p>
-
-            {/* Titular: línea por línea, stagger 80ms */}
-            <h1 className="font-display text-cream font-medium leading-[0.95] tracking-[-0.02em] text-balance">
-              <span
-                className="block text-[2.6rem] sm:text-6xl md:text-7xl lg:text-[5.5rem] opacity-0 animate-fade-in-up"
-                style={{ animationDelay: "260ms" }}
-              >
-                Tu bodega,
-              </span>
-              <span
-                className="block text-[2.6rem] sm:text-6xl md:text-7xl lg:text-[5.5rem] opacity-0 animate-fade-in-up italic text-mostaza"
-                style={{ animationDelay: "340ms" }}
-              >
-                cuadrada al minuto.
-              </span>
-            </h1>
-
-            {/* Subtítulo */}
-            <p
-              className="mt-8 max-w-2xl text-cream/75 text-base md:text-lg leading-relaxed opacity-0 animate-fade-in-up"
-              style={{ animationDelay: "560ms" }}
-            >
-              Datuva registra cada movimiento del vino y genera tus libros{" "}
-              <span className="text-cream">SILICIE</span>,{" "}
-              <span className="text-cream">INFOVI</span> y el{" "}
-              <span className="text-cream">cuaderno de campo</span> solos.
-              Hecho en el Bierzo por gente de bodega.
-            </p>
-
-            {/* Curva de densidad */}
-            <div
-              className="mt-12 md:mt-14 opacity-0 animate-fade-in-up text-cream"
-              style={{ animationDelay: "700ms" }}
-            >
-              <DensityCurve
-                color="hsl(var(--mostaza))"
-                strokeWidth={1.5}
-                trigger="mount"
-                height={90}
-                showLabels
-              />
-            </div>
-
-            {/* CTAs */}
-            <div
-              className="mt-10 flex flex-col sm:flex-row gap-3 opacity-0 animate-fade-in-up"
-              style={{ animationDelay: "900ms" }}
-            >
-              <a
-                href="#contacto"
-                className="group inline-flex items-center justify-center gap-2 bg-mostaza text-carbon font-semibold text-base h-14 px-8 rounded-md hover:bg-mostaza/90 transition-all hover:shadow-[0_12px_32px_-12px_hsl(var(--mostaza)/0.6)]"
-              >
-                Reserva una demo
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </a>
-              <a
-                href="#ciclo"
-                className="inline-flex items-center justify-center gap-2 border border-cream/25 text-cream font-medium text-base h-14 px-8 rounded-md hover:bg-cream/5 hover:border-cream/45 transition-all"
-              >
-                Ver cómo funciona
-              </a>
-            </div>
-          </div>
-        </div>
+    <section id="inicio" className="relative min-h-screen flex items-end overflow-hidden pt-28 md:pt-32">
+      {/* Background image */}
+      <div className="absolute inset-0">
+        <img
+          src={sectionCampo}
+          alt="Viñedos españoles"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/50 to-black/60" />
       </div>
 
-      {/* Pie de hero */}
-      <div className="relative z-10 border-t border-cream/10">
-        <div className="container mx-auto px-4 py-5 flex flex-wrap items-center justify-between gap-3 text-cream/50 text-xs tracking-wide">
-          <span>D.O. Bierzo · Villafranca</span>
-          <span className="hidden sm:inline">Móvil · Tablet · Escritorio</span>
-          <span>Instalable como app</span>
+      <div className="container mx-auto px-4 relative z-10 pb-16 md:pb-24">
+        <div className="max-w-4xl">
+          <motion.p
+            custom={0}
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+            className="text-accent font-medium tracking-[0.3em] uppercase text-xs md:text-sm mb-4"
+          >
+            Campo y bodega · Cumplimiento normativo · Control de costes
+          </motion.p>
+
+          <motion.h1
+            custom={1}
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+            className="font-serif text-[2rem] sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] md:leading-[0.95] tracking-tight mb-6 text-white"
+          >
+            Toda tu bodega{" "}
+            <span className="text-accent block sm:inline mt-2 sm:mt-0">
+              a golpe de clic.
+            </span>
+          </motion.h1>
+
+          <motion.p
+            custom={2}
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+            className="text-white/80 text-base md:text-lg max-w-2xl mb-8 leading-relaxed"
+          >
+            Olvídate de pasar horas trasladando datos del papel al Excel.
+            Con Datuva controlas depósitos, barricas, trabajos del viñedo y de bodega
+            desde el móvil. SILICIE, INFOVI y libros oficiales JCYL se generan solos,
+            listos para presentar.
+          </motion.p>
+
+          <motion.div
+            custom={3}
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+            className="flex flex-col sm:flex-row gap-4"
+          >
+            <Button variant="contact" size="lg" asChild className="text-base group">
+              <a href="#demo-app" className="gap-2">
+                Ver demo en 2 minutos
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </a>
+            </Button>
+            <Button
+              variant="outline"
+              size="lg"
+              asChild
+              className="text-base border-white/40 text-white hover:bg-white/15 hover:text-white"
+            >
+              <a href="#modulos">Ver cómo funciona</a>
+            </Button>
+          </motion.div>
+
+          <motion.div
+            custom={4}
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+            className="mt-10 flex items-center gap-6 text-white/50 text-sm"
+          >
+            <div className="flex items-center gap-2">
+              <Smartphone className="w-4 h-4" />
+              <span>Móvil</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Tablet className="w-4 h-4" />
+              <span>Tablet</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Monitor className="w-4 h-4" />
+              <span>Ordenador</span>
+            </div>
+            <span className="text-white/20">|</span>
+            <span>Instalable como app</span>
+          </motion.div>
         </div>
       </div>
     </section>

@@ -2,57 +2,54 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,800&family=Instrument+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
 
 @layer base {
   :root {
-    /* === Datuva 2026 — paleta editorial bodega === */
-    /* Cream #F5F0E8 */
-    --background: 37 33% 94%;
-    --foreground: 220 47% 20%;
+    --background: 37 33% 95%;
+    --foreground: 280 30% 15%;
 
-    --card: 37 33% 97%;
-    --card-foreground: 220 47% 20%;
+    --card: 37 33% 98%;
+    --card-foreground: 280 30% 15%;
 
-    --popover: 37 33% 97%;
-    --popover-foreground: 220 47% 20%;
+    --popover: 37 33% 98%;
+    --popover-foreground: 280 30% 15%;
 
-    /* Azul oscuro tinta #1B2A4A */
-    --primary: 220 47% 20%;
-    --primary-foreground: 37 33% 94%;
+    --primary: 301 37% 18%;
+    --primary-foreground: 37 33% 95%;
 
-    /* Dorado mostaza #C9A227 */
-    --secondary: 44 70% 47%;
-    --secondary-foreground: 30 15% 8%;
+    --secondary: 40 50% 54%;
+    --secondary-foreground: 280 30% 15%;
 
-    --muted: 37 20% 88%;
-    --muted-foreground: 220 20% 38%;
+    --muted: 37 20% 90%;
+    --muted-foreground: 280 15% 45%;
 
-    --accent: 44 70% 47%;
-    --accent-foreground: 30 15% 8%;
+    --accent: 40 50% 54%;
+    --accent-foreground: 280 30% 15%;
 
-    --destructive: 0 70% 45%;
-    --destructive-foreground: 37 33% 94%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 37 18% 82%;
-    --input: 37 18% 82%;
-    --ring: 220 47% 20%;
+    --border: 37 20% 85%;
+    --input: 37 20% 85%;
+    --ring: 301 37% 18%;
 
     --radius: 0.5rem;
 
-    /* === Tokens propios de marca === */
-    --carbon: 30 15% 8%;        /* #14110F header app */
-    --tinta: 220 47% 20%;        /* #1B2A4A azul tinta */
-    --mostaza: 44 70% 47%;       /* #C9A227 dorado mostaza */
-    --mostaza-soft: 44 70% 60%;
-    --vino: 348 49% 33%;         /* #7C2D3E acento vino */
-    --cream: 37 33% 94%;
-    --cream-soft: 37 33% 97%;
+    /* Custom Datuva tokens */
+    --bordeaux: 301 37% 18%;
+    --bordeaux-light: 301 30% 28%;
+    --vineyard: 120 37% 25%;
+    --vineyard-light: 120 30% 35%;
+    --gold: 40 50% 54%;
+    --gold-light: 40 55% 65%;
+    --cream: 37 33% 95%;
+    --cream-dark: 37 25% 88%;
 
-    /* Sombras sobrias */
-    --shadow-soft: 0 4px 24px -8px hsl(220 47% 20% / 0.10);
-    --shadow-card: 0 8px 30px -12px hsl(220 47% 20% / 0.12);
-    --shadow-hover: 0 16px 40px -16px hsl(220 47% 20% / 0.18);
+    /* Shadows */
+    --shadow-soft: 0 4px 20px -4px hsl(301 37% 18% / 0.1);
+    --shadow-card: 0 8px 30px -8px hsl(301 37% 18% / 0.08);
+    --shadow-hover: 0 12px 40px -12px hsl(301 37% 18% / 0.15);
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -76,64 +73,38 @@
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
-    font-feature-settings: "ss01", "cv11";
-  }
-
-  ::selection {
-    background: hsl(var(--mostaza) / 0.35);
-    color: hsl(var(--carbon));
   }
 }
 
 @layer utilities {
-  .font-display {
-    font-family: 'Fraunces', 'Cormorant Garamond', Georgia, serif;
-    font-optical-sizing: auto;
-    letter-spacing: -0.02em;
-  }
-
-  .text-balance {
-    text-wrap: balance;
-  }
-
-  /* Reveal scroll: opacity + translateY */
-  .reveal {
+  .animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
     opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 500ms ease-out, transform 500ms ease-out;
-    will-change: opacity, transform;
-  }
-  .reveal.is-visible {
-    opacity: 1;
-    transform: translateY(0);
   }
 
-  /* Curva de densidad: dibujado con stroke-dashoffset */
-  .density-path {
-    stroke-dasharray: 1;
-    stroke-dashoffset: 1;
-    transition: stroke-dashoffset 2.4s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-  .density-path.is-drawn {
-    stroke-dashoffset: 0;
+  .animate-fade-in-up-delay-1 {
+    animation: fadeInUp 0.6s ease-out 0.15s forwards;
+    opacity: 0;
   }
 
-  .hairline {
-    height: 1px;
-    background: linear-gradient(to right, transparent, hsl(var(--foreground) / 0.18), transparent);
+  .animate-fade-in-up-delay-2 {
+    animation: fadeInUp 0.6s ease-out 0.3s forwards;
+    opacity: 0;
+  }
+
+  .animate-fade-in-up-delay-3 {
+    animation: fadeInUp 0.6s ease-out 0.45s forwards;
+    opacity: 0;
   }
 }
 
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.001ms !important;
-    transition-duration: 0.001ms !important;
+  from {
+    opacity: 0;
+    transform: translateY(24px);
   }
-  .reveal { opacity: 1 !important; transform: none !important; }
-  .density-path { stroke-dashoffset: 0 !important; }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
