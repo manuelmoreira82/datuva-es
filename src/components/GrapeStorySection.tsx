@@ -1,115 +1,132 @@
-import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import storyVideo from "@/assets/datuva-story.mp4.asset.json";
 
-type Step = {
-  emoji: string;
+type Caption = {
+  start: number;
+  end: number;
   text: string;
 };
 
-const steps: Step[] = [
-  { emoji: "🍇", text: "Nazco en la viña, soy un racimo." },
-  { emoji: "☀️", text: "Me da el sol." },
-  { emoji: "🌧️", text: "Me llueve." },
-  { emoji: "✂️", text: "Me podan." },
-  { emoji: "💧", text: "Me tratan contra el mildiu." },
-  { emoji: "🧺", text: "Me vendimian a mano." },
-  { emoji: "📦", text: "Entro en una caja de 15 kilos." },
-  { emoji: "🏚️", text: "Me llevan a la bodega." },
-  { emoji: "🦶", text: "Me despalillan y me prensan." },
-  { emoji: "🫧", text: "Fermento durante doce días." },
-  { emoji: "🛢️", text: "Me descuban y descanso en barrica." },
-  { emoji: "🍾", text: "Me embotellan, me etiquetan, me precintan." },
-  { emoji: "🍷", text: "Y termino servido en una copa." },
+const captions: Caption[] = [
+  { start: 0.0, end: 2.3, text: "Nazco en la viña." },
+  { start: 2.3, end: 4.4, text: "Me da el sol, me llueve, me podan." },
+  { start: 4.4, end: 6.6, text: "Me vendimian a mano." },
+  { start: 6.6, end: 8.8, text: "Entro en una caja de quince kilos." },
+  { start: 8.8, end: 11.0, text: "Fermento. Descanso en barrica." },
+  { start: 11.0, end: 13.5, text: "Y termino servido en una copa." },
 ];
 
 const GrapeStorySection = () => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [activeIdx, setActiveIdx] = useState(0);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const onTime = () => {
+      const t = video.currentTime;
+      const idx = captions.findIndex((c) => t >= c.start && t < c.end);
+      if (idx !== -1 && idx !== activeIdx) setActiveIdx(idx);
+    };
+
+    video.addEventListener("timeupdate", onTime);
+    return () => video.removeEventListener("timeupdate", onTime);
+  }, [activeIdx]);
+
   return (
     <section
       id="historia"
-      className="relative py-24 md:py-36 bg-[hsl(var(--background))] overflow-hidden"
+      className="relative w-full h-screen min-h-[600px] overflow-hidden bg-black"
     >
-      <div className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="max-w-3xl mx-auto text-center mb-16 md:mb-24"
-        >
-          <p className="text-accent font-medium tracking-[0.3em] uppercase text-xs md:text-sm mb-5">
-            La vida de un vino
-          </p>
-          <h2 className="font-serif text-4xl md:text-6xl font-bold leading-[1.05] text-foreground mb-6">
-            Soy una uva.
-            <span className="block text-accent italic">Esta es mi historia.</span>
-          </h2>
-          <p className="text-muted-foreground text-base md:text-lg leading-relaxed">
-            Desde el primer brote en la viña hasta la copa de quien me bebe,
-            pasan cientos de decisiones. Datuva las anota todas.
-          </p>
-        </motion.div>
+      {/* Video de fondo */}
+      <video
+        ref={videoRef}
+        src={storyVideo.url}
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        className="absolute inset-0 w-full h-full object-cover"
+        aria-label="La vida de un vino: del viñedo a la copa"
+      />
 
-        <div className="relative max-w-2xl mx-auto">
-          {/* Línea vertical */}
-          <div
-            aria-hidden
-            className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-accent/40 to-transparent"
-          />
+      {/* Gradientes para legibilidad */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-black/80 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/30 pointer-events-none" />
 
-          <ol className="space-y-10 md:space-y-14">
-            {steps.map((step, i) => {
-              const isLeft = i % 2 === 0;
-              return (
-                <motion.li
-                  key={i}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-60px" }}
-                  transition={{
-                    duration: 0.55,
-                    delay: 0.05,
-                    ease: [0.22, 1, 0.36, 1],
-                  }}
-                  className={`relative flex items-center gap-4 md:gap-8 ${
-                    isLeft ? "md:flex-row" : "md:flex-row-reverse"
-                  }`}
-                >
-                  <div
-                    className={`flex-1 ${
-                      isLeft ? "md:text-right" : "md:text-left"
-                    } text-left`}
-                  >
-                    <p className="font-serif text-xl md:text-2xl text-foreground leading-snug">
-                      {step.text}
-                    </p>
-                  </div>
-
-                  <div className="relative z-10 shrink-0 w-14 h-14 md:w-16 md:h-16 rounded-full bg-card border border-accent/40 shadow-sm flex items-center justify-center text-2xl md:text-3xl">
-                    <span aria-hidden>{step.emoji}</span>
-                  </div>
-
-                  <div className="flex-1 hidden md:block" />
-                </motion.li>
-              );
-            })}
-          </ol>
+      {/* Contenido */}
+      <div className="relative z-10 h-full flex flex-col">
+        {/* Eyebrow superior */}
+        <div className="container mx-auto px-4 pt-24 md:pt-28">
+          <motion.p
+            initial={{ opacity: 0, y: -10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-accent font-medium tracking-[0.3em] uppercase text-xs md:text-sm"
+          >
+            La vida de un vino · En primera persona
+          </motion.p>
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="max-w-2xl mx-auto text-center mt-20 md:mt-28"
-        >
-          <p className="font-serif text-2xl md:text-3xl text-foreground leading-snug mb-4">
+        {/* Caption central — sincronizada con el vídeo */}
+        <div className="flex-1 flex items-center">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl">
+              <AnimatePresence mode="wait">
+                <motion.h2
+                  key={activeIdx}
+                  initial={{ opacity: 0, y: 24, filter: "blur(8px)" }}
+                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  exit={{ opacity: 0, y: -16, filter: "blur(8px)" }}
+                  transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                  className="font-serif text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold leading-[1.02] tracking-tight text-white drop-shadow-2xl"
+                >
+                  {captions[activeIdx].text}
+                </motion.h2>
+              </AnimatePresence>
+            </div>
+          </div>
+        </div>
+
+        {/* Footer con tagline y progreso */}
+        <div className="container mx-auto px-4 pb-10 md:pb-16">
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, delay: 0.3 }}
+            className="font-serif text-lg md:text-2xl text-white/85 italic max-w-2xl"
+          >
             Y en cada paso,{" "}
-            <span className="text-accent italic">Datuva ha tomado nota.</span>
-          </p>
-          <p className="text-muted-foreground text-base md:text-lg leading-relaxed">
-            Cada tratamiento, cada kilo, cada trasiego, cada botella.
-            Trazabilidad completa desde la parcela hasta la copa.
-          </p>
-        </motion.div>
+            <span className="text-accent not-italic font-semibold">
+              Datuva ha tomado nota.
+            </span>
+          </motion.p>
+
+          {/* Barra de progreso */}
+          <div className="mt-6 flex gap-2">
+            {captions.map((_, i) => (
+              <div
+                key={i}
+                className="h-[2px] flex-1 bg-white/15 overflow-hidden rounded-full"
+              >
+                <div
+                  className={`h-full bg-accent transition-all duration-500 ${
+                    i < activeIdx
+                      ? "w-full"
+                      : i === activeIdx
+                      ? "w-1/2"
+                      : "w-0"
+                  }`}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
