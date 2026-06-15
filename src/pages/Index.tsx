@@ -4,7 +4,8 @@ import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import GrapeStorySection from "@/components/GrapeStorySection";
 import DemoAppSection from "@/components/DemoAppSection";
-import { ScrollDrivenCards, type SectionCard } from "@/components/ScrollDrivenCards";
+import { type SectionCard } from "@/components/ScrollDrivenCards";
+import ScrollNarrative from "@/components/ScrollNarrative";
 import SectionDetailModal from "@/components/SectionDetailModal";
 import CTAFinalSection from "@/components/CTAFinalSection";
 import Footer from "@/components/Footer";
@@ -176,7 +177,7 @@ const Index = () => {
       <DemoAppSection />
       
       <div id="modulos">
-        <ScrollDrivenCards cards={sections} onCardClick={setActiveCard} />
+        <ScrollNarrative cards={sections} onCardClick={setActiveCard} />
       </div>
 
       <SectionDetailModal card={activeCard} onClose={() => setActiveCard(null)} />
