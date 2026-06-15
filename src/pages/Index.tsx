@@ -177,7 +177,7 @@ const Index = () => {
       <DemoAppSection />
       
       <div id="modulos">
-        <ScrollDrivenCards cards={sections} onCardClick={setActiveCard} />
+        <ScrollNarrative cards={sections} onCardClick={setActiveCard} />
       </div>
 
       <SectionDetailModal card={activeCard} onClose={() => setActiveCard(null)} />
