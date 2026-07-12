@@ -8,6 +8,7 @@ import Terminos from "./pages/Terminos";
 import Privacidad from "./pages/Privacidad";
 import AvisoLegal from "./pages/AvisoLegal";
 import PoliticaCookies from "./pages/PoliticaCookies";
+import Presentacion from "./pages/Presentacion";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
