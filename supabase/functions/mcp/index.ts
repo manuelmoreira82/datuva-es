@@ -3,10 +3,10 @@
 // supabase function: mcp
 // Bundled from src/lib/mcp/index.ts by @lovable.dev/mcp-js.
 // src/lib/mcp/index.ts
-import { defineMcp } from "npm:@lovable.dev/mcp-js@0.20.0";
+import { defineMcp } from "npm:@lovable.dev/mcp-js@0.20.1";
 
 // src/lib/mcp/tools/list-modules.ts
-import { defineTool } from "npm:@lovable.dev/mcp-js@0.20.0";
+import { defineTool } from "npm:@lovable.dev/mcp-js@0.20.1";
 var modules = [
   { id: "normativa", title: "Cumplimiento normativo \xB7 SILICIE autom\xE1tico", description: "SILICIE, INFOVI, libros JCYL y alertas de rendimiento/mermas." },
   { id: "costes", title: "Control de costes", description: "Coste por litro, por dep\xF3sito y por botella con desglose completo." },
@@ -32,7 +32,7 @@ var list_modules_default = defineTool({
 });
 
 // src/lib/mcp/tools/get-module.ts
-import { defineTool as defineTool2 } from "npm:@lovable.dev/mcp-js@0.20.0";
+import { defineTool as defineTool2 } from "npm:@lovable.dev/mcp-js@0.20.1";
 import { z } from "npm:zod@^3.25.76";
 var get_module_default = defineTool2({
   name: "get_module",
@@ -55,7 +55,7 @@ var get_module_default = defineTool2({
 });
 
 // src/lib/mcp/tools/get-contact.ts
-import { defineTool as defineTool3 } from "npm:@lovable.dev/mcp-js@0.20.0";
+import { defineTool as defineTool3 } from "npm:@lovable.dev/mcp-js@0.20.1";
 var get_contact_default = defineTool3({
   name: "get_contact",
   title: "Datos de contacto de Datuva",
@@ -86,5 +86,5 @@ var mcp_default = defineMcp({
 });
 
 // lovable-mcp-supabase-entry.ts
-import { createSupabaseHandler } from "npm:@lovable.dev/mcp-js@0.20.0/stacks/supabase";
+import { createSupabaseHandler } from "npm:@lovable.dev/mcp-js@0.20.1/stacks/supabase";
 Deno.serve(createSupabaseHandler(mcp_default, { functionName: "mcp" }));
