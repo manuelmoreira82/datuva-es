@@ -42,11 +42,10 @@ const Presentacion = () => {
           </div>
 
           <div className="w-full rounded-lg overflow-hidden shadow-card border border-border bg-card">
-            <iframe
-              src={pdfUrl}
-              title="Presentación Datuva"
-              className="w-full"
-              style={{ height: "80vh" }}
+            <img
+              src="/datuva-presentacion.jpg"
+              alt="Presentación comercial de Datuva"
+              className="w-full h-auto"
             />
           </div>
 
