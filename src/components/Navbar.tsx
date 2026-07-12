@@ -44,6 +44,16 @@ const Navbar = () => {
             Módulos
           </a>
           <a
+            href="/presentacion"
+            className={`font-medium transition-colors duration-200 ${
+              isScrolled
+                ? "text-foreground/80 hover:text-primary"
+                : "text-white/80 hover:text-white"
+            }`}
+          >
+            Presentación
+          </a>
+          <a
             href="#demo"
             className={`font-medium transition-colors duration-200 ${
               isScrolled
@@ -81,6 +91,13 @@ const Navbar = () => {
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Módulos
+            </a>
+            <a
+              href="/presentacion"
+              className="text-foreground/80 hover:text-primary font-medium py-2"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Presentación
             </a>
             <a
               href="#demo"
