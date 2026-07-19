@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import storyVideo from "@/assets/datuva-story.mp4.asset.json";
+import storyBg from "@/assets/hero-vineyard.jpg";
 
 type Caption = {
   start: number;
@@ -18,21 +18,15 @@ const captions: Caption[] = [
 ];
 
 const GrapeStorySection = () => {
-  const videoRef = useRef<HTMLVideoElement>(null);
   const [activeIdx, setActiveIdx] = useState(0);
 
   useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    const onTime = () => {
-      const t = video.currentTime;
-      const idx = captions.findIndex((c) => t >= c.start && t < c.end);
-      if (idx !== -1 && idx !== activeIdx) setActiveIdx(idx);
-    };
-
-    video.addEventListener("timeupdate", onTime);
-    return () => video.removeEventListener("timeupdate", onTime);
+    const current = captions[activeIdx];
+    const durationMs = (current.end - current.start) * 1000;
+    const timer = setTimeout(() => {
+      setActiveIdx((prev) => (prev + 1) % captions.length);
+    }, durationMs);
+    return () => clearTimeout(timer);
   }, [activeIdx]);
 
   return (
@@ -40,17 +34,14 @@ const GrapeStorySection = () => {
       id="historia"
       className="relative w-full h-screen min-h-[600px] overflow-hidden bg-black"
     >
-      {/* Video de fondo */}
-      <video
-        ref={videoRef}
-        src={storyVideo.url}
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="auto"
+      {/* Imagen de fondo con leve zoom (sustituye al vídeo) */}
+      <motion.img
+        src={storyBg}
+        alt="La vida de un vino: del viñedo a la copa"
+        initial={{ scale: 1.05 }}
+        animate={{ scale: 1.15 }}
+        transition={{ duration: 20, repeat: Infinity, repeatType: "reverse", ease: "linear" }}
         className="absolute inset-0 w-full h-full object-cover"
-        aria-label="La vida de un vino: del viñedo a la copa"
       />
 
       {/* Gradientes para legibilidad */}
