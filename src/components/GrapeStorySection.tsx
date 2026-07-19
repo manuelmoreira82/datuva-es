@@ -1,26 +1,21 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import imgVina from "@/assets/hero-vineyard.jpg";
-import imgCampo from "@/assets/section-campo.jpg";
-import imgVendimia from "@/assets/section-vendimia.jpg";
-import imgBodega from "@/assets/section-bodega.jpg";
-import imgBarrica from "@/assets/section-embotellado.jpg";
-import imgCopa from "@/assets/hero-bodega.jpg";
 
 type Caption = {
   start: number;
   end: number;
   text: string;
-  image: string;
+  glow: string;
 };
 
+// Fondo cinematográfico por fase (colores de marca, sin fotos ni vídeo)
 const captions: Caption[] = [
-  { start: 0.0, end: 3.0, text: "Nazco en la viña.", image: imgVina },
-  { start: 3.0, end: 6.0, text: "Me da el sol, me llueve, me podan.", image: imgCampo },
-  { start: 6.0, end: 9.0, text: "Me vendimian a mano.", image: imgVendimia },
-  { start: 9.0, end: 12.0, text: "Entro en una caja de quince kilos.", image: imgBodega },
-  { start: 12.0, end: 15.0, text: "Fermento. Descanso en barrica.", image: imgBarrica },
-  { start: 15.0, end: 18.0, text: "Y termino servido en una copa.", image: imgCopa },
+  { start: 0, end: 3, text: "Nazco en la viña.", glow: "radial-gradient(130% 130% at 28% 22%, rgba(46,92,74,0.55), transparent 62%)" },
+  { start: 3, end: 6, text: "Me da el sol, me llueve, me podan.", glow: "radial-gradient(130% 130% at 70% 24%, rgba(190,150,70,0.50), transparent 62%)" },
+  { start: 6, end: 9, text: "Me vendimian a mano.", glow: "radial-gradient(130% 130% at 40% 28%, rgba(168,86,44,0.50), transparent 62%)" },
+  { start: 9, end: 12, text: "Entro en una caja de quince kilos.", glow: "radial-gradient(130% 130% at 62% 26%, rgba(96,52,64,0.52), transparent 62%)" },
+  { start: 12, end: 15, text: "Fermento. Descanso en barrica.", glow: "radial-gradient(130% 130% at 34% 30%, rgba(118,38,58,0.55), transparent 62%)" },
+  { start: 15, end: 18, text: "Y termino servido en una copa.", glow: "radial-gradient(130% 130% at 66% 26%, rgba(124,45,62,0.62), transparent 62%)" },
 ];
 
 const GrapeStorySection = () => {
@@ -40,26 +35,23 @@ const GrapeStorySection = () => {
       id="historia"
       className="relative w-full h-screen min-h-[600px] overflow-hidden bg-black"
     >
-      {/* Secuencia de imágenes con fundido + zoom lento (efecto cine, sin vídeo) */}
+      {/* Fondo cinematográfico de marca que evoluciona con cada frase (sin fotos, sin vídeo) */}
+      <div className="absolute inset-0 bg-[#0b0e18]" />
       <AnimatePresence>
-        <motion.img
+        <motion.div
           key={activeIdx}
-          src={captions[activeIdx].image}
-          alt="La vida de un vino: del viñedo a la copa"
-          initial={{ opacity: 0, scale: 1.05 }}
-          animate={{ opacity: 1, scale: 1.16 }}
+          className="absolute inset-0"
+          style={{ background: captions[activeIdx].glow }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{
-            opacity: { duration: 1.2, ease: "easeInOut" },
-            scale: { duration: 3.6, ease: "linear" },
-          }}
-          className="absolute inset-0 w-full h-full object-cover"
+          transition={{ duration: 1.4, ease: "easeInOut" }}
         />
       </AnimatePresence>
 
-      {/* Gradientes para legibilidad */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-black/80 pointer-events-none" />
-      <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/30 pointer-events-none" />
+      {/* Viñeta para legibilidad y profundidad */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/85 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent pointer-events-none" />
 
       {/* Contenido */}
       <div className="relative z-10 h-full flex flex-col">
