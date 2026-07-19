@@ -1,20 +1,26 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import storyBg from "@/assets/hero-vineyard.jpg";
+import imgVina from "@/assets/hero-vineyard.jpg";
+import imgCampo from "@/assets/section-campo.jpg";
+import imgVendimia from "@/assets/section-vendimia.jpg";
+import imgBodega from "@/assets/section-bodega.jpg";
+import imgBarrica from "@/assets/section-embotellado.jpg";
+import imgCopa from "@/assets/hero-bodega.jpg";
 
 type Caption = {
   start: number;
   end: number;
   text: string;
+  image: string;
 };
 
 const captions: Caption[] = [
-  { start: 0.0, end: 2.3, text: "Nazco en la viña." },
-  { start: 2.3, end: 4.4, text: "Me da el sol, me llueve, me podan." },
-  { start: 4.4, end: 6.6, text: "Me vendimian a mano." },
-  { start: 6.6, end: 8.8, text: "Entro en una caja de quince kilos." },
-  { start: 8.8, end: 11.0, text: "Fermento. Descanso en barrica." },
-  { start: 11.0, end: 13.5, text: "Y termino servido en una copa." },
+  { start: 0.0, end: 3.0, text: "Nazco en la viña.", image: imgVina },
+  { start: 3.0, end: 6.0, text: "Me da el sol, me llueve, me podan.", image: imgCampo },
+  { start: 6.0, end: 9.0, text: "Me vendimian a mano.", image: imgVendimia },
+  { start: 9.0, end: 12.0, text: "Entro en una caja de quince kilos.", image: imgBodega },
+  { start: 12.0, end: 15.0, text: "Fermento. Descanso en barrica.", image: imgBarrica },
+  { start: 15.0, end: 18.0, text: "Y termino servido en una copa.", image: imgCopa },
 ];
 
 const GrapeStorySection = () => {
@@ -34,15 +40,22 @@ const GrapeStorySection = () => {
       id="historia"
       className="relative w-full h-screen min-h-[600px] overflow-hidden bg-black"
     >
-      {/* Imagen de fondo con leve zoom (sustituye al vídeo) */}
-      <motion.img
-        src={storyBg}
-        alt="La vida de un vino: del viñedo a la copa"
-        initial={{ scale: 1.05 }}
-        animate={{ scale: 1.15 }}
-        transition={{ duration: 20, repeat: Infinity, repeatType: "reverse", ease: "linear" }}
-        className="absolute inset-0 w-full h-full object-cover"
-      />
+      {/* Secuencia de imágenes con fundido + zoom lento (efecto cine, sin vídeo) */}
+      <AnimatePresence>
+        <motion.img
+          key={activeIdx}
+          src={captions[activeIdx].image}
+          alt="La vida de un vino: del viñedo a la copa"
+          initial={{ opacity: 0, scale: 1.05 }}
+          animate={{ opacity: 1, scale: 1.16 }}
+          exit={{ opacity: 0 }}
+          transition={{
+            opacity: { duration: 1.2, ease: "easeInOut" },
+            scale: { duration: 3.6, ease: "linear" },
+          }}
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+      </AnimatePresence>
 
       {/* Gradientes para legibilidad */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-black/80 pointer-events-none" />
