@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import GrapeStorySection from "@/components/GrapeStorySection";
 import DemoAppSection from "@/components/DemoAppSection";
+import AnuncioSection from "@/components/AnuncioSection";
 import { type SectionCard } from "@/components/ScrollDrivenCards";
 import ScrollNarrative from "@/components/ScrollNarrative";
 import SectionDetailModal from "@/components/SectionDetailModal";
@@ -172,6 +173,7 @@ const Index = () => {
       <Navbar />
       <HeroSection />
       <GrapeStorySection />
+      <AnuncioSection />
       <DemoAppSection />
       
       <div id="modulos">
