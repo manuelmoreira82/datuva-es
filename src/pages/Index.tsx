@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
-import GrapeStorySection from "@/components/GrapeStorySection";
 import DemoAppSection from "@/components/DemoAppSection";
 import AnuncioSection from "@/components/AnuncioSection";
 import { type SectionCard } from "@/components/ScrollDrivenCards";
@@ -172,7 +171,6 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       <HeroSection />
-      <GrapeStorySection />
       <AnuncioSection />
       <DemoAppSection />
       
