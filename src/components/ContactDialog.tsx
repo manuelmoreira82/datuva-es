@@ -110,6 +110,13 @@ export const ContactDialogProvider = ({ children }: { children: React.ReactNode 
         body: JSON.stringify({ ...campos, origen, website: honeypot }),
       });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+      // Un 200 no basta: si la ruta no existiera, el sitio devuelve el HTML de
+      // la SPA con 200 y daríamos por enviado algo que nadie ha recibido.
+      // Solo consideramos correcto un JSON que confirme el registro.
+      const datos = await res.json().catch(() => null);
+      if (!datos?.ok) throw new Error("Respuesta inesperada del servidor");
+
       setEstado("ok");
     } catch {
       setEstado("error");
