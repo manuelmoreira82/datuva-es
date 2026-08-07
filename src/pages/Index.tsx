@@ -4,12 +4,20 @@ import HeroSection from "@/components/HeroSection";
 import DemoAppSection from "@/components/DemoAppSection";
 import AnuncioSection from "@/components/AnuncioSection";
 import { type SectionCard } from "@/components/ScrollDrivenCards";
-import ScrollNarrative from "@/components/ScrollNarrative";
+import ModulosBento from "@/components/ModulosBento";
 import SectionDetailModal from "@/components/SectionDetailModal";
+import ROISection from "@/components/ROISection";
+import ComparativaSection from "@/components/ComparativaSection";
+import TestimoniosSection from "@/components/TestimoniosSection";
+import FAQSection from "@/components/FAQSection";
 import CTAFinalSection from "@/components/CTAFinalSection";
 import Footer from "@/components/Footer";
 import CookieBanner from "@/components/CookieBanner";
 import WhatsAppButton from "@/components/WhatsAppButton";
+
+import appCapturaMapa from "@/assets/app-screenshot-map.jpg";
+import appCapturaAnaliticas from "@/assets/app-screenshot-analytics.jpg";
+import appCapturaTrazabilidad from "@/assets/app-screenshot-traceability.jpg";
 
 import {
   MapPin, BookOpen, Leaf, Sun, Bug, Tractor, CloudRain, FlaskConical, Clock, Euro,
@@ -37,7 +45,7 @@ const sections: SectionCard[] = [
   {
     id: "normativa",
     title: "Tu SILICIE se prepara solo desde los movimientos reales de tu bodega.",
-    subtitle: "Cumplimiento normativo · SILICIE preparado",
+    subtitle: "Cumplimiento normativo",
     image: sectionNormativa,
     features: [
       { icon: ShieldCheck, text: "SILICIE preparado automáticamente: cada movimiento de vino genera el asiento contable con su código NC (TARIC). El libro se descarga en el formato oficial de importación de la AEAT, listo para que lo presentes tú o tu gestoría." },
@@ -46,12 +54,16 @@ const sections: SectionCard[] = [
       { icon: AlertTriangle, text: "Alertas de rendimiento, lías, mermas y subproductos fuera de rango." },
     ],
     nota: "Datuva prepara y exporta los libros y declaraciones a partir de los movimientos que registras. La presentación ante la AEAT, la Junta de Castilla y León u otros organismos oficiales, así como la revisión y veracidad de los datos, corresponde a la bodega o a su gestoría.",
+    resumen: "SILICIE, INFOVI y libros JCyL preparados a partir de los movimientos que ya registras. Sin trabajo extra.",
+    icono: ShieldCheck,
   },
   {
     id: "costes",
     title: "Si no sabes tu coste por botella, estás perdiendo dinero.",
     subtitle: "Control de costes",
     image: sectionCostes,
+    resumen: "Coste real por litro y por botella con todo dentro: uva, mano de obra, materiales, mermas y costes fijos.",
+    icono: Calculator,
     features: [
       { icon: Euro, text: "Coste de producción desde la uva hasta la botella: uva, tratamientos, materiales, mano de obra, mermas, roturas, costes fijos estructurales." },
       { icon: BarChart3, text: "Coste por litro en cada depósito y barrica en tiempo real." },
@@ -63,6 +75,9 @@ const sections: SectionCard[] = [
     title: "Tu viñedo, documentado al detalle",
     subtitle: "Campo y viñedo",
     image: sectionCampo,
+    resumen: "Parcelas con SIGPAC y geolocalización, cuaderno de campo digital, fitosanitarios, fenología y meteorología automática.",
+    captura: appCapturaMapa,
+    icono: MapPin,
     features: [
       { icon: MapPin, text: "Ficha completa de parcelas: variedad, superficie, SIGPAC, polígono, parcela catastral, referencia catastral, año de plantación, sistema de conducción y marco de plantación." },
       { icon: MapPin, text: "Mapa de parcelas con geolocalización." },
@@ -84,6 +99,8 @@ const sections: SectionCard[] = [
     title: "Cada kilo de uva, registrado",
     subtitle: "Vendimia",
     image: sectionVendimia,
+    resumen: "Entradas por viticultor con kg, grado, pH y parcela de origen. Trazabilidad de parcela a botella.",
+    icono: Grape,
     features: [
       { icon: Grape, text: "Registro de entradas de uva por viticultor: kg, grado, pH, temperatura, parcela de origen y depósito de destino." },
       { icon: Route, text: "Trazabilidad completa: parcela → depósito → lote → botella." },
@@ -95,6 +112,9 @@ const sections: SectionCard[] = [
     title: "Escanea el QR. Sabes todo.",
     subtitle: "Bodega",
     image: sectionBodega,
+    resumen: "Depósitos y barricas identificados con QR. Escaneas y sabes qué hay dentro, cuántos litros y desde cuándo.",
+    captura: appCapturaTrazabilidad,
+    icono: Container,
     features: [
       { icon: Container, text: "Control de depósitos de acero inoxidable, hormigón y fibra de vidrio: capacidad, contenido actual, estado, QR identificativo." },
       { icon: Wine, text: "Gestión de barricas: tipo de madera, capacidad, contenido, fecha de llenado, QR." },
@@ -108,6 +128,9 @@ const sections: SectionCard[] = [
     title: "Fermentación bajo control",
     subtitle: "Laboratorio",
     image: sectionLaboratorio,
+    resumen: "Analíticas completas, lecturas rápidas de fermentación con gráficos y alertas cuando algo se sale de rango.",
+    captura: appCapturaAnaliticas,
+    icono: FlaskConical,
     features: [
       { icon: FlaskConical, text: "Analíticas completas: pH, grado alcohólico, acidez total, acidez volátil, SO₂ libre y total, azúcar residual, densidad, glicerina." },
       { icon: TrendingUp, text: "Lecturas rápidas de fermentación (2-3 veces/día) con gráficos de evolución." },
@@ -120,6 +143,8 @@ const sections: SectionCard[] = [
     title: "Embotellas. El stock se actualiza solo.",
     subtitle: "Embotellado y etiquetado",
     image: sectionEmbotellado,
+    resumen: "Lotes con trazabilidad hasta la parcela, descuento automático de materiales y stock de producto terminado.",
+    icono: Package,
     features: [
       { icon: Package, text: "Control por lotes de embotellado con trazabilidad hasta la parcela de origen." },
       { icon: Minus, text: "Descuento automático de materiales: corchos, botellas, cápsulas." },
@@ -135,6 +160,8 @@ const sections: SectionCard[] = [
     title: "Cada caja que sale, queda registrada",
     subtitle: "Expediciones",
     image: sectionExpediciones,
+    resumen: "Albaranes de salida nacionales, intracomunitarios y de exportación, con clientes y transportistas listos para la documentación fiscal.",
+    icono: Truck,
     features: [
       { icon: FileOutput, text: "Albaranes de salida: ventas nacionales, intracomunitarias (EMCS), exportación, muestras, catas, autoconsumo." },
       { icon: Users, text: "Gestión de clientes con CAE, SEED EMCS, NIF intracomunitario." },
@@ -146,6 +173,8 @@ const sections: SectionCard[] = [
     title: "Tu equipo, organizado",
     subtitle: "Recursos humanos",
     image: sectionBodega,
+    resumen: "Control horario conforme al RD-ley 8/2019, partes de trabajo, órdenes asignadas y carnets de aplicador.",
+    icono: Users,
     features: [
       { icon: Clock, text: "Control horario conforme al RD-ley 8/2019." },
       { icon: ClipboardList, text: "Partes de trabajo de bodega y campo." },
@@ -159,6 +188,8 @@ const sections: SectionCard[] = [
     title: "Tus proveedores, centralizados",
     subtitle: "Proveedores",
     image: sectionExpediciones,
+    resumen: "Fichas con categorías, condiciones de pago y descuentos.",
+    icono: Building2,
     features: [
       { icon: Building2, text: "Ficha de proveedores con categorías, condiciones de pago y descuentos." },
     ],
@@ -174,13 +205,15 @@ const Index = () => {
       <HeroSection />
       <AnuncioSection />
       <DemoAppSection />
-      
-      <div id="modulos">
-        <ScrollNarrative cards={sections} onCardClick={setActiveCard} />
-      </div>
 
+      <ModulosBento cards={sections} onCardClick={setActiveCard} />
       <SectionDetailModal card={activeCard} onClose={() => setActiveCard(null)} />
-      
+
+      <ROISection />
+      <ComparativaSection />
+      <TestimoniosSection />
+      <FAQSection />
+
       <CTAFinalSection />
       <Footer />
       <CookieBanner />
