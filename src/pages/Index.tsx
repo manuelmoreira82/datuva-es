@@ -37,14 +37,15 @@ const sections: SectionCard[] = [
   {
     id: "normativa",
     title: "Tu SILICIE se prepara solo desde los movimientos reales de tu bodega.",
-    subtitle: "Cumplimiento normativo · SILICIE automático",
+    subtitle: "Cumplimiento normativo · SILICIE preparado",
     image: sectionNormativa,
     features: [
-      { icon: ShieldCheck, text: "SILICIE automático: cada movimiento de vino genera el asiento contable con código NC (TARIC) correcto. El libro queda listo para presentar en la sede electrónica de la AEAT." },
-      { icon: CalendarDays, text: "Declaraciones INFOVI mensuales." },
-      { icon: BookOpen, text: "Libros JCYL (Orden AGR/1616/2022): elaboración, envasado, etiquetado, entradas y salidas." },
+      { icon: ShieldCheck, text: "SILICIE preparado automáticamente: cada movimiento de vino genera el asiento contable con su código NC (TARIC). El libro se descarga en el formato oficial de importación de la AEAT, listo para que lo presentes tú o tu gestoría." },
+      { icon: CalendarDays, text: "Datos de INFOVI preparados mes a mes y exportables en Excel, CSV y PDF." },
+      { icon: BookOpen, text: "Libros JCyL (Orden AGR/1616/2022): elaboración, envasado, etiquetado, entradas y salidas." },
       { icon: AlertTriangle, text: "Alertas de rendimiento, lías, mermas y subproductos fuera de rango." },
     ],
+    nota: "Datuva prepara y exporta los libros y declaraciones a partir de los movimientos que registras. La presentación ante la AEAT, la Junta de Castilla y León u otros organismos oficiales, así como la revisión y veracidad de los datos, corresponde a la bodega o a su gestoría.",
   },
   {
     id: "costes",

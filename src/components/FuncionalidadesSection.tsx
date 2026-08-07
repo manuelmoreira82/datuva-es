@@ -5,7 +5,7 @@ const FuncionalidadesSection = () => {
     {
       icon: FileText,
       title: "Tu Libro SILICIE, listo en un clic.",
-      description: "Tú mueve el vino, nosotros organizamos los datos. El sistema genera automáticamente el Libro de Movimientos con el formato exacto que pide Hacienda, listo para que tú o tu asesor lo presentéis sin perder tiempo cuadrando litros.",
+      description: "Tú mueve el vino, nosotros organizamos los datos. El sistema prepara automáticamente el Libro de Movimientos con el formato exacto de importación que pide Hacienda, listo para que tú o tu asesor lo presentéis sin perder tiempo cuadrando litros.",
       accent: "primary"
     },
     {

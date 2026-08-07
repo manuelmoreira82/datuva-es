@@ -116,6 +116,19 @@ const ScrollNarrative = ({ cards, onCardClick }: Props) => {
                   ))}
                 </motion.ul>
 
+                {/* Aclaración legal */}
+                {card.nota && (
+                  <motion.p
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.9, delay: 0.5 }}
+                    className="mt-8 max-w-2xl text-left text-xs md:text-sm text-[#F5F0E8]/45 leading-relaxed border-l border-[#C9A227]/40 pl-4"
+                  >
+                    {card.nota}
+                  </motion.p>
+                )}
+
                 {/* CTA */}
                 <motion.button
                   initial={{ opacity: 0 }}

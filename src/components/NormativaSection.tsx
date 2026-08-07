@@ -2,9 +2,9 @@ import { FileCheck, CalendarDays, BookOpen, AlertTriangle, ShieldCheck } from "l
 
 const NormativaSection = () => {
   const features = [
-    { icon: FileCheck, text: "SILICIE automático: cada movimiento de vino genera el asiento contable con código NC (TARIC) correcto. El libro queda listo para presentar en la sede electrónica de la AEAT." },
-    { icon: CalendarDays, text: "Declaraciones INFOVI mensuales." },
-    { icon: BookOpen, text: "Libros JCYL (Orden AGR/1616/2022): elaboración, envasado, etiquetado, entradas y salidas." },
+    { icon: FileCheck, text: "SILICIE preparado automáticamente: cada movimiento de vino genera el asiento contable con su código NC (TARIC). El libro se descarga en el formato oficial de importación de la AEAT, listo para que lo presentes tú o tu gestoría." },
+    { icon: CalendarDays, text: "Datos de INFOVI preparados mes a mes y exportables en Excel, CSV y PDF." },
+    { icon: BookOpen, text: "Libros JCyL (Orden AGR/1616/2022): elaboración, envasado, etiquetado, entradas y salidas." },
     { icon: AlertTriangle, text: "Alertas de rendimiento, lías, mermas y subproductos fuera de rango." },
   ];
 
@@ -19,10 +19,10 @@ const NormativaSection = () => {
             </span>
           </div>
           <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-            Tu SILICIE se escribe solo
+            Tu SILICIE se prepara solo
           </h2>
           <p className="text-primary-foreground/60 text-lg mb-12 max-w-2xl">
-            El diferenciador de Datuva. Cada operación en bodega genera automáticamente la documentación normativa.
+            El diferenciador de Datuva. Cada operación en bodega alimenta automáticamente la documentación normativa.
           </p>
 
           <div className="grid md:grid-cols-2 gap-5">
@@ -35,6 +35,13 @@ const NormativaSection = () => {
               </div>
             ))}
           </div>
+
+          <p className="mt-10 max-w-3xl text-sm text-primary-foreground/50 leading-relaxed border-l-2 border-accent/40 pl-4">
+            Datuva prepara y exporta los libros y declaraciones a partir de los movimientos que
+            registras. La presentación ante la AEAT, la Junta de Castilla y León u otros organismos
+            oficiales, así como la revisión y veracidad de los datos, corresponde a la bodega o a su
+            gestoría.
+          </p>
         </div>
       </div>
     </section>

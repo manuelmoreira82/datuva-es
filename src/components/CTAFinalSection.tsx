@@ -1,7 +1,10 @@
 import { ArrowRight, Mail, Phone, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useContactDialog } from "@/components/ContactDialog";
 
 const CTAFinalSection = () => {
+  const { abrir } = useContactDialog();
+
   return (
     <section id="demo" className="py-24 md:py-32 bg-primary text-primary-foreground">
       <div className="container mx-auto px-4">
@@ -10,22 +13,17 @@ const CTAFinalSection = () => {
             Deja de mover papeles entre el viñedo y la bodega.
           </h2>
           <p className="text-primary-foreground/70 text-lg mb-10 max-w-2xl mx-auto">
-            Datuva captura cada dato donde se genera y lo entrega listo para SILICIE, INFOVI y los libros oficiales JCYL.
+            Datuva captura cada dato donde se genera y prepara con él tu SILICIE, tu INFOVI y los libros JCyL, listos para descargar y presentar.
             Te lo enseñamos funcionando en 20 minutos. Sin compromiso.
           </p>
           <Button
             variant="contact"
             size="lg"
-            asChild
-            className="text-lg px-10 py-6 h-auto"
+            onClick={() => abrir("cta-final")}
+            className="text-lg px-10 py-6 h-auto gap-3"
           >
-            <a
-              href="mailto:manuelmoreira@datuva.es?subject=Solicitud%20de%20demostraci%C3%B3n%20Datuva"
-              className="gap-3"
-            >
-              Quiero ver la demo
-              <ArrowRight className="w-5 h-5" />
-            </a>
+            Quiero ver la demo
+            <ArrowRight className="w-5 h-5" />
           </Button>
 
           <div className="mt-14 pt-10 border-t border-primary-foreground/10">

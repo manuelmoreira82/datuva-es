@@ -2,9 +2,9 @@ import { Check, X, Minus } from "lucide-react";
 
 const rows = [
   { feature: "Movimientos con validación QR", excel: "no", erp: "no", datuva: "yes" },
-  { feature: "SILICIE automatizado", excel: "no", erp: "no", datuva: "yes" },
-  { feature: "Libros oficiales JCyL", excel: "no", erp: "no", datuva: "yes" },
-  { feature: "Integración INFOVI", excel: "no", erp: "no", datuva: "yes" },
+  { feature: "Libro SILICIE en formato oficial AEAT", excel: "no", erp: "no", datuva: "yes" },
+  { feature: "Libros JCyL preparados", excel: "no", erp: "no", datuva: "yes" },
+  { feature: "Datos de INFOVI preparados", excel: "no", erp: "no", datuva: "yes" },
   { feature: "Cuaderno de campo digital", excel: "no", erp: "partial", datuva: "yes" },
   { feature: "Modo offline real", excel: "partial", erp: "no", datuva: "yes" },
   { feature: "Trazabilidad viñedo → botella", excel: "no", erp: "partial", datuva: "yes" },

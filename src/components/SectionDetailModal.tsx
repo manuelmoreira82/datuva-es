@@ -72,6 +72,12 @@ const SectionDetailModal = ({ card, onClose }: SectionDetailModalProps) => {
                   </motion.div>
                 ))}
               </div>
+
+              {card.nota && (
+                <p className="mt-6 text-xs md:text-sm text-muted-foreground leading-relaxed border-l-2 border-accent/40 pl-4">
+                  {card.nota}
+                </p>
+              )}
             </div>
           </motion.div>
         </>

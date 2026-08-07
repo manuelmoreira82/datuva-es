@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useContactDialog } from "@/components/ContactDialog";
 import datuvaLogo from "@/assets/datuva-logo-new.webp";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { abrir } = useContactDialog();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -66,10 +68,8 @@ const Navbar = () => {
         </div>
 
         <div className="hidden md:flex items-center">
-          <Button variant="contact" size="default" asChild>
-            <a href="mailto:manuelmoreira@datuva.es?subject=Solicitud%20de%20demostraci%C3%B3n%20Datuva">
-              Solicitar demo
-            </a>
+          <Button variant="contact" size="default" onClick={() => abrir("navbar")}>
+            Solicitar demo
           </Button>
         </div>
 
@@ -107,10 +107,15 @@ const Navbar = () => {
               Contacto
             </a>
             <hr className="border-border my-2" />
-            <Button variant="contact" className="w-full" asChild>
-              <a href="mailto:manuelmoreira@datuva.es?subject=Solicitud%20de%20demostraci%C3%B3n%20Datuva">
-                Solicitar demo
-              </a>
+            <Button
+              variant="contact"
+              className="w-full"
+              onClick={() => {
+                setIsMobileMenuOpen(false);
+                abrir("navbar-movil");
+              }}
+            >
+              Solicitar demo
             </Button>
           </div>
         </div>

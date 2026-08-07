@@ -8,6 +8,8 @@ export interface SectionCard {
   subtitle: string;
   image: string;
   features: { icon: React.ComponentType<{ className?: string }>; text: string }[];
+  /** Aclaración legal opcional que se muestra en letra pequeña bajo las features. */
+  nota?: string;
 }
 
 interface ScrollDrivenCardsProps {

@@ -30,14 +30,14 @@ const modulos = [
   },
   {
     icon: BookOpen,
-    title: "Libros oficiales JCyL",
-    benefit: "Generación automática de los libros que exige la Junta. Sin rellenar formularios, sin cuadrar cifras a mano.",
+    title: "Libros JCyL preparados",
+    benefit: "Los libros que exige la Junta se preparan solos a partir de tus movimientos. Sin rellenar formularios, sin cuadrar cifras a mano. Los presentas tú o tu gestoría.",
     accent: "gold",
   },
   {
     icon: BarChart3,
-    title: "INFOVI integrado",
-    benefit: "Los datos de tu producción se preparan listos para INFOVI. Sin re-teclear, sin transcripciones manuales.",
+    title: "INFOVI preparado",
+    benefit: "Los datos de tu producción se preparan listos para INFOVI y se exportan en Excel, CSV o PDF. Sin re-teclear, sin transcripciones manuales.",
     accent: "vineyard",
   },
   {

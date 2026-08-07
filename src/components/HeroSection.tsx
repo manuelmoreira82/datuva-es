@@ -80,7 +80,8 @@ const HeroSection = () => {
           className="mt-12 md:mt-16 text-[#F5F0E8]/55 text-base md:text-lg max-w-xl leading-relaxed font-light"
         >
           Campo, bodega, cumplimiento y costes en una sola plataforma.
-          SILICIE, INFOVI y libros JCYL, listos para presentar.
+          SILICIE, INFOVI y libros JCyL preparados y exportados en formato oficial,
+          listos para que los presentes tú o tu gestoría.
         </motion.p>
 
         {/* CTAs */}
