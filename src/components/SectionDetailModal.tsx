@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
-import type { SectionCard } from "./ScrollDrivenCards";
+import type { SectionCard } from "@/types/modulos";
 
 interface SectionDetailModalProps {
   card: SectionCard | null;

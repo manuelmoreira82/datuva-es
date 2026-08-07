@@ -3,7 +3,7 @@ import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import DemoAppSection from "@/components/DemoAppSection";
 import AnuncioSection from "@/components/AnuncioSection";
-import { type SectionCard } from "@/components/ScrollDrivenCards";
+import { type SectionCard } from "@/types/modulos";
 import ModulosBento from "@/components/ModulosBento";
 import SectionDetailModal from "@/components/SectionDetailModal";
 import ROISection from "@/components/ROISection";

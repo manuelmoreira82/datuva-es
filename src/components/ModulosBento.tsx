@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import type { SectionCard } from "./ScrollDrivenCards";
+import type { SectionCard } from "@/types/modulos";
 
 interface Props {
   cards: SectionCard[];
