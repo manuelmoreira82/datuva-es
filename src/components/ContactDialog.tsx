@@ -13,8 +13,21 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 
-/** Endpoint que recibe el formulario. Si no está configurado se usa /api/contacto. */
-const ENDPOINT = import.meta.env.VITE_CONTACT_ENDPOINT || "/api/contacto";
+/**
+ * Endpoint que recibe el formulario.
+ *
+ * Apunta a una Edge Function de Supabase, no a /api/contacto, porque la web se
+ * publica hoy en GitHub Pages, que es hosting estático y no ejecuta código de
+ * servidor: functions/api/contacto.ts nunca llegaba a correr y el formulario
+ * solo mostraba el contacto directo.
+ *
+ * La función hace lo mismo (guarda en web_leads y avisa por Resend) y funciona
+ * desde cualquier hosting. Si algún día se termina la migración a Cloudflare
+ * Workers, basta con poner VITE_CONTACT_ENDPOINT=/api/contacto.
+ */
+const ENDPOINT =
+  import.meta.env.VITE_CONTACT_ENDPOINT ||
+  "https://mvqtgrmamxbxzbtxieez.supabase.co/functions/v1/contacto-web";
 
 const EMAIL_CONTACTO = "manuelmoreira@datuva.es";
 const TEL_CONTACTO = "+34627130891";
