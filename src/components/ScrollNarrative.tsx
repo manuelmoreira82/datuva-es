@@ -34,16 +34,20 @@ const ScrollNarrative = ({ cards, onCardClick }: Props) => {
           <section
             key={card.id}
             id={card.id}
-            className="relative min-h-[100svh] flex items-center overflow-hidden"
+            className="relative min-h-[100svh] flex items-center overflow-hidden scroll-mt-20"
           >
-            {/* Background image very dim */}
+            {/* Imagen de fondo. Al 20% no se veía nada: eran 8 JPG cargándose para
+                producir una mancha gris. Al 40% con el degradado algo más suave se
+                distingue la foto sin comprometer el contraste del texto. */}
             <div className="absolute inset-0">
               <img
                 src={card.image}
                 alt=""
-                className="w-full h-full object-cover opacity-20"
+                loading="lazy"
+                decoding="async"
+                className="w-full h-full object-cover opacity-40"
               />
-              <div className="absolute inset-0 bg-gradient-to-b from-[#0B0A14]/85 via-[#0B0A14]/70 to-[#0B0A14]" />
+              <div className="absolute inset-0 bg-gradient-to-b from-[#0B0A14]/85 via-[#0B0A14]/75 to-[#0B0A14]/95" />
             </div>
 
             {/* Tinted glow alternating */}
@@ -55,7 +59,9 @@ const ScrollNarrative = ({ cards, onCardClick }: Props) => {
               }`}
             />
 
-            <div className="relative z-10 container mx-auto px-6 md:px-10 py-24 md:py-32">
+            {/* Padding superior mayor que el inferior: la barra fija ocupa ~80px
+                y con py simétrico los titulares largos quedaban por debajo de ella. */}
+            <div className="relative z-10 container mx-auto px-6 md:px-10 pt-32 pb-20 md:pt-40 md:pb-28">
               <div className="max-w-4xl mx-auto text-center flex flex-col items-center">
                 {/* Counter */}
                 <motion.div
@@ -63,15 +69,17 @@ const ScrollNarrative = ({ cards, onCardClick }: Props) => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-100px" }}
                   transition={{ duration: 0.8 }}
-                  className="mb-10 md:mb-14 flex items-center gap-3 text-[#C9A227] tracking-[0.4em] text-[10px] font-medium"
+                  /* El número romano iba en su propio span: cuando el subtítulo
+                     ocupaba dos líneas, quedaba descolgado en el extremo derecho.
+                     Ahora fluye como texto dentro del subtítulo y acompaña
+                     siempre a la última palabra. */
+                  className="mb-10 md:mb-14 flex flex-wrap items-baseline justify-center gap-x-3 gap-y-1 text-center text-[#C9A227] tracking-[0.4em] text-[10px] font-medium"
                 >
                   <span>{padded}</span>
                   <span className="opacity-40">/</span>
                   <span className="opacity-70 uppercase">
-                    {card.subtitle}
+                    {card.subtitle} <span className="opacity-60">· {romanize(num)}</span>
                   </span>
-                  <span className="opacity-40">·</span>
-                  <span className="opacity-50">{romanize(num)}</span>
                 </motion.div>
 
                 {/* Big headline */}
@@ -108,7 +116,7 @@ const ScrollNarrative = ({ cards, onCardClick }: Props) => {
                   {previewFeatures.map((f, i) => (
                     <li
                       key={i}
-                      className="flex items-start gap-4 text-[#F5F0E8]/70 leading-relaxed text-sm md:text-base"
+                      className="flex items-start gap-4 text-[#F5F0E8]/85 leading-relaxed text-sm md:text-base"
                     >
                       <f.icon className="w-4 h-4 text-[#C9A227] mt-1 shrink-0" />
                       <span>{f.text}</span>

@@ -39,7 +39,7 @@ const HeroSection = () => {
           variants={fadeUp}
           initial="hidden"
           animate="visible"
-          className="mb-12 md:mb-16 flex items-center gap-3 text-[#C9A227] tracking-[0.4em] text-[10px] font-medium"
+          className="mb-12 md:mb-16 flex items-center gap-3 text-[#C9A227]/55 tracking-[0.4em] text-[10px] font-medium"
         >
           <span>01</span>
           <span className="opacity-40">/</span>
@@ -77,7 +77,10 @@ const HeroSection = () => {
           variants={fadeUp}
           initial="hidden"
           animate="visible"
-          className="mt-12 md:mt-16 text-[#F5F0E8]/55 text-base md:text-lg max-w-xl leading-relaxed font-light"
+          /* Es el único texto que explica qué vende Datuva. Estaba al 55% de
+             opacidad y en tamaño base: el mensaje más importante era el menos
+             visible de la sección. */
+          className="mt-12 md:mt-16 text-[#F5F0E8]/85 text-lg md:text-xl max-w-2xl leading-relaxed font-light"
         >
           Campo, bodega, cumplimiento y costes en una sola plataforma.
           SILICIE, INFOVI y libros JCyL preparados y exportados en formato oficial,
@@ -114,7 +117,9 @@ const HeroSection = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.8, duration: 1 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-[10px] text-[#F5F0E8]/40 tracking-[0.3em] uppercase"
+        /* Oculto en móvil: ahí el hero ya llena la pantalla y el indicador se
+           solapaba con los botones. */
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden sm:flex flex-col items-center gap-2 text-[10px] text-[#F5F0E8]/40 tracking-[0.3em] uppercase"
       >
         <span>Scroll</span>
         <span className="block w-px h-10 bg-gradient-to-b from-[#C9A227]/60 to-transparent animate-pulse" />

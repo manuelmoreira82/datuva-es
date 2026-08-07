@@ -19,9 +19,12 @@ const Navbar = () => {
 
   return (
     <nav
+      /* La barra es siempre oscura: la mitad de las secciones tienen fondo negro
+         y una barra color crema flotando encima cortaba los titulares. Además el
+         header negro con el logo dorado es la identidad de Datuva. */
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
         isScrolled
-          ? "bg-card/95 backdrop-blur-md shadow-sm py-3"
+          ? "bg-[#0B0A14]/90 backdrop-blur-md shadow-lg shadow-black/20 py-3"
           : "bg-transparent py-5"
       }`}
     >
@@ -37,31 +40,19 @@ const Navbar = () => {
         <div className="hidden md:flex items-center gap-8">
           <a
             href="#modulos"
-            className={`font-medium transition-colors duration-200 ${
-              isScrolled
-                ? "text-foreground/80 hover:text-primary"
-                : "text-white/80 hover:text-white"
-            }`}
+            className="font-medium text-[#F5F0E8]/75 hover:text-[#C9A227] transition-colors duration-200"
           >
             Módulos
           </a>
           <a
             href="/presentacion"
-            className={`font-medium transition-colors duration-200 ${
-              isScrolled
-                ? "text-foreground/80 hover:text-primary"
-                : "text-white/80 hover:text-white"
-            }`}
+            className="font-medium text-[#F5F0E8]/75 hover:text-[#C9A227] transition-colors duration-200"
           >
             Presentación
           </a>
           <a
             href="#demo"
-            className={`font-medium transition-colors duration-200 ${
-              isScrolled
-                ? "text-foreground/80 hover:text-primary"
-                : "text-white/80 hover:text-white"
-            }`}
+            className="font-medium text-[#F5F0E8]/75 hover:text-[#C9A227] transition-colors duration-200"
           >
             Contacto
           </a>
@@ -74,7 +65,7 @@ const Navbar = () => {
         </div>
 
         <button
-          className={`md:hidden p-2 ${isScrolled ? "text-foreground" : "text-white"}`}
+          className="md:hidden p-2 text-[#F5F0E8]"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label="Toggle menu"
         >
@@ -83,30 +74,30 @@ const Navbar = () => {
       </div>
 
       {isMobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-card shadow-lg p-6 animate-fade-in">
+        <div className="md:hidden absolute top-full left-0 right-0 bg-[#0B0A14]/97 backdrop-blur-md shadow-lg p-6 animate-fade-in">
           <div className="flex flex-col gap-4">
             <a
               href="#modulos"
-              className="text-foreground/80 hover:text-primary font-medium py-2"
+              className="text-[#F5F0E8]/80 hover:text-[#C9A227] font-medium py-2"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Módulos
             </a>
             <a
               href="/presentacion"
-              className="text-foreground/80 hover:text-primary font-medium py-2"
+              className="text-[#F5F0E8]/80 hover:text-[#C9A227] font-medium py-2"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Presentación
             </a>
             <a
               href="#demo"
-              className="text-foreground/80 hover:text-primary font-medium py-2"
+              className="text-[#F5F0E8]/80 hover:text-[#C9A227] font-medium py-2"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Contacto
             </a>
-            <hr className="border-border my-2" />
+            <hr className="border-[#F5F0E8]/15 my-2" />
             <Button
               variant="contact"
               className="w-full"

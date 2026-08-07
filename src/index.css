@@ -6,39 +6,43 @@
 
 @layer base {
   :root {
+    /* Paleta Datuva. `primary` es el azul oscuro de la identidad (#1B2A4A),
+       el mismo que usa la app. Antes era 301 (morado), que no pertenecía a la
+       marca y salía en todos los títulos y CTAs de la web. */
     --background: 37 33% 95%;
-    --foreground: 280 30% 15%;
+    --foreground: 222 22% 15%;
 
     --card: 37 33% 98%;
-    --card-foreground: 280 30% 15%;
+    --card-foreground: 222 22% 15%;
 
     --popover: 37 33% 98%;
-    --popover-foreground: 280 30% 15%;
+    --popover-foreground: 222 22% 15%;
 
-    --primary: 301 37% 18%;
+    --primary: 221 47% 20%;
     --primary-foreground: 37 33% 95%;
 
     --secondary: 40 50% 54%;
-    --secondary-foreground: 280 30% 15%;
+    --secondary-foreground: 222 22% 15%;
 
     --muted: 37 20% 90%;
-    --muted-foreground: 280 15% 45%;
+    --muted-foreground: 222 12% 42%;
 
     --accent: 40 50% 54%;
-    --accent-foreground: 280 30% 15%;
+    --accent-foreground: 222 22% 15%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
     --border: 37 20% 85%;
     --input: 37 20% 85%;
-    --ring: 301 37% 18%;
+    --ring: 221 47% 20%;
 
     --radius: 0.5rem;
 
     /* Custom Datuva tokens */
-    --bordeaux: 301 37% 18%;
-    --bordeaux-light: 301 30% 28%;
+    /* Vino real de la marca (#7C2D3E). El valor anterior (301) era morado. */
+    --bordeaux: 347 47% 33%;
+    --bordeaux-light: 347 40% 43%;
     --vineyard: 120 37% 25%;
     --vineyard-light: 120 30% 35%;
     --gold: 40 50% 54%;
@@ -47,9 +51,9 @@
     --cream-dark: 37 25% 88%;
 
     /* Shadows */
-    --shadow-soft: 0 4px 20px -4px hsl(301 37% 18% / 0.1);
-    --shadow-card: 0 8px 30px -8px hsl(301 37% 18% / 0.08);
-    --shadow-hover: 0 12px 40px -12px hsl(301 37% 18% / 0.15);
+    --shadow-soft: 0 4px 20px -4px hsl(221 47% 20% / 0.1);
+    --shadow-card: 0 8px 30px -8px hsl(221 47% 20% / 0.08);
+    --shadow-hover: 0 12px 40px -12px hsl(221 47% 20% / 0.15);
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
