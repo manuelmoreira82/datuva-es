@@ -42,34 +42,33 @@ const faqs = [
 
 const FAQSection = () => {
   return (
-    <section id="faq" className="relative bg-background py-24 md:py-32">
-      <Aforo oscuro={false} />
+    <section id="faq" className="relative bg-[#0B0A14] py-28 md:py-44">
+      <Aforo />
       <div className="container relative mx-auto px-6 md:px-10 lg:pl-20">
         <EncabezadoSeccion
           codigo="07"
           etiqueta="Preguntas frecuentes"
-          oscuro={false}
           titulo={
             <>
               Las dudas que ya nos han{" "}
-              <span className="italic text-bordeaux">preguntado otros bodegueros.</span>
+              <span className="italic text-gold">preguntado otros bodegueros.</span>
             </>
           }
-          className="mb-14"
+          className="mb-16 md:mb-20"
         />
 
         <div className="max-w-3xl">
-          <Accordion type="single" collapsible className="space-y-3">
+          <Accordion type="single" collapsible className="space-y-4">
             {faqs.map((faq, i) => (
               <AccordionItem
                 key={i}
                 value={`faq-${i}`}
-                className="border border-border/60 bg-card px-6 transition-colors data-[state=open]:border-bordeaux/40"
+                className="border border-cream/12 bg-cream/[0.03] px-6 transition-colors data-[state=open]:border-gold/40"
               >
-                <AccordionTrigger className="py-5 text-left font-serif text-lg font-normal text-primary hover:no-underline">
+                <AccordionTrigger className="py-5 text-left font-serif text-lg font-normal text-cream hover:no-underline">
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground leading-relaxed pb-5">
+                <AccordionContent className="pb-5 leading-relaxed text-cream/65">
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>
