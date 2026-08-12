@@ -33,6 +33,10 @@ interface Props {
 
 /* Orden de aparición. La posición de cada uno NO se escribe a mano: sale del
    centroide de su hoja, medido sobre la fotografía en `cepaHojas.ts`. */
+/* Centro de la hoja grande de la esquina, medido con el mismo análisis que las
+   demás. No lleva menú: es donde va escrito «Toca la cepa». */
+const HOJA_GRANDE = { x: 16.3, y: 23.4 };
+
 const ORDEN = [
   "normativa", "vendimia", "bodega", "costes", "campo",
   "expediciones", "rrhh", "laboratorio", "embotellado", "proveedores",
@@ -144,7 +148,8 @@ const CepaHub = ({ cards, onCardClick }: Props) => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.9, delay: 0.5 }}
             aria-hidden="true"
-            className="pointer-events-none absolute left-[16.3%] top-[23.4%] w-[22%] -translate-x-1/2 -translate-y-1/2 text-center font-serif text-[2.1rem] font-normal leading-[0.95] tracking-[-0.03em] text-[#F5F0E8] [text-shadow:0_2px_10px_rgba(16,11,8,0.85)] lg:text-[2.8rem]"
+            style={{ left: `${HOJA_GRANDE.x}%`, top: `${HOJA_GRANDE.y}%` }}
+            className="pointer-events-none absolute w-[22%] -translate-x-1/2 -translate-y-1/2 text-center font-serif text-[2.1rem] font-normal leading-[0.95] tracking-[-0.03em] text-[#F5F0E8] [text-shadow:0_2px_10px_rgba(16,11,8,0.85)] lg:text-[2.8rem]"
           >
             Toca la cepa.
           </motion.p>
@@ -248,6 +253,17 @@ const CepaHub = ({ cards, onCardClick }: Props) => {
               aria-hidden="true"
               className="pointer-events-none absolute inset-0 bg-[#100B08]/35"
             />
+            {/* «Toca la cepa» también en móvil: estaba solo en el bloque de
+                escritorio, oculto por debajo de 768 px, así que en el teléfono no
+                aparecía en ninguna parte. */}
+            <p
+              aria-hidden="true"
+              style={{ left: `${HOJA_GRANDE.x}%`, top: `${HOJA_GRANDE.y}%` }}
+              className="pointer-events-none absolute z-10 w-[20%] -translate-x-1/2 -translate-y-1/2 text-center font-serif text-[1.6rem] font-normal leading-[0.95] tracking-[-0.03em] text-[#F5F0E8] [text-shadow:0_2px_10px_rgba(16,11,8,0.9)]"
+            >
+              Toca la cepa.
+            </p>
+
             <svg
               viewBox="0 0 100 100"
               preserveAspectRatio="none"
