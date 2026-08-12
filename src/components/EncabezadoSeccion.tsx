@@ -41,15 +41,15 @@ const EncabezadoSeccion = ({
     <div className="mb-6 flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.2em]">
       <span
         aria-hidden="true"
-        className={`h-px w-8 shrink-0 ${oscuro ? "bg-gold" : "bg-bordeaux"}`}
+        className={`h-px w-8 shrink-0 ${oscuro ? "bg-gold" : "bg-[#4A2E1F]"}`}
       />
-      <span className={`cifras ${oscuro ? "text-gold" : "text-bordeaux"}`}>{codigo}</span>
-      <span className={oscuro ? "text-cream/50" : "text-foreground/50"}>{etiqueta}</span>
+      <span className={`cifras ${oscuro ? "text-gold" : "text-[#4A2E1F]"}`}>{codigo}</span>
+      <span className={oscuro ? "text-cream/50" : "text-[#3A2A16]/70"}>{etiqueta}</span>
     </div>
 
     <h2
       className={`font-serif text-[2.4rem] font-normal leading-[0.95] tracking-[-0.035em] sm:text-5xl md:text-[3.8rem] ${
-        oscuro ? "text-cream" : "text-primary"
+        oscuro ? "text-cream" : "text-[#241C12]"
       }`}
     >
       {titulo}
@@ -58,7 +58,7 @@ const EncabezadoSeccion = ({
     {descripcion && (
       <p
         className={`mt-5 max-w-xl text-base leading-relaxed md:text-lg ${
-          oscuro ? "text-cream/65" : "text-foreground/70"
+          oscuro ? "text-cream/65" : "text-[#3A2A16]/80"
         }`}
       >
         {descripcion}

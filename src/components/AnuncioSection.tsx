@@ -3,13 +3,14 @@ import Aforo from "@/components/Aforo";
 
 const AnuncioSection = () => {
   return (
-    <section id="anuncio" className="relative bg-[#0B0A14] py-28 md:py-40">
-      <Aforo />
+    <section id="anuncio" className="relative py-28 md:py-40">
+      <Aforo oscuro={false} />
 
       <div className="container mx-auto px-6 md:px-10 lg:pl-20">
         <EncabezadoSeccion
           codigo="01"
           etiqueta="De la cepa a la copa"
+          oscuro={false}
           titulo="Datuva registra cada paso de tu vino"
           descripcion="Del viñedo a la bodega, de la barrica a la copa. Cada trabajo, tratamiento y movimiento, registrado."
           className="mb-14 md:mb-16"

@@ -37,7 +37,7 @@ const costes = [
  */
 const ROISection = () => {
   return (
-    <section className="relative overflow-hidden bg-[#0B0A14] py-28 text-cream md:py-44">
+    <section className="relative overflow-hidden py-28 text-cream md:py-44">
       <Aforo />
 
       <div className="container relative z-10 mx-auto px-6 md:px-10 lg:pl-20">

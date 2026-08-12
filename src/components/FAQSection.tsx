@@ -42,7 +42,7 @@ const faqs = [
 
 const FAQSection = () => {
   return (
-    <section id="faq" className="relative bg-[#0B0A14] py-28 md:py-44">
+    <section id="faq" className="relative py-28 md:py-44">
       <Aforo />
       <div className="container relative mx-auto px-6 md:px-10 lg:pl-20">
         <EncabezadoSeccion
