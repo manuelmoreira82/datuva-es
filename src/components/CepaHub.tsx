@@ -50,22 +50,26 @@ const CepaHub = ({ cards, onCardClick }: Props) => {
     y: HOJAS[id].cy,
   }));
 
+  /* El titular vuelve a ser el de siempre: el recorrido completo, que es lo que
+     vende la web y lo que la posiciona. «Toca la cepa» deja de ser el titular y
+     pasa a la hoja grande, que es donde tiene sentido — es una instrucción, no
+     una propuesta de valor. */
   const textoIntro = (
     <>
       <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#D9B274] md:text-[11px]">
         Software para bodegas españolas
       </p>
-      <h1 className="mt-3 font-serif text-[2.4rem] font-normal leading-[0.9] tracking-[-0.035em] text-[#F5F0E8] md:mt-4 md:text-[3.4rem]">
-        Toca la cepa.
+      <h1 className="mt-3 font-serif text-[2rem] font-normal leading-[1.02] tracking-[-0.03em] text-[#F5F0E8] md:mt-4 md:text-[2.6rem]">
+        Del viñedo a la bodega, de la barrica a la copa.
       </h1>
       <p className="mt-3 max-w-xs text-sm leading-relaxed text-[#F5F0E8]/85 md:mt-4">
-        Cada hoja es una parte de tu bodega. Ábrela y ves exactamente qué hace
-        Datuva ahí — con capturas reales de la aplicación.
+        Cada trabajo, tratamiento y movimiento, registrado. SILICIE, INFOVI y
+        libros JCyL preparados en formato oficial.
       </p>
       <p className="mt-4 inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.16em] text-[#E8B4BE]">
         <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-[#E8B4BE]" />
-        <span className="hidden md:inline">Pasa por encima o pincha en cualquiera</span>
-        <span className="md:hidden">Toca cualquiera</span>
+        <span className="hidden md:inline">Pasa por encima de las hojas o pincha en cualquiera</span>
+        <span className="md:hidden">Toca una hoja</span>
       </p>
     </>
   );
@@ -128,10 +132,22 @@ const CepaHub = ({ cards, onCardClick }: Props) => {
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="absolute left-[4%] top-[9%] w-[30%] max-w-sm"
+            className="absolute left-[3.5%] top-[46%] w-[27%] max-w-sm"
           >
             {textoIntro}
           </motion.div>
+
+          {/* «Toca la cepa», dentro de la hoja grande de la esquina. No es un
+              menú: es la instrucción, escrita en la hoja más visible. */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.9, delay: 0.5 }}
+            aria-hidden="true"
+            className="pointer-events-none absolute left-[16.3%] top-[23.4%] w-[22%] -translate-x-1/2 -translate-y-1/2 text-center font-serif text-[2.1rem] font-normal leading-[0.95] tracking-[-0.03em] text-[#F5F0E8] [text-shadow:0_2px_10px_rgba(16,11,8,0.85)] lg:text-[2.8rem]"
+          >
+            Toca la cepa.
+          </motion.p>
 
           {nodos.map((n, i) => {
             const card = porId.get(n.id)!;
