@@ -75,7 +75,7 @@ const CepaHub = ({ cards, onCardClick }: Props) => {
       <img
         src="/cepa.webp"
         alt="Cepa vieja de viñedo en El Bierzo"
-        className="pointer-events-none absolute inset-0 h-full w-full object-cover object-[60%_center] md:object-center"
+        className="pointer-events-none absolute inset-0 h-full w-full scale-105 object-cover blur-[4px] md:scale-100 md:blur-0"
       />
       {/* Velo: sin esto el texto compite con las hojas. Más denso a la izquierda,
           que es donde cae el titular. */}
@@ -213,11 +213,41 @@ const CepaHub = ({ cards, onCardClick }: Props) => {
           su tamaño y cada menú tiene una zona de toque de 44 px, que es el
           mínimo para el dedo. Debajo queda la lista completa, porque el gesto de
           arrastrar no lo descubre todo el mundo. */}
-      <div className="relative z-10 w-full py-24 md:hidden">
+      <div className="relative z-10 w-full pb-24 pt-32 md:hidden">
         <div className="px-6">{textoIntro}</div>
 
         <div className="mt-8 overflow-x-auto overscroll-x-contain pb-2">
+          {/* La foto va DENTRO del carril: si se queda en la sección, el carril
+              se desplaza y ella no, y las hojas dejan de coincidir con sus
+              menús. Mismo ancho y misma proporción que la capa de botones. */}
           <div className="relative aspect-[3/2] w-[240vw] max-w-none">
+            <img
+              src="/cepa.webp"
+              alt=""
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 h-full w-full object-cover"
+            />
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 bg-[#100B08]/35"
+            />
+            <svg
+              viewBox="0 0 100 100"
+              preserveAspectRatio="none"
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 h-full w-full"
+            >
+              {nodos.map((n) => (
+                <polygon
+                  key={n.id}
+                  points={HOJAS[n.id].puntos}
+                  vectorEffect="non-scaling-stroke"
+                  fill="rgba(245,240,232,0.05)"
+                  stroke="rgba(245,240,232,0.3)"
+                  strokeWidth={1}
+                />
+              ))}
+            </svg>
             {nodos.map((n) => {
               const card = porId.get(n.id)!;
               const Icono = card.icono;
