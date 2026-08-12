@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useContactDialog } from "@/components/ContactDialog";
-import datuvaLogo from "@/assets/datuva-logo-new.webp";
+import Logo from "@/components/Logo";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -29,12 +29,8 @@ const Navbar = () => {
       }`}
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
-        <a href="#inicio" className="flex items-center gap-3">
-          <img
-            src={datuvaLogo}
-            alt="Datuva Logo"
-            className="h-10 w-auto rounded-lg"
-          />
+        <a href="#inicio" className="transition-opacity hover:opacity-80">
+          <Logo className="h-9 md:h-10" />
         </a>
 
         <div className="hidden md:flex items-center gap-8">

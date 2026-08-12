@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import datuvaLogo from "@/assets/datuva-logo-new.webp";
+import Logo from "@/components/Logo";
 import { Instagram, Mail, Phone } from "lucide-react";
 
 const Footer = () => {
@@ -8,11 +8,7 @@ const Footer = () => {
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row items-center justify-between gap-8 mb-8">
           <div className="flex items-center gap-4">
-            <img
-              src={datuvaLogo}
-              alt="Datuva Logo"
-              className="h-12 w-auto rounded-lg"
-            />
+            <Logo className="h-12" />
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-6 text-primary-foreground/60 text-sm">
