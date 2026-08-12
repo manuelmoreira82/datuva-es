@@ -33,20 +33,23 @@ interface Props {
   onCardClick: (card: SectionCard) => void;
 }
 
-/* Posición de cada racimo en el lienzo de la cepa, en % del contenedor.
-   Están repartidos como una cepa en espaldera: tronco al centro, brazos
-   abriéndose y los racimos colgando a distintas alturas. */
+/* Posición de cada menú, en % del lienzo de la cepa.
+   MEDIDAS SOBRE EL BOCETO del fundador (1536×1024): cada valor es el centro de
+   la hoja donde él colocó ese menú, así que con la foto limpia detrás caen justo
+   donde los pensó. Si se cambia la fotografía, hay que volver a medirlos.
+   El contenedor mantiene la proporción 3:2 de esa imagen precisamente para que
+   estos porcentajes sigan cuadrando. */
 const NODOS: { id: string; x: number; y: number }[] = [
-  { id: "campo", x: 10, y: 34 },
-  { id: "vendimia", x: 22, y: 14 },
-  { id: "laboratorio", x: 24, y: 56 },
-  { id: "bodega", x: 38, y: 28 },
-  { id: "embotellado", x: 40, y: 62 },
-  { id: "normativa", x: 55, y: 12 },
-  { id: "expediciones", x: 60, y: 44 },
-  { id: "costes", x: 72, y: 24 },
-  { id: "proveedores", x: 76, y: 62 },
-  { id: "rrhh", x: 89, y: 38 },
+  { id: "vendimia", x: 41.7, y: 31.7 },
+  { id: "bodega", x: 51.2, y: 38.9 },
+  { id: "normativa", x: 63.1, y: 32.9 },
+  { id: "costes", x: 74.0, y: 38.1 },
+  { id: "campo", x: 31.1, y: 44.4 },
+  { id: "expediciones", x: 66.2, y: 51.4 },
+  { id: "rrhh", x: 84.2, y: 51.3 },
+  { id: "laboratorio", x: 36.0, y: 58.3 },
+  { id: "embotellado", x: 50.7, y: 62.3 },
+  { id: "proveedores", x: 75.7, y: 64.6 },
 ];
 
 /* Foto de la cepa. Se sirve desde `public/`, no se importa, para que la web
@@ -116,7 +119,7 @@ const CepaHub = ({ cards, onCardClick }: Props) => {
         </motion.div>
 
         {/* ── La cepa (escritorio) ───────────────────────────────────────── */}
-        <div className="relative mx-auto hidden aspect-[16/9] w-full max-w-5xl md:block">
+        <div className="relative mx-auto hidden aspect-[3/2] w-full max-w-6xl md:block">
           <svg
             viewBox="0 0 1000 560"
             aria-hidden="true"
