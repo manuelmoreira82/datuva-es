@@ -6,26 +6,23 @@ import { useContactDialog } from "@/components/ContactDialog";
 /**
  * La cepa navegable: primera pantalla de la web.
  *
- * Cada racimo es un botón real que abre la ficha de esa parte de la bodega. El
- * dibujo sale de la marca —el logo de Datuva es un racimo trazado como
- * circuito—, así que la navegación es la propia identidad y no una ilustración
- * pegada encima.
+ * Sobre una fotografía de cepa vieja, cada hoja lleva un menú que abre la ficha
+ * de esa parte de la bodega. El texto y los menús los pone la web ENCIMA de la
+ * foto, nunca pintados dentro de ella, por tres motivos que no son estéticos:
+ * unos píxeles no se pueden pinchar ni recorrer con el tabulador, un texto
+ * metido en una imagen no lo indexa un buscador, y un globo pintado se quedaría
+ * congelado en el mismo menú para siempre.
  *
- * DOS DECISIONES QUE CONVIENE NO DESHACER SIN PENSARLO:
+ * Las posiciones son porcentajes sobre un lienzo con la MISMA proporción 3:2 que
+ * la fotografía, así que hojas y menús no se desalinean al cambiar el tamaño de
+ * pantalla. Si se sustituye la foto, hay que volver a medirlas.
  *
- * 1. Los racimos son `<button>` de HTML colocados sobre el SVG, no formas
- *    dentro del SVG. Así se recorren con el tabulador, se anuncian con su
- *    nombre y funcionan con teclado. Un `<circle>` con onClick no hace nada de
- *    eso.
- *
- * 2. Debajo de 768 px la cepa NO se dibuja: once racimos en 390 px quedan
- *    ilegibles y con las zonas de toque solapadas. En móvil se muestra la lista
- *    de las mismas áreas, que se lee y se toca bien.
+ * Debajo de 768 px la cepa no se dibuja: diez zonas pinchables en 390 px quedan
+ * solapadas y no se acierta ninguna. Ahí va la lista de las mismas áreas.
  *
  * La cepa es la ENTRADA, no la única página: el resto de la home sigue debajo.
- * Una portada que solo muestra un dibujo no la indexa un buscador ni la escanea
- * un visitante con prisa, y el texto de SILICIE, INFOVI y trazabilidad es lo que
- * posiciona esta web.
+ * Una portada que solo enseña un dibujo no la indexa un buscador ni la escanea
+ * quien viene con prisa.
  */
 
 interface Props {
@@ -33,131 +30,83 @@ interface Props {
   onCardClick: (card: SectionCard) => void;
 }
 
-/* Posición de cada menú, en % del lienzo de la cepa.
-   MEDIDAS SOBRE EL BOCETO del fundador (1536×1024): cada valor es el centro de
-   la hoja donde él colocó ese menú, así que con la foto limpia detrás caen justo
-   donde los pensó. Si se cambia la fotografía, hay que volver a medirlos.
-   El contenedor mantiene la proporción 3:2 de esa imagen precisamente para que
-   estos porcentajes sigan cuadrando. */
+/* Centro de la hoja donde va cada menú, en % del lienzo 3:2.
+   Medidas sobre `public/cepa.webp`. */
 const NODOS: { id: string; x: number; y: number }[] = [
-  { id: "vendimia", x: 41.7, y: 31.7 },
-  { id: "bodega", x: 51.2, y: 38.9 },
-  { id: "normativa", x: 63.1, y: 32.9 },
-  { id: "costes", x: 74.0, y: 38.1 },
-  { id: "campo", x: 31.1, y: 44.4 },
-  { id: "expediciones", x: 66.2, y: 51.4 },
-  { id: "rrhh", x: 84.2, y: 51.3 },
-  { id: "laboratorio", x: 36.0, y: 58.3 },
-  { id: "embotellado", x: 50.7, y: 62.3 },
-  { id: "proveedores", x: 75.7, y: 64.6 },
+  { id: "normativa", x: 62.5, y: 11.0 },
+  { id: "vendimia", x: 40.5, y: 33.5 },
+  { id: "bodega", x: 61.0, y: 33.0 },
+  { id: "costes", x: 75.0, y: 39.0 },
+  { id: "campo", x: 31.0, y: 47.0 },
+  { id: "expediciones", x: 66.0, y: 54.0 },
+  { id: "rrhh", x: 84.0, y: 54.0 },
+  { id: "laboratorio", x: 36.0, y: 58.5 },
+  { id: "embotellado", x: 50.5, y: 64.5 },
+  { id: "proveedores", x: 75.5, y: 64.5 },
 ];
-
-/* Foto de la cepa. Se sirve desde `public/`, no se importa, para que la web
-   siga funcionando mientras el fichero no exista: si no carga, `onError` deja el
-   dibujo vectorial de reserva. En cuanto se deje `public/cepa.jpg`, aparece. */
-const FOTO_CEPA = "/cepa.jpg";
 
 const CepaHub = ({ cards, onCardClick }: Props) => {
   const { abrir } = useContactDialog();
-  const [hayFoto, setHayFoto] = useState(false);
   // La invitación se apaga en cuanto se toca o se pasa por encima una vez.
   const [tocada, setTocada] = useState(false);
   const [encima, setEncima] = useState<string | null>(null);
   const porId = new Map(cards.map((c) => [c.id, c]));
   const nodos = NODOS.filter((n) => porId.has(n.id));
 
-  return (
-    <section
-      id="cepa"
-      className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden px-6 py-24 md:px-10"
-    >
-      {/* La cepa de verdad, si está. */}
-      <img
-        src={FOTO_CEPA}
-        alt=""
-        aria-hidden="true"
-        onLoad={() => setHayFoto(true)}
-        onError={() => setHayFoto(false)}
-        className={`pointer-events-none absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
-          hayFoto ? "opacity-100" : "opacity-0"
-        }`}
-      />
-      {/* Velo: sin esto el texto compite con las hojas y no se lee. */}
-      {hayFoto && (
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0"
-          style={{
-            background:
-              "linear-gradient(100deg, rgba(20,14,10,0.72) 0%, rgba(20,14,10,0.45) 42%, rgba(20,14,10,0.3) 100%)",
-          }}
-        />
-      )}
-      <div className="container relative z-10 mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="mb-10 max-w-xl md:mb-4"
-        >
-          <p className={`font-mono text-[11px] uppercase tracking-[0.22em] ${hayFoto ? "text-[#D9B274]" : "text-[#4A2E1F]"}`}>
-            Software para bodegas españolas
-          </p>
-          <h1
-            className={`mt-4 font-serif text-[2.6rem] font-normal leading-[0.9] tracking-[-0.035em] md:text-[4.2rem] ${hayFoto ? "text-[#F5F0E8]" : "text-[#1a1208]"}`}
-          >
-            Toca la cepa.
-          </h1>
-          <p className={`mt-4 max-w-md text-base leading-relaxed ${hayFoto ? "text-[#F5F0E8]/85" : "text-[#3A2A16]/85"}`}>
-            Cada racimo es una parte de tu bodega. Ábrelo y ves exactamente qué
-            hace Datuva ahí — con capturas reales de la aplicación.
-          </p>
-          <p className={`mt-5 inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.18em] ${hayFoto ? "text-[#E8B4BE]" : "text-[#7C2D3E]"}`}>
-            <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-[#7C2D3E]" />
-            Pasa por encima o pincha en cualquiera
-          </p>
-        </motion.div>
+  const textoIntro = (
+    <>
+      <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#D9B274] md:text-[11px]">
+        Software para bodegas españolas
+      </p>
+      <h1 className="mt-3 font-serif text-[2.4rem] font-normal leading-[0.9] tracking-[-0.035em] text-[#F5F0E8] md:mt-4 md:text-[3.4rem]">
+        Toca la cepa.
+      </h1>
+      <p className="mt-3 max-w-xs text-sm leading-relaxed text-[#F5F0E8]/85 md:mt-4">
+        Cada hoja es una parte de tu bodega. Ábrela y ves exactamente qué hace
+        Datuva ahí — con capturas reales de la aplicación.
+      </p>
+      <p className="mt-4 inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.16em] text-[#E8B4BE]">
+        <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-[#E8B4BE]" />
+        <span className="hidden md:inline">Pasa por encima o pincha en cualquiera</span>
+        <span className="md:hidden">Toca cualquiera</span>
+      </p>
+    </>
+  );
 
-        {/* ── La cepa (escritorio) ───────────────────────────────────────── */}
-        <div className="relative mx-auto hidden aspect-[3/2] w-full max-w-6xl md:block">
-          <svg
-            viewBox="0 0 1000 560"
-            aria-hidden="true"
-            className={`absolute inset-0 h-full w-full transition-opacity duration-500 ${
-              hayFoto ? "opacity-0" : "opacity-100"
-            }`}
-            fill="none"
+  return (
+    <section id="cepa" className="relative flex min-h-[100svh] items-center overflow-hidden">
+      <img
+        src="/cepa.webp"
+        alt="Cepa vieja de viñedo en El Bierzo"
+        className="pointer-events-none absolute inset-0 h-full w-full object-cover"
+      />
+      {/* Velo: sin esto el texto compite con las hojas. Más denso a la izquierda,
+          que es donde cae el titular. */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(100deg, rgba(16,11,8,0.84) 0%, rgba(16,11,8,0.55) 34%, rgba(16,11,8,0.26) 62%, rgba(16,11,8,0.44) 100%)",
+        }}
+      />
+
+      {/* ── Escritorio: lienzo con la proporción de la foto ─────────────────── */}
+      <div className="relative z-10 hidden w-full md:block">
+        <div className="relative mx-auto aspect-[3/2] w-full max-w-[1500px]">
+          <motion.div
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            className="absolute left-[4%] top-[9%] w-[30%] max-w-sm"
           >
-            {/* Tronco */}
-            <path
-              d="M500,560 C492,470 508,430 500,380 C494,340 470,320 452,300"
-              stroke="#4A2E1F"
-              strokeOpacity="0.55"
-              strokeWidth="7"
-              strokeLinecap="round"
-            />
-            {/* Brazos: de la base a cada racimo. */}
-            {nodos.map((n) => {
-              const x = (n.x / 100) * 1000;
-              const y = (n.y / 100) * 560;
-              const cx = 500 + (x - 500) * 0.35;
-              const cy = 400;
-              return (
-                <path
-                  key={n.id}
-                  d={`M500,400 Q${cx},${cy} ${x},${y}`}
-                  stroke="#4A2E1F"
-                  strokeOpacity="0.32"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                />
-              );
-            })}
-          </svg>
+            {textoIntro}
+          </motion.div>
 
           {nodos.map((n, i) => {
             const card = porId.get(n.id)!;
             const Icono = card.icono;
+            const aLaDerecha = n.x > 62;
             return (
               <motion.button
                 key={n.id}
@@ -175,34 +124,30 @@ const CepaHub = ({ cards, onCardClick }: Props) => {
                 onBlur={() => setEncima(null)}
                 initial={{ opacity: 0, scale: 0.85 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.45, delay: 0.25 + i * 0.06 }}
+                transition={{ duration: 0.45, delay: 0.3 + i * 0.06 }}
                 style={{ left: `${n.x}%`, top: `${n.y}%` }}
-                className="group absolute flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-2 focus-visible:outline-none"
+                className="group absolute flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-1.5 focus-visible:outline-none"
               >
-                {/* El racimo */}
                 <span
-                  className={`relative flex h-16 w-16 items-center justify-center border transition-all duration-300 group-hover:scale-110 group-focus-visible:ring-2 group-focus-visible:ring-offset-2 ${
-                    hayFoto
-                      ? "border-[#EDE0C8]/25 bg-[#5E6B3A]/55 text-[#F5F0E8] backdrop-blur-[2px] group-hover:bg-[#7C2D3E]/75 group-focus-visible:ring-[#F5F0E8]"
-                      : "border-transparent bg-[#4A2E1F] text-[#EDE0C8] shadow-lg shadow-[#4A2E1F]/30 group-hover:bg-[#7C2D3E] group-focus-visible:ring-[#1a1208]"
-                  } ${tocada ? "" : "racimo-late"}`}
+                  className={`relative flex h-12 w-12 items-center justify-center border border-[#F5F0E8]/30 bg-[#2A1F12]/70 text-[#F5F0E8] backdrop-blur-[2px] transition-all duration-300 group-hover:scale-110 group-hover:border-[#E8B4BE]/60 group-hover:bg-[#7C2D3E]/85 group-focus-visible:ring-2 group-focus-visible:ring-[#F5F0E8] lg:h-14 lg:w-14 ${
+                    tocada ? "" : "racimo-late"
+                  }`}
                   style={{
                     animationDelay: `${i * 0.26}s`,
-                    // Silueta de hoja: lóbulos irregulares, no un círculo.
                     borderRadius: "58% 42% 46% 54% / 48% 56% 44% 52%",
                   }}
                 >
                   {Icono && <Icono className="h-5 w-5" />}
                 </span>
-                <span className={`whitespace-nowrap font-mono text-[10px] uppercase tracking-[0.16em] transition-colors ${hayFoto ? "text-[#F5F0E8] [text-shadow:0_1px_3px_rgba(0,0,0,0.7)] group-hover:text-[#E8B4BE]" : "text-[#3A2A16] group-hover:text-[#7C2D3E]"}`}>
+                <span className="whitespace-nowrap font-mono text-[9px] uppercase tracking-[0.14em] text-[#F5F0E8] [text-shadow:0_1px_4px_rgba(0,0,0,0.85)] transition-colors group-hover:text-[#E8B4BE] lg:text-[10px]">
                   {card.subtitle}
                 </span>
 
                 {/* Lo que hay dentro, asomado al pasar por encima. */}
                 <span
-                  className={`pointer-events-none absolute top-full z-20 mt-2 w-56 border border-[#4A2E1F]/25 bg-[#F5F0E8] p-3 text-left text-[11px] leading-snug text-[#3A2A16] shadow-xl transition-all duration-200 ${
-                    encima === n.id ? "translate-y-0 opacity-100" : "pointer-events-none -translate-y-1 opacity-0"
-                  }`}
+                  className={`pointer-events-none absolute top-full z-20 mt-2 w-56 border border-[#4A2E1F]/25 bg-[#F5F0E8] p-3 text-left text-[11px] leading-snug text-[#3A2A16] shadow-2xl transition-all duration-200 ${
+                    aLaDerecha ? "right-0" : "left-0"
+                  } ${encima === n.id ? "translate-y-0 opacity-100" : "-translate-y-1 opacity-0"}`}
                 >
                   {card.resumen ?? card.features[0]?.text}
                   <span className="mt-2 block font-mono text-[9px] uppercase tracking-[0.14em] text-[#7C2D3E]">
@@ -212,10 +157,30 @@ const CepaHub = ({ cards, onCardClick }: Props) => {
               </motion.button>
             );
           })}
-        </div>
 
-        {/* ── Lista (móvil) ──────────────────────────────────────────────── */}
-        <ul className="grid grid-cols-2 gap-2 md:hidden">
+          <div className="absolute bottom-[3%] left-[4%] flex items-center gap-3">
+            <button
+              type="button"
+              onClick={() => abrir("cepa")}
+              className="inline-flex items-center bg-[#F5F0E8] px-7 py-3.5 text-sm font-medium text-[#1a1208] transition-transform hover:scale-[1.02]"
+            >
+              Solicitar demo
+            </button>
+            <a
+              href="#anuncio"
+              className="inline-flex items-center border border-[#F5F0E8]/40 px-6 py-3.5 text-sm text-[#F5F0E8] transition-colors hover:border-[#F5F0E8]"
+            >
+              O baja y te lo contamos
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* ── Móvil: lista ───────────────────────────────────────────────────── */}
+      <div className="relative z-10 w-full px-6 py-28 md:hidden">
+        {textoIntro}
+
+        <ul className="mt-8 grid grid-cols-2 gap-2">
           {nodos.map((n) => {
             const card = porId.get(n.id)!;
             const Icono = card.icono;
@@ -224,10 +189,10 @@ const CepaHub = ({ cards, onCardClick }: Props) => {
                 <button
                   type="button"
                   onClick={() => onCardClick(card)}
-                  className="flex w-full items-center gap-2.5 border border-[#4A2E1F]/25 px-3 py-3.5 text-left transition-colors active:bg-[#4A2E1F]/10"
+                  className="flex w-full items-center gap-2.5 border border-[#F5F0E8]/25 bg-[#2A1F12]/60 px-3 py-3.5 text-left backdrop-blur-[2px] transition-colors active:bg-[#7C2D3E]/70"
                 >
-                  {Icono && <Icono className="h-4 w-4 shrink-0 text-[#7C2D3E]" />}
-                  <span className="font-mono text-[10px] uppercase leading-tight tracking-[0.12em] text-[#3A2A16]">
+                  {Icono && <Icono className="h-4 w-4 shrink-0 text-[#E8B4BE]" />}
+                  <span className="font-mono text-[10px] uppercase leading-tight tracking-[0.12em] text-[#F5F0E8]">
                     {card.subtitle}
                   </span>
                 </button>
@@ -236,21 +201,13 @@ const CepaHub = ({ cards, onCardClick }: Props) => {
           })}
         </ul>
 
-        <div className="mt-12 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
-          <button
-            type="button"
-            onClick={() => abrir("cepa")}
-            className={`inline-flex items-center px-8 py-4 text-sm font-medium transition-transform hover:scale-[1.02] ${hayFoto ? "bg-[#F5F0E8] text-[#1a1208]" : "bg-[#1a1208] text-[#F5F0E8]"}`}
-          >
-            Solicitar demo
-          </button>
-          <a
-            href="#anuncio"
-            className={`inline-flex items-center border px-7 py-4 text-sm transition-colors ${hayFoto ? "border-[#F5F0E8]/40 text-[#F5F0E8] hover:border-[#F5F0E8]" : "border-[#1a1208]/35 text-[#1a1208] hover:border-[#1a1208]"}`}
-          >
-            O baja y te lo contamos
-          </a>
-        </div>
+        <button
+          type="button"
+          onClick={() => abrir("cepa")}
+          className="mt-8 inline-flex w-full items-center justify-center bg-[#F5F0E8] px-7 py-4 text-sm font-medium text-[#1a1208]"
+        >
+          Solicitar demo
+        </button>
       </div>
     </section>
   );
