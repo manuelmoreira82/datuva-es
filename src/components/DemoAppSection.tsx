@@ -15,7 +15,7 @@ const DemoAppSection = () => {
           className="mb-14 md:mb-16"
         />
 
-        <div className="relative border border-cream/10 bg-[#0e0b06] shadow-2xl">
+        <div className="relative border border-mosto/25 bg-barrica-oscura shadow-2xl">
           <div className="relative w-full" style={{ aspectRatio: "16 / 9" }}>
             <iframe
               src="/demo/index.html"

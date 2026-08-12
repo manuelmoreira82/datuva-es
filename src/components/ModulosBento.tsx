@@ -65,7 +65,7 @@ const ModulosBento = ({ cards, onCardClick }: Props) => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.45, delay: Math.min(idx, 6) * 0.05 }}
-                className={`group relative flex flex-col overflow-hidden border border-cream/10 bg-cream/[0.02] p-7 text-left transition-colors duration-300 hover:border-gold/40 hover:bg-cream/[0.05] md:p-9 ${
+                className={`group relative flex flex-col overflow-hidden border border-mosto/20 bg-barrica-oscura p-7 text-left transition-colors duration-300 hover:border-mosto/55 hover:bg-barrica md:p-9 ${
                   destacada ? "sm:col-span-2" : ""
                 }`}
               >
@@ -111,7 +111,7 @@ const ModulosBento = ({ cards, onCardClick }: Props) => {
                 </p>
 
                 {destacada && (
-                  <div className="relative mt-6 overflow-hidden border border-cream/10">
+                  <div className="relative mt-6 overflow-hidden border border-mosto/25">
                     <img
                       src={card.captura}
                       alt={`Datuva — ${card.subtitle}`}
