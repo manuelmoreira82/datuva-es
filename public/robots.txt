@@ -3,4 +3,4 @@ Allow: /
 Disallow: /app/
 Disallow: /admin/
 
-Sitemap: https://datuva.es/sitemap.xml
+Sitemap: https://www.datuva.es/sitemap.xml
