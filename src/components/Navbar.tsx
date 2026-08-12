@@ -4,17 +4,25 @@ import { Button } from "@/components/ui/button";
 import { useContactDialog } from "@/components/ContactDialog";
 import Logo from "@/components/Logo";
 
-/* `sobreClaro` para heros de fondo claro: sin esto los enlaces son cream sobre
-   cream y desaparecen. */
-const Navbar = ({ sobreClaro = false }: { sobreClaro?: boolean }) => {
+/* La barra se adapta al tramo del descenso en el que esté: clara sobre la luz de
+   la viña, oscura a partir de que el fondo se vuelve marrón. Con un valor fijo,
+   o los enlaces desaparecían arriba (cream sobre cream) o la barra quedaba color
+   crema flotando sobre las secciones oscuras. */
+const Navbar = ({ sobreClaro: forzarClaro }: { sobreClaro?: boolean } = {}) => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [enZonaClara, setEnZonaClara] = useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { abrir } = useContactDialog();
+  const sobreClaro = forzarClaro ?? enZonaClara;
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
+      // 14 % es donde el degradado de la página deja de ser claro.
+      const recorrible = document.body.scrollHeight - window.innerHeight;
+      setEnZonaClara(recorrible <= 0 || window.scrollY / recorrible < 0.14);
     };
+    handleScroll();
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);

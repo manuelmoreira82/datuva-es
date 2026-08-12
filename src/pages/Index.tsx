@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
+import FondoVivo from "@/components/FondoVivo";
 import HeroSection from "@/components/HeroSection";
 import DemoAppSection from "@/components/DemoAppSection";
 import AnuncioSection from "@/components/AnuncioSection";
@@ -212,24 +213,28 @@ const Index = () => {
           "linear-gradient(180deg, #F5F0E8 0%, #EDE0C8 6%, #D9B274 12%, #9A6438 18%, #3A2418 25%, #2C1C15 42%, #241711 62%, #1A1210 82%, #0B0A14 100%)",
       }}
     >
-      {/* El hero arranca en cream: sin esto los enlaces son cream sobre cream. */}
-      <Navbar sobreClaro />
-      <HeroSection />
-      <AnuncioSection />
-      <DemoAppSection />
+      {/* Movimiento continuo detrás de todo, que cambia con el descenso. */}
+      <FondoVivo />
 
-      <ModulosBento cards={sections} onCardClick={setActiveCard} />
-      <SectionDetailModal card={activeCard} onClose={() => setActiveCard(null)} />
+      <Navbar />
+      <div className="relative z-10">
+        <HeroSection />
+        <AnuncioSection />
+        <DemoAppSection />
 
-      <ROISection />
-      <ComparativaSection />
-      <TestimoniosSection />
-      <FAQSection />
+        <ModulosBento cards={sections} onCardClick={setActiveCard} />
+        <SectionDetailModal card={activeCard} onClose={() => setActiveCard(null)} />
 
-      <CTAFinalSection />
-      <Footer />
-      <CookieBanner />
-      <WhatsAppButton />
+        <ROISection />
+        <ComparativaSection />
+        <TestimoniosSection />
+        <FAQSection />
+
+        <CTAFinalSection />
+        <Footer />
+        <CookieBanner />
+        <WhatsAppButton />
+      </div>
     </div>
   );
 };
