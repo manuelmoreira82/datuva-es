@@ -19,10 +19,12 @@ const Navbar = ({ sobreClaro: forzarClaro }: { sobreClaro?: boolean } = {}) => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
       // La primera pantalla es la foto de la cepa, oscura: ahí la barra va en
-      // modo oscuro. La franja clara del degradado empieza al pasarla y dura
-      // hasta el 20 % del recorrido, que es donde el fondo vira a marrón.
+      // modo oscuro. Se mide contra el FONDO REAL de esa sección, no contra una
+      // fracción de pantalla: en móvil la cepa es bastante más alta que una
+      // pantalla y con un umbral fijo la barra se aclaraba encima de la foto.
+      const cepa = document.getElementById("cepa");
+      const pasadaLaCepa = cepa ? cepa.getBoundingClientRect().bottom <= 64 : true;
       const recorrible = document.documentElement.scrollHeight - window.innerHeight;
-      const pasadaLaCepa = window.scrollY > window.innerHeight * 0.85;
       const progreso = recorrible > 0 ? window.scrollY / recorrible : 0;
       setEnZonaClara(pasadaLaCepa && progreso < 0.2);
     };

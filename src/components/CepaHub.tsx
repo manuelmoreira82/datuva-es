@@ -211,8 +211,9 @@ const CepaHub = ({ cards, onCardClick }: Props) => {
           toque solapadas. En vez de eso se muestra a más del doble de ancho
           dentro de un carril con desplazamiento horizontal: las hojas conservan
           su tamaño y cada menú tiene una zona de toque de 44 px, que es el
-          mínimo para el dedo. Debajo queda la lista completa, porque el gesto de
-          arrastrar no lo descubre todo el mundo. */}
+          mínimo para el dedo. No hay lista de respaldo debajo: quien no
+          descubra el gesto encuentra igualmente los diez módulos en la rejilla
+          de la sección 03, más abajo en la misma página. */}
       <div className="relative z-10 w-full pb-24 pt-32 md:hidden">
         <div className="px-6">{textoIntro}</div>
 
@@ -286,41 +287,16 @@ const CepaHub = ({ cards, onCardClick }: Props) => {
           ← Desliza la cepa →
         </p>
 
-        <div className="mt-10 px-6">
-          <p className="mb-3 font-mono text-[9px] uppercase tracking-[0.16em] text-[#D9B274]">
-            Todas las áreas
-          </p>
-          <ul className="grid grid-cols-2 gap-2">
-            {nodos.map((n) => {
-              const card = porId.get(n.id)!;
-              const Icono = card.icono;
-              return (
-                <li key={n.id}>
-                  <button
-                    type="button"
-                    onClick={() => onCardClick(card)}
-                    className="flex w-full items-center gap-2.5 border border-[#F5F0E8]/25 bg-[#2A1F12]/60 px-3 py-3.5 text-left backdrop-blur-[2px] active:bg-[#7C2D3E]/70"
-                  >
-                    {Icono && <Icono className="h-4 w-4 shrink-0 text-[#E8B4BE]" />}
-                    <span className="font-mono text-[10px] uppercase leading-tight tracking-[0.12em] text-[#F5F0E8]">
-                      {card.subtitle}
-                    </span>
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
-
+        <div className="mt-8 px-6">
           <button
             type="button"
             onClick={() => abrir("cepa")}
-            className="mt-8 inline-flex w-full items-center justify-center bg-[#F5F0E8] px-7 py-4 text-sm font-medium text-[#1a1208]"
+            className="inline-flex w-full items-center justify-center bg-[#F5F0E8] px-7 py-4 text-sm font-medium text-[#1a1208]"
           >
             Solicitar demo
           </button>
         </div>
       </div>
-
     </section>
   );
 };
