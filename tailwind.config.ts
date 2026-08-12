@@ -31,6 +31,14 @@ export default {
         mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Consolas', 'monospace'],
       },
       colors: {
+        // Tramos del degradado del hero (cream → mosto → sarmiento → barrica →
+        // negro). Se sacan a tokens para que las tarjetas y superficies del
+        // resto de la página sean del mismo mundo cálido y no negro neutro.
+        mosto: "#C79A55",
+        sarmiento: "#7A4E2A",
+        barrica: "#331F18",
+        "barrica-oscura": "#1E1410",
+
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

@@ -40,7 +40,7 @@ const TestimoniosSection = () => {
           {testimonios.map((t, i) => (
             <div
               key={i}
-              className="relative flex flex-col border border-cream/10 bg-cream/[0.02] p-8 md:p-9"
+              className="relative flex flex-col border border-mosto/20 bg-barrica-oscura p-8 md:p-9"
             >
               <Quote className="mb-5 h-7 w-7 text-gold/30" />
               <p className="font-serif text-lg font-normal leading-snug text-cream">

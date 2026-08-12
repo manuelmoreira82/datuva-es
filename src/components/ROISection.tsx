@@ -64,7 +64,7 @@ const ROISection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.5, delay: i * 0.08 }}
-              className="flex flex-col border border-cream/10 bg-cream/[0.02] p-7 md:p-9"
+              className="flex flex-col border border-mosto/20 bg-barrica-oscura p-7 md:p-9"
             >
               <c.icon className="mb-6 h-5 w-5 text-gold/70" aria-hidden="true" />
               <div

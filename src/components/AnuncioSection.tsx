@@ -15,7 +15,7 @@ const AnuncioSection = () => {
           className="mb-14 md:mb-16"
         />
 
-        <div className="relative overflow-hidden border border-cream/10 bg-[#0b0e18] shadow-2xl">
+        <div className="relative overflow-hidden border border-mosto/25 bg-barrica-oscura shadow-2xl">
           <div className="relative w-full" style={{ aspectRatio: "16 / 9" }}>
             <video
               className="absolute inset-0 h-full w-full"
