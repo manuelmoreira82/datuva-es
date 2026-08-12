@@ -1,10 +1,10 @@
 import EncabezadoSeccion from "@/components/EncabezadoSeccion";
+import Aforo from "@/components/Aforo";
 
 const DemoAppSection = () => {
   return (
     <section id="demo-app" className="relative overflow-hidden bg-[#0B0A14] py-24 md:py-32">
-      <div className="fondo-reticula pointer-events-none absolute inset-0 opacity-50" />
-      <div className="traza-vertical pointer-events-none absolute bottom-0 left-6 top-0 hidden w-px lg:block" />
+      <Aforo />
 
       <div className="container relative z-10 mx-auto px-6 md:px-10 lg:pl-20">
         <EncabezadoSeccion

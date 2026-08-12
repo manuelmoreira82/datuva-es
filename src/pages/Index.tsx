@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
-import { HeroDescenso, HeroRegistro, HeroEtiqueta } from "@/components/HeroVariantes";
 import DemoAppSection from "@/components/DemoAppSection";
 import AnuncioSection from "@/components/AnuncioSection";
 import { type SectionCard } from "@/types/modulos";
@@ -197,23 +196,14 @@ const sections: SectionCard[] = [
   },
 ];
 
-/* Andamio temporal para elegir dirección de diseño: ?hero=descenso|registro|etiqueta
-   Sin parámetro se renderiza el hero actual. Se retira en cuanto se elija una. */
-const HEROS: Record<string, () => JSX.Element> = {
-  descenso: HeroDescenso,
-  registro: HeroRegistro,
-  etiqueta: HeroEtiqueta,
-};
-
 const Index = () => {
   const [activeCard, setActiveCard] = useState<SectionCard | null>(null);
-  const variante = new URLSearchParams(window.location.search).get("hero") ?? "";
-  const Hero = HEROS[variante] ?? HeroSection;
 
   return (
     <div className="min-h-screen bg-background">
-      <Navbar sobreClaro={variante === "descenso" || variante === "registro"} />
-      <Hero />
+      {/* El hero arranca en cream: sin esto los enlaces son cream sobre cream. */}
+      <Navbar sobreClaro />
+      <HeroSection />
       <AnuncioSection />
       <DemoAppSection />
 

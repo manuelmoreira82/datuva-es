@@ -1,4 +1,5 @@
 import EncabezadoSeccion from "@/components/EncabezadoSeccion";
+import Aforo from "@/components/Aforo";
 import {
   Accordion,
   AccordionContent,
@@ -42,7 +43,7 @@ const faqs = [
 const FAQSection = () => {
   return (
     <section id="faq" className="relative bg-background py-24 md:py-32">
-      <div className="traza-vertical pointer-events-none absolute bottom-0 left-6 top-0 hidden w-px opacity-60 lg:block" />
+      <Aforo oscuro={false} />
       <div className="container relative mx-auto px-6 md:px-10 lg:pl-20">
         <EncabezadoSeccion
           codigo="07"

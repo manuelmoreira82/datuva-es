@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import Aforo from "@/components/Aforo";
 import { Clock, Ban, Scale, Brain } from "lucide-react";
 import EncabezadoSeccion from "@/components/EncabezadoSeccion";
 
@@ -37,9 +38,7 @@ const costes = [
 const ROISection = () => {
   return (
     <section className="relative overflow-hidden bg-[#0B0A14] py-24 text-cream md:py-32">
-      <div className="fondo-reticula pointer-events-none absolute inset-0 opacity-40" />
-      <div className="pointer-events-none absolute -right-40 top-1/4 h-[500px] w-[500px] rounded-full bg-bordeaux opacity-25 blur-[170px]" />
-      <div className="traza-vertical pointer-events-none absolute bottom-0 left-6 top-0 hidden w-px lg:block" />
+      <Aforo />
 
       <div className="container relative z-10 mx-auto px-6 md:px-10 lg:pl-20">
         <EncabezadoSeccion

@@ -1,229 +1,197 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { useContactDialog } from "@/components/ContactDialog";
 import appCapturaMenu from "@/assets/app-screenshot-menu.jpg";
-import FondoTraza from "@/components/FondoTraza";
+import appCapturaMapa from "@/assets/app-screenshot-map.jpg";
+import appCapturaAnaliticas from "@/assets/app-screenshot-analytics.jpg";
+import appCapturaTrazabilidad from "@/assets/app-screenshot-traceability.jpg";
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
-  }),
-};
+/**
+ * Hero «el descenso».
+ *
+ * El vino baja: viña al sol arriba, bodega a oscuras abajo. La página empieza en
+ * luz, no en negro, y va cayendo. El titular cae con el fondo — «Del viñedo» en
+ * la luz, «a la botella» ya en la oscuridad — y el móvil atraviesa la transición.
+ *
+ * El índice del recorrido es el AFORO: la regla graduada con la que se mide un
+ * depósito, que además es una pantalla real de la app (/bodega/aforos). No es una
+ * línea decorativa: es un objeto del oficio.
+ *
+ * Deliberadamente NO usa halos desenfocados, retícula de fondo ni antetítulos en
+ * mono mayúscula. Esos recursos, juntos, son el paquete por defecto que hacía que
+ * la web pareciera de plantilla.
+ */
 
-/* Las cuatro estaciones del recorrido que vende el producto. Son las mismas que
-   luego numeran los módulos, para que el hero anuncie la estructura de la página
-   en vez de ser un bloque suelto. */
-const estaciones = ["Parcela", "Depósito", "Barrica", "Botella"];
+const ESTACIONES = [
+  { nombre: "Viña", claro: true },
+  { nombre: "Vendimia", claro: true },
+  { nombre: "Depósito", claro: true },
+  { nombre: "Barrica", claro: false },
+  { nombre: "Botella", claro: false },
+];
+
+/* El recorrido, pantalla a pantalla. Cada una es una captura REAL de la app y
+   está atada a su estación del aforo: al cambiar la pantalla, se enciende la
+   marca correspondiente. El movimiento cuenta el recorrido, no adorna. */
+const PANTALLAS = [
+  { src: appCapturaMenu, estacion: null, pie: "Los nueve módulos, en el móvil" },
+  { src: appCapturaMapa, estacion: "Viña", pie: "Parcelas con SIGPAC y geolocalización" },
+  { src: appCapturaAnaliticas, estacion: "Depósito", pie: "Fermentación con alertas por rango" },
+  { src: appCapturaTrazabilidad, estacion: "Botella", pie: "Trazabilidad de parcela a botella" },
+];
+
+const MS_POR_PANTALLA = 3400;
+
+/** Rota las capturas reales dentro del marco del móvil. Se detiene con
+ *  `prefers-reduced-motion` y deja fija la primera. */
+function usePantallaActiva() {
+  const [i, setI] = useState(0);
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const t = setInterval(() => setI((n) => (n + 1) % PANTALLAS.length), MS_POR_PANTALLA);
+    return () => clearInterval(t);
+  }, []);
+  return i;
+}
 
 const HeroSection = () => {
   const { abrir } = useContactDialog();
-  const [videoListo, setVideoListo] = useState(false);
-
+  const activa = usePantallaActiva();
+  const estacionActiva = PANTALLAS[activa].estacion;
   return (
     <section
       id="inicio"
-      className="relative flex min-h-[100svh] items-center overflow-hidden bg-[#0B0A14] text-cream"
+      className="relative min-h-[100svh] overflow-hidden"
+      style={{
+        background:
+          "linear-gradient(180deg, #F5F0E8 0%, #EADCC2 22%, #C79A55 42%, #7A4E2A 60%, #331F18 78%, #0B0A14 100%)",
+      }}
     >
-      {/* ── Fondo con movimiento ──────────────────────────────────────────────
-          Capa base: las trazas de circuito-viña de la marca, animadas. No es una
-          fotografía: las de `src/assets` son de stock y una muestra una interfaz
-          inventada, que contradice el «capturas reales» que promete la web.
+      <div className="container mx-auto grid min-h-[100svh] grid-cols-1 gap-8 px-6 pb-14 pt-28 md:px-10 md:pb-20 md:pt-36 lg:grid-cols-[80px_1.05fr_0.85fr] lg:gap-10">
+        {/* ── El aforo ──────────────────────────────────────────────────────
+            La regla graduada con la que se mide un depósito. Es un objeto real
+            de la bodega —y una pantalla real de la app, /bodega/aforos— así que
+            sirve de índice del recorrido en vez de una línea decorativa. */}
+        <ol className="relative hidden flex-col justify-between py-2 lg:flex" aria-label="Recorrido del vino">
+          {ESTACIONES.map(({ nombre, claro }) => {
+            const encendida = nombre === estacionActiva;
+            const tinta = claro ? "#3A2A16" : "#F5F0E8";
+            return (
+            <li key={nombre} className="relative flex items-center gap-3">
+              <motion.span
+                className="h-px shrink-0"
+                style={{ background: encendida ? "#C9A227" : tinta }}
+                animate={{ width: encendida ? 34 : 28, opacity: encendida ? 1 : 0.6 }}
+                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                aria-hidden="true"
+              />
+              <motion.span
+                className="font-mono text-[9px] uppercase tracking-[0.2em]"
+                style={{ color: encendida ? "#C9A227" : tinta }}
+                animate={{ opacity: encendida ? 1 : 0.7 }}
+                transition={{ duration: 0.5 }}
+              >
+                {nombre}
+              </motion.span>
+              {/* Graduación menor entre estaciones. */}
+              <span className="absolute left-0 top-1/2 flex flex-col gap-[7px]" aria-hidden="true">
+                {[0, 1, 2].map((i) => (
+                  <span
+                    key={i}
+                    className="block h-px w-3"
+                    style={{ background: claro ? "#3A2A16" : "#F5F0E8", opacity: 0.28 }}
+                  />
+                ))}
+              </span>
+            </li>
+            );
+          })}
+        </ol>
 
-          Encima, opcional, un bucle de vídeo mudo. Solo aparece si el fichero
-          existe y el navegador puede reproducirlo (`onCanPlay`); si falta o falla,
-          `onError` lo deja oculto y se quedan las trazas. Por eso NO se referencia el
-          anuncio completo: pesa 16 MB y cargarlo de fondo en la portada sería
-          inaceptable para una bodega con mala conexión.
-
-          Para activarlo, dejar en `public/` un bucle corto y mudo (2-4 s):
-            ffmpeg -i public/datuva-anuncio-web.mp4 -ss 3 -t 4 -an \
-              -vf "scale=1280:-2" -c:v libvpx-vp9 -crf 40 -b:v 0 public/hero-loop.webm
-            ffmpeg -i public/datuva-anuncio-web.mp4 -ss 3 -t 4 -an \
-              -vf "scale=1280:-2" -c:v libx264 -crf 30 public/hero-loop.mp4
-          Objetivo: por debajo de 1,5 MB. */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <FondoTraza className="opacity-90" />
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="none"
-          poster="/poster-anuncio.jpg"
-          onCanPlay={() => setVideoListo(true)}
-          onError={() => setVideoListo(false)}
-          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${
-            videoListo ? "opacity-30" : "opacity-0"
-          }`}
-        >
-          <source src="/hero-loop.webm" type="video/webm" />
-          <source src="/hero-loop.mp4" type="video/mp4" />
-        </video>
-
-        {/* Velo de legibilidad: sin esto el titular compite con el viñedo. */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0B0A14] via-[#0B0A14]/85 to-[#0B0A14]/55" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0B0A14] via-transparent to-[#0B0A14]/70" />
-      </div>
-
-      {/* Retícula de fondo: papel pautado de libro de registro, no una foto de 2 MB. */}
-      <div className="fondo-reticula pointer-events-none absolute inset-0 opacity-70" />
-
-      {/* Halos difusos: azul de marca arriba, vino abajo. */}
-      <div className="pointer-events-none absolute -top-40 left-1/4 h-[600px] w-[700px] rounded-full bg-primary opacity-40 blur-[170px]" />
-      <div className="pointer-events-none absolute -bottom-40 right-0 h-[500px] w-[500px] rounded-full bg-bordeaux opacity-25 blur-[180px]" />
-
-      {/* Grano */}
-      <div className="pointer-events-none absolute inset-0 opacity-[0.06] mix-blend-overlay">
-        <svg className="h-full w-full" xmlns="http://www.w3.org/2000/svg">
-          <filter id="heroGrain">
-            <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch" />
-          </filter>
-          <rect width="100%" height="100%" filter="url(#heroGrain)" />
-        </svg>
-      </div>
-
-      {/* La traza arranca aquí y baja por toda la página. */}
-      <motion.div
-        initial={{ scaleY: 0 }}
-        animate={{ scaleY: 1 }}
-        transition={{ duration: 1.4, delay: 0.5, ease: [0.22, 0.61, 0.36, 1] }}
-        style={{ transformOrigin: "top" }}
-        className="traza-vertical pointer-events-none absolute bottom-0 left-6 top-1/3 hidden w-px lg:block"
-      />
-
-      <div className="container relative z-10 mx-auto grid grid-cols-1 items-center gap-10 px-6 pb-16 pt-28 md:px-10 md:pb-24 md:pt-36 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16 lg:pl-20">
-        {/* Columna de texto */}
-        <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
-          <motion.span
-            custom={0}
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            className="mb-8 inline-flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.22em] text-gold"
-          >
-            <span className="h-px w-8 traza-rama" aria-hidden="true" />
-            Software para bodegas españolas
-          </motion.span>
-
-          <motion.h1
-            custom={1}
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            className="font-serif text-[2.9rem] font-normal leading-[0.98] tracking-[-0.03em] sm:text-6xl md:text-7xl lg:text-[5rem]"
-            style={{ fontVariationSettings: '"opsz" 120, "SOFT" 20, "WONK" 1' }}
-          >
-            Del viñedo
-            <br />
-            a la botella,
-            <br />
-            <span className="italic text-gold">en una sola app.</span>
-          </motion.h1>
-
-          <motion.p
-            custom={2}
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            className="mt-8 max-w-lg text-lg leading-relaxed text-cream/70"
-          >
-            Campo, bodega, cumplimiento y costes en una sola plataforma. SILICIE,
-            INFOVI y libros JCyL preparados en formato oficial.
-          </motion.p>
-
-          <motion.div
-            custom={3}
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            className="mt-10 flex flex-col items-center gap-3 sm:flex-row lg:items-start"
-          >
-            <a
-              href="#demo-app"
-              className="group inline-flex items-center gap-3 bg-gold px-8 py-4 font-mono text-xs font-medium uppercase tracking-[0.14em] text-[#0B0A14] transition-transform hover:scale-[1.02] active:scale-[0.98]"
+        {/* ── Texto ─────────────────────────────────────────────────────────
+            El titular cae con el fondo: la primera línea en la luz de la viña,
+            la última ya en la oscuridad de la bodega. */}
+        <div className="flex flex-col justify-between">
+          <div>
+            <p className="max-w-sm text-sm leading-relaxed text-[#4A3520]">
+              Software de gestión para bodegas españolas. Campo, bodega,
+              cumplimiento y costes en una sola plataforma.
+            </p>
+            <h1
+              className="mt-8 font-serif font-normal leading-[0.85] tracking-[-0.04em] text-[#1a1208]"
+              style={{ fontSize: "clamp(3rem, 9.5vw, 8rem)", fontVariationSettings: '"opsz" 144, "SOFT" 0, "WONK" 1' }}
             >
-              Ver Datuva funcionando
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </a>
-            <button
-              type="button"
-              onClick={() => abrir("hero")}
-              className="inline-flex items-center gap-2 border border-cream/20 px-7 py-4 font-mono text-xs uppercase tracking-[0.14em] text-cream/85 transition-colors hover:border-gold/60 hover:text-cream"
-            >
-              Solicitar demo
-            </button>
-          </motion.div>
-
-          {/* Las estaciones del recorrido, encadenadas por la traza. */}
-          <motion.ol
-            custom={4}
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            className="mt-12 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 font-mono text-[11px] uppercase tracking-[0.16em] text-cream/40 lg:justify-start"
-          >
-            {estaciones.map((estacion, i) => (
-              <li key={estacion} className="flex items-center gap-3">
-                {i > 0 && <span className="h-px w-5 bg-gold/35" aria-hidden="true" />}
-                <span className="flex items-center gap-2">
-                  <span className="h-1 w-1 rounded-full bg-gold/70" aria-hidden="true" />
-                  {estacion}
-                </span>
-              </li>
-            ))}
-          </motion.ol>
-
-          <motion.p
-            custom={5}
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            className="mt-6 text-sm text-cream/40"
-          >
-            Diseñado en El Bierzo · Implantación in situ con QRs
-          </motion.p>
-        </div>
-
-        {/* Columna de producto */}
-        <motion.div
-          initial={{ opacity: 0, y: 34 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
-          className="relative mx-auto w-full max-w-[230px] sm:max-w-[280px] lg:max-w-[390px]"
-        >
-          <div className="absolute -inset-10 rounded-full bg-gold/10 blur-3xl" />
-
-          {/* Rama de la traza que va a buscar el móvil. */}
-          <span
-            aria-hidden="true"
-            className="traza-rama absolute -left-20 top-1/2 hidden h-px w-20 lg:block"
-          />
-          <span
-            aria-hidden="true"
-            className="traza-nodo absolute -left-20 top-1/2 hidden h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold lg:block"
-          />
-
-          <div className="relative overflow-hidden rounded-[2.4rem] border-[6px] border-[#1a1a24] bg-[#1a1a24] shadow-2xl shadow-black/60">
-            <img
-              src={appCapturaMenu}
-              alt="Datuva en el móvil: menú de módulos de la aplicación"
-              width={390}
-              height={780}
-              /* Recortada por abajo: a tamaño completo el móvil medía ~700 px y
-                 se salía del hero, quedando cortado a media pantalla. */
-              className="block max-h-[380px] w-full rounded-[1.9rem] object-cover object-top sm:max-h-[460px] lg:max-h-[600px]"
-            />
+              Del viñedo
+            </h1>
           </div>
 
-          {/* Pie de imagen en mono: es una captura real, no un render. */}
-          <p className="mt-4 text-center font-mono text-[10px] uppercase tracking-[0.18em] text-cream/35">
-            Pantalla real de la aplicación
-          </p>
-        </motion.div>
+          <div>
+            <h1
+              className="font-serif font-normal leading-[0.85] tracking-[-0.04em] text-cream"
+              style={{ fontSize: "clamp(3rem, 9.5vw, 8rem)", fontVariationSettings: '"opsz" 144, "SOFT" 0, "WONK" 1' }}
+            >
+              a la botella
+            </h1>
+
+            <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
+              <a
+                href="#demo-app"
+                className="group inline-flex items-center gap-3 bg-cream px-8 py-4 text-sm font-medium text-[#1a1208] transition-transform hover:scale-[1.02]"
+              >
+                Ver Datuva funcionando
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </a>
+              <button
+                type="button"
+                onClick={() => abrir("hero")}
+                className="inline-flex items-center border border-cream/30 px-7 py-4 text-sm text-cream/85 transition-colors hover:border-cream hover:text-cream"
+              >
+                Solicitar demo
+              </button>
+            </div>
+
+            <p className="mt-8 text-xs text-cream/50">
+              SILICIE, INFOVI y libros JCyL preparados en formato oficial · El Bierzo
+            </p>
+          </div>
+        </div>
+
+        {/* ── Producto ──────────────────────────────────────────────────────
+            El móvil atraviesa la transición: arriba le da la luz de la viña,
+            abajo se hunde en la bodega. Es la frase del titular, en una imagen. */}
+        <div className="relative hidden items-center justify-center lg:flex">
+          <div className="relative w-full max-w-[330px]">
+            <div className="relative h-[620px] overflow-hidden rounded-[2.2rem] border-[7px] border-[#241a12]/80 shadow-2xl shadow-black/50">
+              <AnimatePresence initial={false}>
+                <motion.img
+                  key={activa}
+                  src={PANTALLAS[activa].src}
+                  alt={`Datuva en el móvil: ${PANTALLAS[activa].pie}`}
+                  initial={{ opacity: 0, scale: 1.02 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                  className="absolute inset-0 h-full w-full object-cover object-top"
+                />
+              </AnimatePresence>
+            </div>
+
+            {/* Barra de avance: deja claro que la secuencia rota sola. */}
+            <div className="mt-4 flex justify-center gap-1.5" aria-hidden="true">
+              {PANTALLAS.map((_, i) => (
+                <span
+                  key={i}
+                  className="h-px w-8 transition-colors duration-500"
+                  style={{ background: i === activa ? "#C9A227" : "rgba(245,240,232,0.25)" }}
+                />
+              ))}
+            </div>
+            <p className="mt-3 h-8 text-center font-mono text-[9px] uppercase tracking-[0.2em] text-cream/45">
+              {PANTALLAS[activa].pie}
+            </p>
+          </div>
+        </div>
       </div>
     </section>
   );

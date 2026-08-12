@@ -1,4 +1,5 @@
 import { ArrowRight, Mail, Phone, User } from "lucide-react";
+import Aforo from "@/components/Aforo";
 import { Button } from "@/components/ui/button";
 import { useContactDialog } from "@/components/ContactDialog";
 
@@ -7,9 +8,8 @@ const CTAFinalSection = () => {
 
   return (
     <section id="demo" className="relative overflow-hidden bg-bordeaux py-24 text-cream md:py-32">
-      <div className="fondo-reticula pointer-events-none absolute inset-0 opacity-40" />
       
-      <div className="traza-vertical pointer-events-none absolute bottom-0 left-6 top-0 hidden w-px lg:block" />
+      <Aforo />
 
       <div className="container relative z-10 mx-auto px-6 md:px-10 lg:pl-20">
         <div className="max-w-3xl">

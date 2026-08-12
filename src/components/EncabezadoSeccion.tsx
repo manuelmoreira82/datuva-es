@@ -36,21 +36,22 @@ const EncabezadoSeccion = ({
     transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
     className={`relative max-w-3xl ${className}`}
   >
-    <div className="mb-5 flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.22em]">
+    {/* Marca de aforo: la graduación larga señala la sección, como en la regla
+        de un depósito. */}
+    <div className="mb-6 flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.2em]">
       <span
         aria-hidden="true"
-        className={`traza-nodo h-1.5 w-1.5 shrink-0 rounded-full ${oscuro ? "bg-gold" : "bg-bordeaux"}`}
+        className={`h-px w-8 shrink-0 ${oscuro ? "bg-gold" : "bg-bordeaux"}`}
       />
-      <span className={oscuro ? "text-gold" : "text-bordeaux"}>{codigo}</span>
-      <span aria-hidden="true" className="traza-rama h-px w-6" />
-      <span className={oscuro ? "text-cream/55" : "text-foreground/55"}>{etiqueta}</span>
+      <span className={`cifras ${oscuro ? "text-gold" : "text-bordeaux"}`}>{codigo}</span>
+      <span className={oscuro ? "text-cream/50" : "text-foreground/50"}>{etiqueta}</span>
     </div>
 
     <h2
-      className={`font-serif text-[2.1rem] font-normal leading-[1.05] tracking-[-0.02em] sm:text-4xl md:text-[3.1rem] ${
+      className={`font-serif text-[2.4rem] font-normal leading-[0.95] tracking-[-0.035em] sm:text-5xl md:text-[3.8rem] ${
         oscuro ? "text-cream" : "text-primary"
       }`}
-      style={{ fontVariationSettings: '"opsz" 100, "SOFT" 20' }}
+      style={{ fontVariationSettings: '"opsz" 144, "SOFT" 0, "WONK" 1' }}
     >
       {titulo}
     </h2>

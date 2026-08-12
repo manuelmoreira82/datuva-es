@@ -1,11 +1,12 @@
 import EncabezadoSeccion from "@/components/EncabezadoSeccion";
+import Aforo from "@/components/Aforo";
 
 const AnuncioSection = () => {
   return (
     <section id="anuncio" className="relative bg-background py-20 md:py-28">
       {/* Primer respiro en cream después del hero: el vídeo destaca más sobre
           claro, y rompe la cadena de secciones oscuras. */}
-      <div className="traza-vertical pointer-events-none absolute bottom-0 left-6 top-0 hidden w-px opacity-60 lg:block" />
+      <Aforo oscuro={false} />
 
       <div className="container mx-auto px-6 md:px-10 lg:pl-20">
         <EncabezadoSeccion
