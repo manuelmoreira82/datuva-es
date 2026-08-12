@@ -27,7 +27,7 @@ const CON_FOTO = new Set(["normativa", "costes", "vendimia"]);
  */
 const ModulosBento = ({ cards, onCardClick }: Props) => {
   return (
-    <section id="modulos" className="relative overflow-hidden bg-[#0B0A14] py-24 md:py-32">
+    <section id="modulos" className="relative overflow-hidden bg-[#0B0A14] py-28 md:py-44">
       <Aforo />
 
       <div className="container relative z-10 mx-auto px-6 md:px-10 lg:pl-20">
@@ -42,13 +42,13 @@ const ModulosBento = ({ cards, onCardClick }: Props) => {
             </>
           }
           descripcion="Del cuaderno de campo al albarán de salida. Toca cualquiera para ver todo lo que incluye."
-          className="mb-14 md:mb-20"
+          className="mb-16 md:mb-24"
         />
 
         {/* grid-flow-dense: sin él, una tarjeta de doble ancho que no cabe en el
             hueco restante salta de fila y deja un agujero. Con dense, una tarjeta
             simple posterior rellena ese hueco. */}
-        <div className="grid auto-rows-[minmax(0,auto)] grid-flow-row-dense grid-cols-1 gap-px bg-cream/10 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid auto-rows-[minmax(0,auto)] grid-flow-row-dense grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5 lg:grid-cols-3">
           {cards.map((card, idx) => {
             const destacada = !!card.captura;
             const conFoto = !destacada && CON_FOTO.has(card.id);
@@ -65,7 +65,7 @@ const ModulosBento = ({ cards, onCardClick }: Props) => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.45, delay: Math.min(idx, 6) * 0.05 }}
-                className={`group relative flex flex-col overflow-hidden bg-[#0B0A14] p-6 text-left transition-colors duration-300 hover:bg-cream/[0.05] md:p-8 ${
+                className={`group relative flex flex-col overflow-hidden border border-cream/10 bg-cream/[0.02] p-7 text-left transition-colors duration-300 hover:border-gold/40 hover:bg-cream/[0.05] md:p-9 ${
                   destacada ? "sm:col-span-2" : ""
                 }`}
               >

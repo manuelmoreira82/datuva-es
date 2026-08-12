@@ -37,7 +37,7 @@ const costes = [
  */
 const ROISection = () => {
   return (
-    <section className="relative overflow-hidden bg-[#0B0A14] py-24 text-cream md:py-32">
+    <section className="relative overflow-hidden bg-[#0B0A14] py-28 text-cream md:py-44">
       <Aforo />
 
       <div className="container relative z-10 mx-auto px-6 md:px-10 lg:pl-20">
@@ -51,12 +51,12 @@ const ROISection = () => {
             </>
           }
           descripcion="Datuva cuesta menos que una jornada administrativa mal empleada."
-          className="mb-14 md:mb-20"
+          className="mb-16 md:mb-24"
         />
 
         {/* Cifras en fila, separadas por hairlines: se leen como el renglón de un
             libro de cuentas, que es de lo que hablan. */}
-        <div className="grid grid-cols-1 gap-px bg-cream/10 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5 lg:grid-cols-4">
           {costes.map((c, i) => (
             <motion.div
               key={i}
@@ -64,7 +64,7 @@ const ROISection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.5, delay: i * 0.08 }}
-              className="flex flex-col bg-[#0B0A14] p-7 md:p-8"
+              className="flex flex-col border border-cream/10 bg-cream/[0.02] p-7 md:p-9"
             >
               <c.icon className="mb-6 h-5 w-5 text-gold/70" aria-hidden="true" />
               <div

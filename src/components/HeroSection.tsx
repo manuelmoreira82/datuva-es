@@ -128,7 +128,7 @@ const HeroSection = () => {
 
           <div>
             <h1
-              className="font-serif font-normal leading-[0.85] tracking-[-0.04em] text-cream"
+              className="font-serif font-normal leading-[0.85] tracking-[-0.04em] text-[#1a1208] lg:text-cream"
               style={{ fontSize: "clamp(3rem, 9.5vw, 8rem)" }}
             >
               a la botella
@@ -145,13 +145,13 @@ const HeroSection = () => {
               <button
                 type="button"
                 onClick={() => abrir("hero")}
-                className="inline-flex items-center border border-cream/30 px-7 py-4 text-sm text-cream/85 transition-colors hover:border-cream hover:text-cream"
+                className="inline-flex items-center justify-center border border-[#1a1208]/35 px-7 py-4 text-sm text-[#1a1208] transition-colors hover:border-[#1a1208] lg:border-cream/30 lg:text-cream/85 lg:hover:border-cream lg:hover:text-cream"
               >
                 Solicitar demo
               </button>
             </div>
 
-            <p className="mt-8 text-xs text-cream/50">
+            <p className="mt-8 text-xs text-[#3A2A16]/75 lg:text-cream/50">
               SILICIE, INFOVI y libros JCyL preparados en formato oficial · El Bierzo
             </p>
           </div>
@@ -160,9 +160,9 @@ const HeroSection = () => {
         {/* ── Producto ──────────────────────────────────────────────────────
             El móvil atraviesa la transición: arriba le da la luz de la viña,
             abajo se hunde en la bodega. Es la frase del titular, en una imagen. */}
-        <div className="relative hidden items-center justify-center lg:flex">
-          <div className="relative w-full max-w-[330px]">
-            <div className="relative h-[620px] overflow-hidden rounded-[2.2rem] border-[7px] border-[#241a12]/80 shadow-2xl shadow-black/50">
+        <div className="relative order-last flex items-center justify-center lg:order-none">
+          <div className="relative w-full max-w-[230px] sm:max-w-[280px] lg:max-w-[330px]">
+            <div className="relative h-[380px] overflow-hidden rounded-[2.2rem] border-[6px] border-[#241a12]/80 shadow-2xl shadow-black/50 sm:h-[460px] lg:h-[620px] lg:border-[7px]">
               <AnimatePresence initial={false}>
                 <motion.img
                   key={activa}

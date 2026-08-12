@@ -15,44 +15,43 @@ const rows = [
 ];
 
 const StatusIcon = ({ status }: { status: string }) => {
-  if (status === "yes") return <Check className="w-5 h-5 text-vineyard mx-auto" />;
+  if (status === "yes") return <Check className="w-5 h-5 mx-auto text-[#8FBF7A]" />;
   if (status === "partial") return <Minus className="w-5 h-5 text-gold mx-auto" />;
-  return <X className="w-5 h-5 text-destructive/60 mx-auto" />;
+  return <X className="w-5 h-5 mx-auto text-cream/25" />;
 };
 
 const ComparativaSection = () => {
   return (
-    <section id="comparativa" className="relative bg-background py-24 md:py-32">
-      <Aforo oscuro={false} />
+    <section id="comparativa" className="relative bg-[#0B0A14] py-28 text-cream md:py-44">
+      <Aforo />
       <div className="container relative mx-auto px-6 md:px-10 lg:pl-20">
         <EncabezadoSeccion
           codigo="05"
           etiqueta="Comparativa"
-          oscuro={false}
           titulo={
             <>
               No es lo mismo un Excel que{" "}
-              <span className="italic text-bordeaux">una herramienta profesional.</span>
+              <span className="italic text-gold">una herramienta profesional.</span>
             </>
           }
-          className="mb-14"
+          className="mb-16 md:mb-20"
         />
 
         {/* Table */}
         <div className="max-w-4xl mx-auto overflow-x-auto">
           <table className="w-full">
             <thead>
-              <tr className="border-b-2 border-border">
-                <th className="text-left py-4 pr-4 text-muted-foreground font-medium text-sm">
+              <tr className="border-b-2 border-cream/25">
+                <th className="text-left py-4 pr-4 font-mono text-[10px] uppercase tracking-[0.16em] text-cream/50">
                   Funcionalidad
                 </th>
-                <th className="py-4 px-4 text-center text-muted-foreground font-medium text-sm w-28">
+                <th className="py-4 px-4 text-center font-mono text-[10px] uppercase tracking-[0.16em] text-cream/50 w-28">
                   Excel
                 </th>
-                <th className="py-4 px-4 text-center text-muted-foreground font-medium text-sm w-28">
+                <th className="py-4 px-4 text-center font-mono text-[10px] uppercase tracking-[0.16em] text-cream/50 w-28">
                   ERP genérico
                 </th>
-                <th className="py-4 px-4 text-center font-bold text-sm w-28 text-primary">
+                <th className="w-28 px-4 py-4 text-center font-mono text-[10px] font-medium uppercase tracking-[0.16em] text-gold">
                   Datuva
                 </th>
               </tr>
@@ -61,9 +60,9 @@ const ComparativaSection = () => {
               {rows.map((row, i) => (
                 <tr
                   key={i}
-                  className="border-b border-border/50 hover:bg-background/50 transition-colors"
+                  className="border-b border-cream/10 transition-colors hover:bg-cream/[0.04]"
                 >
-                  <td className="py-4 pr-4 text-foreground text-sm font-medium">
+                  <td className="py-4 pr-4 text-sm text-cream/85">
                     {row.feature}
                   </td>
                   <td className="py-4 px-4">

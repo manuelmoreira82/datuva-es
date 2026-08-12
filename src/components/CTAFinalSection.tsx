@@ -7,7 +7,7 @@ const CTAFinalSection = () => {
   const { abrir } = useContactDialog();
 
   return (
-    <section id="demo" className="relative overflow-hidden bg-bordeaux py-24 text-cream md:py-32">
+    <section id="demo" className="relative overflow-hidden bg-bordeaux py-28 text-cream md:py-44">
       
       <Aforo />
 

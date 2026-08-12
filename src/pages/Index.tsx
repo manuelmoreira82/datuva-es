@@ -200,7 +200,7 @@ const Index = () => {
   const [activeCard, setActiveCard] = useState<SectionCard | null>(null);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-[#0B0A14]">
       {/* El hero arranca en cream: sin esto los enlaces son cream sobre cream. */}
       <Navbar sobreClaro />
       <HeroSection />
