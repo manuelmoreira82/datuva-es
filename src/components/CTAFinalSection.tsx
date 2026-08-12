@@ -21,7 +21,6 @@ const CTAFinalSection = () => {
           </div>
           <h2
             className="mb-6 font-serif text-[2.3rem] font-normal leading-[1.03] tracking-[-0.02em] md:text-[3.4rem]"
-            style={{ fontVariationSettings: '"opsz" 110, "SOFT" 20' }}
           >
             Deja de mover papeles entre el viñedo y la bodega.
           </h2>

@@ -103,7 +103,6 @@ const ModulosBento = ({ cards, onCardClick }: Props) => {
                   className={`relative font-serif font-normal leading-[1.15] tracking-[-0.01em] text-cream ${
                     destacada ? "text-2xl md:text-[2rem]" : "text-xl md:text-2xl"
                   }`}
-                  style={{ fontVariationSettings: '"opsz" 60, "SOFT" 20' }}
                 >
                   {card.title}
                 </h3>

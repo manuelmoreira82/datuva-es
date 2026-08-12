@@ -69,7 +69,6 @@ const ROISection = () => {
               <c.icon className="mb-6 h-5 w-5 text-gold/70" aria-hidden="true" />
               <div
                 className="cifras font-serif text-[2.4rem] font-normal leading-none tracking-[-0.02em] text-gold md:text-[2.9rem]"
-                style={{ fontVariationSettings: '"opsz" 80, "SOFT" 20' }}
               >
                 {c.value}
               </div>

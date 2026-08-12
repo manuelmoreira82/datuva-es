@@ -120,7 +120,7 @@ const HeroSection = () => {
             </p>
             <h1
               className="mt-8 font-serif font-normal leading-[0.85] tracking-[-0.04em] text-[#1a1208]"
-              style={{ fontSize: "clamp(3rem, 9.5vw, 8rem)", fontVariationSettings: '"opsz" 144, "SOFT" 0, "WONK" 1' }}
+              style={{ fontSize: "clamp(3rem, 9.5vw, 8rem)" }}
             >
               Del viñedo
             </h1>
@@ -129,7 +129,7 @@ const HeroSection = () => {
           <div>
             <h1
               className="font-serif font-normal leading-[0.85] tracking-[-0.04em] text-cream"
-              style={{ fontSize: "clamp(3rem, 9.5vw, 8rem)", fontVariationSettings: '"opsz" 144, "SOFT" 0, "WONK" 1' }}
+              style={{ fontSize: "clamp(3rem, 9.5vw, 8rem)" }}
             >
               a la botella
             </h1>

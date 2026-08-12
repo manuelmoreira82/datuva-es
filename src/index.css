@@ -2,11 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Las fuentes se cargan con <link> en index.html, NO con @import.
-   Un @import colocado detrás de las directivas @tailwind se descarta en el
-   build —CSS exige que @import preceda a cualquier otra regla— y así es como
-   la web llevaba tiempo renderizando con Georgia y la fuente del sistema en
-   lugar de con su tipografía. */
+/* Aquí NO se cargan fuentes. La web usa las del sistema, declaradas en
+   tailwind.config.ts. Si algún día se vuelve a una fuente web, va con <link>
+   en index.html y NUNCA con @import detrás de las directivas @tailwind: ahí el
+   build lo descarta en silencio, que es como la web acabó publicándose años
+   con una tipografía que no era la que decía el código. */
 
 @layer base {
   :root {

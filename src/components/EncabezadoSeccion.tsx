@@ -51,7 +51,6 @@ const EncabezadoSeccion = ({
       className={`font-serif text-[2.4rem] font-normal leading-[0.95] tracking-[-0.035em] sm:text-5xl md:text-[3.8rem] ${
         oscuro ? "text-cream" : "text-primary"
       }`}
-      style={{ fontVariationSettings: '"opsz" 144, "SOFT" 0, "WONK" 1' }}
     >
       {titulo}
     </h2>
