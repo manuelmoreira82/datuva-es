@@ -10,7 +10,7 @@ import Logo from "@/components/Logo";
    crema flotando sobre las secciones oscuras. */
 const Navbar = ({ sobreClaro: forzarClaro }: { sobreClaro?: boolean } = {}) => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [enZonaClara, setEnZonaClara] = useState(true);
+  const [enZonaClara, setEnZonaClara] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { abrir } = useContactDialog();
   const sobreClaro = forzarClaro ?? enZonaClara;
@@ -18,9 +18,13 @@ const Navbar = ({ sobreClaro: forzarClaro }: { sobreClaro?: boolean } = {}) => {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
-      // 14 % es donde el degradado de la página deja de ser claro.
-      const recorrible = document.body.scrollHeight - window.innerHeight;
-      setEnZonaClara(recorrible <= 0 || window.scrollY / recorrible < 0.14);
+      // La primera pantalla es la foto de la cepa, oscura: ahí la barra va en
+      // modo oscuro. La franja clara del degradado empieza al pasarla y dura
+      // hasta el 20 % del recorrido, que es donde el fondo vira a marrón.
+      const recorrible = document.documentElement.scrollHeight - window.innerHeight;
+      const pasadaLaCepa = window.scrollY > window.innerHeight * 0.85;
+      const progreso = recorrible > 0 ? window.scrollY / recorrible : 0;
+      setEnZonaClara(pasadaLaCepa && progreso < 0.2);
     };
     handleScroll();
     window.addEventListener("scroll", handleScroll);
