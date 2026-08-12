@@ -5,6 +5,15 @@
 Este repo es la **landing comercial**. La aplicación es otro repo: `manuelmoreira82/bodega-djp`,
 que tiene su propio `CLAUDE.md` con las reglas de la app y el protocolo de razonamiento.
 
+## Skills del repo (`.claude/skills/`)
+| Skill | Se activa cuando |
+|---|---|
+| `copy-comercial-datuva` | cualquier texto visible, sobre todo si menciona SILICIE/INFOVI/EMCS/AEAT |
+| `identidad-visual-datuva` | componentes, colores, rediseños — **manda sobre skills de diseño externas** |
+| `despliegue-web-datuva` | tocar workflows, `wrangler.jsonc`, `functions/`, CNAME o canonical |
+
+Son markdown, sin scripts. Este CLAUDE.md sigue siendo la fuente de verdad general.
+
 ## Qué es este proyecto
 Landing de Datuva, SaaS de gestión para bodegas españolas. Vite + React + TS + Tailwind
 + shadcn/ui. Clientes de pago: lo que se publica aquí es material comercial público.
