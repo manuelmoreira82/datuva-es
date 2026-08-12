@@ -4,7 +4,9 @@ import { Button } from "@/components/ui/button";
 import { useContactDialog } from "@/components/ContactDialog";
 import Logo from "@/components/Logo";
 
-const Navbar = () => {
+/* `sobreClaro` para heros de fondo claro: sin esto los enlaces son cream sobre
+   cream y desaparecen. */
+const Navbar = ({ sobreClaro = false }: { sobreClaro?: boolean }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { abrir } = useContactDialog();
@@ -24,31 +26,33 @@ const Navbar = () => {
          header negro con el logo dorado es la identidad de Datuva. */
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
         isScrolled
-          ? "bg-[#0B0A14]/90 backdrop-blur-md shadow-lg shadow-black/20 py-3"
+          ? sobreClaro
+            ? "bg-[#F5F0E8]/90 py-3 shadow-lg shadow-black/10 backdrop-blur-md"
+            : "bg-[#0B0A14]/90 py-3 shadow-lg shadow-black/20 backdrop-blur-md"
           : "bg-transparent py-5"
       }`}
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
-        <a href="#inicio" className="transition-opacity hover:opacity-80">
+        <a href="#inicio" className={`transition-opacity hover:opacity-80 ${sobreClaro ? "bg-[#0B0A14] px-3 py-2" : ""}`}>
           <Logo className="h-9 md:h-10" />
         </a>
 
         <div className="hidden md:flex items-center gap-8">
           <a
             href="#modulos"
-            className="font-medium text-[#F5F0E8]/75 hover:text-[#C9A227] transition-colors duration-200"
+            className={`font-medium transition-colors duration-200 hover:text-[#C9A227] ${sobreClaro ? "text-[#241C12]/80" : "text-[#F5F0E8]/75"}`}
           >
             Módulos
           </a>
           <a
             href="/presentacion"
-            className="font-medium text-[#F5F0E8]/75 hover:text-[#C9A227] transition-colors duration-200"
+            className={`font-medium transition-colors duration-200 hover:text-[#C9A227] ${sobreClaro ? "text-[#241C12]/80" : "text-[#F5F0E8]/75"}`}
           >
             Presentación
           </a>
           <a
             href="#demo"
-            className="font-medium text-[#F5F0E8]/75 hover:text-[#C9A227] transition-colors duration-200"
+            className={`font-medium transition-colors duration-200 hover:text-[#C9A227] ${sobreClaro ? "text-[#241C12]/80" : "text-[#F5F0E8]/75"}`}
           >
             Contacto
           </a>
@@ -61,7 +65,7 @@ const Navbar = () => {
         </div>
 
         <button
-          className="md:hidden p-2 text-[#F5F0E8]"
+          className={`p-2 md:hidden ${sobreClaro ? "text-[#241C12]" : "text-[#F5F0E8]"}`}
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label="Toggle menu"
         >
