@@ -91,15 +91,14 @@ const ModulosBento = ({ cards, onCardClick }: Props) => {
                 </p>
 
                 {destacada && (
-                  <div className="relative mt-7 overflow-hidden">
+                  <div className="relative mt-7 w-full max-w-[230px] overflow-hidden rounded-[1.4rem] border border-mosto/25 sm:max-w-[250px]">
                     <img
                       src={card.captura}
                       alt={`Datuva — ${card.subtitle}`}
                       loading="lazy"
                       decoding="async"
-                      className="h-48 w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03] md:h-72"
+                      className="block h-auto w-full transition-transform duration-500 group-hover:scale-[1.02]"
                     />
-                    <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#0B0A14]/80 to-transparent" />
                   </div>
                 )}
 

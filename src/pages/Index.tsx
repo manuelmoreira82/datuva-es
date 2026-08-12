@@ -102,6 +102,9 @@ const sections: SectionCard[] = [
     subtitle: "Vendimia",
     image: sectionVendimia,
     resumen: "Entradas por viticultor con kg, grado, pH y parcela de origen. Trazabilidad de parcela a botella.",
+    /* «Histórico por Añada — trazabilidad completa del ciclo de vida del vino».
+       Estaba en Bodega, cuyo texto habla de escanear QR y no de trazabilidad. */
+    captura: appCapturaTrazabilidad,
     icono: Grape,
     features: [
       { icon: Grape, text: "Registro de entradas de uva por viticultor: kg, grado, pH, temperatura, parcela de origen y depósito de destino." },
@@ -115,7 +118,6 @@ const sections: SectionCard[] = [
     subtitle: "Bodega",
     image: sectionBodega,
     resumen: "Depósitos y barricas identificados con QR. Escaneas y sabes qué hay dentro, cuántos litros y desde cuándo.",
-    captura: appCapturaTrazabilidad,
     icono: Container,
     features: [
       { icon: Container, text: "Control de depósitos de acero inoxidable, hormigón y fibra de vidrio: capacidad, contenido actual, estado, QR identificativo." },
