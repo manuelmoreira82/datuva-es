@@ -2,7 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+/* Aquí NO se cargan fuentes. La web usa las del sistema, declaradas en
+   tailwind.config.ts. Si algún día se vuelve a una fuente web, va con <link>
+   en index.html y NUNCA con @import detrás de las directivas @tailwind: ahí el
+   build lo descarta en silencio, que es como la web acabó publicándose años
+   con una tipografía que no era la que decía el código. */
 
 @layer base {
   :root {
@@ -81,6 +85,100 @@
 }
 
 @layer utilities {
+  /* ── La traza ─────────────────────────────────────────────────────────────
+     El logo de Datuva es un racimo dibujado como circuito. Esa es la única
+     forma visual que es suya y de nadie más, así que la página la usa como hilo
+     conductor: una línea dorada que baja, se ramifica y marca nodos. Además
+     dice lo que vende el producto — trazabilidad de parcela a botella. */
+
+  /* Línea vertical con desvanecido en los extremos, para que no corte en seco. */
+  .traza-vertical {
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      hsl(var(--gold) / 0.45) 12%,
+      hsl(var(--gold) / 0.45) 88%,
+      transparent
+    );
+  }
+
+  /* Nodo del recorrido: el punto donde la traza se encuentra con una sección. */
+  .traza-nodo {
+    box-shadow: 0 0 0 4px hsl(var(--gold) / 0.12), 0 0 14px hsl(var(--gold) / 0.5);
+  }
+
+  /* Ramificación horizontal que sale de la traza hacia el contenido. */
+  .traza-rama {
+    background: linear-gradient(to right, hsl(var(--gold) / 0.5), transparent);
+  }
+
+  /* Dibujado progresivo al entrar en pantalla. `--traza` va de 0 a 1. */
+  .traza-dibuja {
+    transform: scaleY(var(--traza, 0));
+    transform-origin: top;
+    transition: transform 1.1s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .traza-dibuja {
+      transform: none;
+      transition: none;
+    }
+  }
+
+  /* Textura de fondo: retícula muy tenue, como el papel pautado de un libro de
+     registro. Da profundidad al negro sin meter una imagen de 2 MB. */
+  .fondo-reticula {
+    background-image:
+      linear-gradient(hsl(var(--gold) / 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--gold) / 0.045) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+
+  /* Trazas del fondo: se dibujan solas, en bucle lento. */
+  .traza-anima {
+    stroke-dasharray: 420;
+    stroke-dashoffset: 420;
+    animation: trazaDibuja 9s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+  .traza-anima--2 {
+    animation-duration: 11s;
+    animation-delay: 1.2s;
+  }
+  .traza-anima--3 {
+    animation-duration: 13s;
+    animation-delay: 2.4s;
+  }
+
+  @keyframes trazaDibuja {
+    0% { stroke-dashoffset: 420; }
+    45%, 70% { stroke-dashoffset: 0; }
+    100% { stroke-dashoffset: -420; }
+  }
+
+  .traza-late {
+    animation: trazaLate 3.5s ease-in-out infinite;
+  }
+
+  @keyframes trazaLate {
+    0%, 100% { opacity: 0.25; }
+    50% { opacity: 0.75; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .traza-anima,
+    .traza-late {
+      animation: none;
+      stroke-dashoffset: 0;
+    }
+  }
+
+  /* Cifras y códigos alineados en columna. */
+  .cifras {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum";
+  }
+
   .animate-fade-in-up {
     animation: fadeInUp 0.6s ease-out forwards;
     opacity: 0;

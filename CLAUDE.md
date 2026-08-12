@@ -58,10 +58,30 @@ titulares y CTAs de un color que no es de la marca.
 - Los comentarios de tipografía y assets sin usar en `src/assets` engordan el repo pero
   no el bundle: Vite solo empaqueta lo importado.
 
+## Preview visual antes de mergear
+No hay despliegue de preview: `main` va directo a producción y **ninguna rama publica
+en ninguna URL**. Para ver los cambios antes de mergear, capturas en local:
+
+```
+node scripts/preview-shots.mjs
+```
+
+Compila, levanta `vite preview` y guarda un PNG de página completa de las seis rutas
+públicas en escritorio (1440) y móvil (390), más un `index.html` para verlas juntas.
+Usa el Playwright global; **no añade dependencias** al `package.json` a propósito.
+
+- **El recorrido previo de la página no es opcional.** `ScrollAnimation` deja cada
+  bloque en `opacity-0` hasta que el IntersectionObserver lo ve entrar en pantalla:
+  sin hacer scroll antes de disparar, la captura sale casi en blanco.
+- Acepta el banner de cookies por defecto, porque si no tapa el pie en todas las
+  capturas. Con `--keep-cookies` se ve lo que ve un visitante nuevo.
+- Para comparar antes/después: `--out` a dos carpetas distintas, una por rama.
+
 ## Comandos
 ```
 npm install
 npm run dev      # http://localhost:8080
 npm run build
 npx tsc --noEmit
+node scripts/preview-shots.mjs   # capturas de revisión
 ```

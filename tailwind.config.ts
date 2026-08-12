@@ -14,8 +14,21 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        serif: ['Playfair Display', 'Georgia', 'serif'],
+        // Tipografías del sistema, por decisión explícita y no por accidente.
+        //
+        // La web declaraba Playfair Display + Inter con un @import que el build
+        // descartaba (iba detrás de las directivas @tailwind, y CSS exige que
+        // @import preceda a cualquier otra regla). El resultado es que llevaba
+        // tiempo publicándose con estas mismas familias de reserva. Al verlas,
+        // se decidió quedarse con ellas: cargan al instante y no dependen de
+        // Google Fonts.
+        //
+        // Contrapartida asumida: `system-ui` cambia según el sistema operativo
+        // del visitante, así que el cuerpo de texto no se ve idéntico en un Mac
+        // y en un Windows. Georgia sí está en ambos.
+        sans: ['system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'sans-serif'],
+        serif: ['Georgia', 'Times New Roman', 'serif'],
+        mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Consolas', 'monospace'],
       },
       colors: {
         border: "hsl(var(--border))",

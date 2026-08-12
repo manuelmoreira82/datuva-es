@@ -1,4 +1,6 @@
 import { Check, X, Minus } from "lucide-react";
+import Aforo from "@/components/Aforo";
+import EncabezadoSeccion from "@/components/EncabezadoSeccion";
 
 const rows = [
   { feature: "Movimientos con validación QR", excel: "no", erp: "no", datuva: "yes" },
@@ -6,7 +8,6 @@ const rows = [
   { feature: "Libros JCyL preparados", excel: "no", erp: "no", datuva: "yes" },
   { feature: "Datos de INFOVI preparados", excel: "no", erp: "no", datuva: "yes" },
   { feature: "Cuaderno de campo digital", excel: "no", erp: "partial", datuva: "yes" },
-  { feature: "Modo offline real", excel: "partial", erp: "no", datuva: "yes" },
   { feature: "Trazabilidad viñedo → botella", excel: "no", erp: "partial", datuva: "yes" },
   { feature: "Stock en tiempo real", excel: "no", erp: "yes", datuva: "yes" },
   { feature: "Diseñado para bodegas españolas", excel: "no", erp: "no", datuva: "yes" },
@@ -21,18 +22,21 @@ const StatusIcon = ({ status }: { status: string }) => {
 
 const ComparativaSection = () => {
   return (
-    <section id="comparativa" className="py-24 md:py-32 bg-muted/50">
-      <div className="container mx-auto px-4">
-        {/* Header */}
-        <div className="max-w-3xl mx-auto text-center mb-16">
-          <span className="inline-block text-sm font-semibold text-primary uppercase tracking-wider mb-4">
-            Comparativa
-          </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6">
-            No es lo mismo un Excel que{" "}
-            <span className="text-primary">una herramienta profesional.</span>
-          </h2>
-        </div>
+    <section id="comparativa" className="relative bg-background py-24 md:py-32">
+      <Aforo oscuro={false} />
+      <div className="container relative mx-auto px-6 md:px-10 lg:pl-20">
+        <EncabezadoSeccion
+          codigo="05"
+          etiqueta="Comparativa"
+          oscuro={false}
+          titulo={
+            <>
+              No es lo mismo un Excel que{" "}
+              <span className="italic text-bordeaux">una herramienta profesional.</span>
+            </>
+          }
+          className="mb-14"
+        />
 
         {/* Table */}
         <div className="max-w-4xl mx-auto overflow-x-auto">

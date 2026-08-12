@@ -1,73 +1,97 @@
+import { motion } from "framer-motion";
+import Aforo from "@/components/Aforo";
 import { Clock, Ban, Scale, Brain } from "lucide-react";
+import EncabezadoSeccion from "@/components/EncabezadoSeccion";
 
 const costes = [
   {
     icon: Clock,
-    value: "16+ horas/mes",
+    value: "16+",
+    unidad: "horas/mes",
     label: "Tiempo perdido en tareas administrativas manuales",
   },
   {
     icon: Ban,
-    value: "€2.000–€10.000",
+    value: "2.000–10.000",
+    unidad: "euros",
     label: "Coste potencial de un error en SILICIE o trazabilidad",
   },
   {
     icon: Scale,
-    value: "Hasta €30.000",
+    value: "30.000",
+    unidad: "euros, hasta",
     label: "Sanción por incumplimiento normativo en inspección",
   },
   {
     icon: Brain,
-    value: "Incalculable",
+    value: "—",
+    unidad: "incalculable",
     label: "Decisiones tomadas sin datos fiables ni históricos",
   },
 ];
 
+/**
+ * La sección del coste de no digitalizar. Las cifras son el argumento, así que
+ * mandan en la composición: van en display grande y con cifras tabulares, no
+ * escondidas dentro de cuatro tarjetas iguales y centradas.
+ */
 const ROISection = () => {
   return (
-    <section className="py-24 md:py-32 bg-foreground text-primary-foreground">
-      <div className="container mx-auto px-4">
-        {/* Header */}
-        <div className="max-w-3xl mx-auto text-center mb-16">
-          <span className="inline-block text-sm font-semibold text-gold uppercase tracking-wider mb-4">
-            Retorno de inversión
-          </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
-            Lo que cuesta{" "}
-            <span className="text-gold">no digitalizar tu bodega.</span>
-          </h2>
-          <p className="text-primary-foreground/70 text-lg">
-            Datuva cuesta menos que una jornada administrativa mal empleada.
-          </p>
-        </div>
+    <section className="relative overflow-hidden bg-[#0B0A14] py-24 text-cream md:py-32">
+      <Aforo />
 
-        {/* Cards */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 max-w-5xl mx-auto mb-16">
+      <div className="container relative z-10 mx-auto px-6 md:px-10 lg:pl-20">
+        <EncabezadoSeccion
+          codigo="04"
+          etiqueta="Retorno de inversión"
+          titulo={
+            <>
+              Lo que cuesta{" "}
+              <span className="italic text-gold">no digitalizar tu bodega.</span>
+            </>
+          }
+          descripcion="Datuva cuesta menos que una jornada administrativa mal empleada."
+          className="mb-14 md:mb-20"
+        />
+
+        {/* Cifras en fila, separadas por hairlines: se leen como el renglón de un
+            libro de cuentas, que es de lo que hablan. */}
+        <div className="grid grid-cols-1 gap-px bg-cream/10 sm:grid-cols-2 lg:grid-cols-4">
           {costes.map((c, i) => (
-            <div
+            <motion.div
               key={i}
-              className="bg-primary-foreground/5 border border-primary-foreground/10 rounded-2xl p-6 text-center"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.5, delay: i * 0.08 }}
+              className="flex flex-col bg-[#0B0A14] p-7 md:p-8"
             >
-              <div className="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center mx-auto mb-4">
-                <c.icon className="w-6 h-6 text-gold" />
+              <c.icon className="mb-6 h-5 w-5 text-gold/70" aria-hidden="true" />
+              <div
+                className="cifras font-serif text-[2.4rem] font-normal leading-none tracking-[-0.02em] text-gold md:text-[2.9rem]"
+              >
+                {c.value}
               </div>
-              <div className="text-2xl font-bold text-gold mb-2">{c.value}</div>
-              <p className="text-primary-foreground/60 text-sm leading-relaxed">
-                {c.label}
-              </p>
-            </div>
+              <div className="mt-2 font-mono text-[10px] uppercase tracking-[0.18em] text-cream/45">
+                {c.unidad}
+              </div>
+              <p className="mt-5 text-sm leading-relaxed text-cream/60">{c.label}</p>
+            </motion.div>
           ))}
         </div>
 
-        {/* Bottom message */}
-        <div className="text-center max-w-2xl mx-auto">
-          <p className="text-primary-foreground/80 text-lg leading-relaxed">
-            Con Datuva, desde{" "}
-            <span className="text-gold font-bold">150 €/mes</span>{" "}
-            eliminas el riesgo, recuperas horas y tomas decisiones con datos reales. 
-            No es un gasto, es la inversión más rentable de tu bodega.
-          </p>
-        </div>
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="mt-14 max-w-2xl text-lg leading-relaxed text-cream/75"
+        >
+          Con Datuva, desde{" "}
+          <span className="cifras font-semibold text-gold">150 €/mes</span>{" "}
+          eliminas el riesgo, recuperas horas y tomas decisiones con datos reales.
+          No es un gasto, es la inversión más rentable de tu bodega.
+        </motion.p>
       </div>
     </section>
   );

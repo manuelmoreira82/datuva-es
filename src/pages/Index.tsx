@@ -201,7 +201,8 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Navbar />
+      {/* El hero arranca en cream: sin esto los enlaces son cream sobre cream. */}
+      <Navbar sobreClaro />
       <HeroSection />
       <AnuncioSection />
       <DemoAppSection />

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
-import datuvaLogo from "@/assets/datuva-logo-new.webp";
+import Logo from "@/components/Logo";
 
 const Terminos = () => {
   return (
@@ -10,8 +10,8 @@ const Terminos = () => {
         <div className="container mx-auto px-4">
           <Link to="/" className="flex items-center gap-3 text-primary-foreground hover:opacity-80 transition-opacity w-fit">
             <ArrowLeft className="w-5 h-5" />
-            <img src={datuvaLogo} alt="Datuva" className="h-10 w-auto rounded-lg" />
-            <span className="font-semibold">Volver a Datuva</span>
+            <Logo className="h-8" />
+            <span className="font-semibold">Volver al inicio</span>
           </Link>
         </div>
       </header>
