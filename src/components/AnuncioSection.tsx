@@ -1,24 +1,26 @@
+import EncabezadoSeccion from "@/components/EncabezadoSeccion";
+
 const AnuncioSection = () => {
   return (
     <section id="anuncio" className="relative bg-background py-20 md:py-28">
-      <div className="container mx-auto px-4">
-        <div className="max-w-3xl mx-auto text-center mb-12">
-          <p className="text-accent font-medium tracking-[0.3em] uppercase text-xs md:text-sm mb-4">
-            De la cepa a la copa
-          </p>
-          <h2 className="font-serif text-3xl md:text-5xl font-bold leading-tight mb-4 text-foreground">
-            Datuva registra cada paso de tu vino
-          </h2>
-          <p className="text-muted-foreground text-base md:text-lg leading-relaxed">
-            Del viñedo a la bodega, de la barrica a la copa. Cada trabajo, tratamiento
-            y movimiento, registrado.
-          </p>
-        </div>
+      {/* Primer respiro en cream después del hero: el vídeo destaca más sobre
+          claro, y rompe la cadena de secciones oscuras. */}
+      <div className="traza-vertical pointer-events-none absolute bottom-0 left-6 top-0 hidden w-px opacity-60 lg:block" />
 
-        <div className="relative max-w-5xl mx-auto rounded-2xl overflow-hidden shadow-2xl border border-border bg-[#0b0e18]">
+      <div className="container mx-auto px-6 md:px-10 lg:pl-20">
+        <EncabezadoSeccion
+          codigo="01"
+          etiqueta="De la cepa a la copa"
+          oscuro={false}
+          titulo="Datuva registra cada paso de tu vino"
+          descripcion="Del viñedo a la bodega, de la barrica a la copa. Cada trabajo, tratamiento y movimiento, registrado."
+          className="mb-12"
+        />
+
+        <div className="relative overflow-hidden border border-primary/15 bg-[#0b0e18] shadow-2xl">
           <div className="relative w-full" style={{ aspectRatio: "16 / 9" }}>
             <video
-              className="absolute inset-0 w-full h-full"
+              className="absolute inset-0 h-full w-full"
               controls
               playsInline
               preload="metadata"

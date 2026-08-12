@@ -1,3 +1,4 @@
+import EncabezadoSeccion from "@/components/EncabezadoSeccion";
 import {
   Accordion,
   AccordionContent,
@@ -36,38 +37,35 @@ const faqs = [
     answer:
       "Soporte directo conmigo, Manuel Moreira, por teléfono o WhatsApp. Sin tickets, sin bots, sin esperas. Conozco tu bodega y tu configuración, así que la respuesta es rápida y concreta.",
   },
-  {
-    question: "¿Funciona sin internet?",
-    answer:
-      "Sí. Datuva está diseñada para funcionar en naves sin cobertura. Escaneas QRs, registras movimientos y todo se sincroniza automáticamente cuando recuperas señal.",
-  },
 ];
 
 const FAQSection = () => {
   return (
-    <section id="faq" className="py-24 md:py-32 bg-muted/50">
-      <div className="container mx-auto px-4">
-        {/* Header */}
-        <div className="max-w-3xl mx-auto text-center mb-16">
-          <span className="inline-block text-sm font-semibold text-primary uppercase tracking-wider mb-4">
-            Preguntas frecuentes
-          </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6">
-            Las dudas que ya nos han{" "}
-            <span className="text-primary">preguntado otros bodegueros.</span>
-          </h2>
-        </div>
+    <section id="faq" className="relative bg-background py-24 md:py-32">
+      <div className="traza-vertical pointer-events-none absolute bottom-0 left-6 top-0 hidden w-px opacity-60 lg:block" />
+      <div className="container relative mx-auto px-6 md:px-10 lg:pl-20">
+        <EncabezadoSeccion
+          codigo="07"
+          etiqueta="Preguntas frecuentes"
+          oscuro={false}
+          titulo={
+            <>
+              Las dudas que ya nos han{" "}
+              <span className="italic text-bordeaux">preguntado otros bodegueros.</span>
+            </>
+          }
+          className="mb-14"
+        />
 
-        {/* FAQ */}
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-3xl">
           <Accordion type="single" collapsible className="space-y-3">
             {faqs.map((faq, i) => (
               <AccordionItem
                 key={i}
                 value={`faq-${i}`}
-                className="bg-background rounded-xl border border-border/50 px-6 data-[state=open]:border-primary/30 transition-colors"
+                className="border border-border/60 bg-card px-6 transition-colors data-[state=open]:border-bordeaux/40"
               >
-                <AccordionTrigger className="text-left font-semibold text-foreground hover:no-underline py-5">
+                <AccordionTrigger className="py-5 text-left font-serif text-lg font-normal text-primary hover:no-underline">
                   {faq.question}
                 </AccordionTrigger>
                 <AccordionContent className="text-muted-foreground leading-relaxed pb-5">
