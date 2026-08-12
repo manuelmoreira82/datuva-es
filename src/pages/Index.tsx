@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import FondoVivo from "@/components/FondoVivo";
+import CepaHub from "@/components/CepaHub";
 import HeroSection from "@/components/HeroSection";
 import DemoAppSection from "@/components/DemoAppSection";
 import AnuncioSection from "@/components/AnuncioSection";
@@ -218,6 +219,11 @@ const Index = () => {
 
       <Navbar />
       <div className="relative z-10">
+        {/* La cepa es la primera pantalla: se entra por ella y desde cada racimo
+            se abre la ficha de esa parte de la bodega. El resto de la home sigue
+            debajo, porque una portada que solo muestra un dibujo no la indexa un
+            buscador ni la escanea quien viene con prisa. */}
+        <CepaHub cards={sections} onCardClick={setActiveCard} />
         <HeroSection />
         <AnuncioSection />
         <DemoAppSection />
