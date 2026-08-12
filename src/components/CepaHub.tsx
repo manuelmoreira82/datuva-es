@@ -260,16 +260,24 @@ const CepaHub = ({ cards, onCardClick }: Props) => {
                 <button
                   key={n.id}
                   type="button"
-                  onClick={() => onCardClick(card)}
-                  onPointerDown={() => setEncima(n.id)}
-                  onPointerUp={() => setEncima(null)}
-                  onPointerCancel={() => setEncima(null)}
-                  onPointerLeave={() => setEncima(null)}
+                  /* Dos toques a propósito. Con uno solo, la hoja se encendía y
+                     la ficha la tapaba al instante: el resaltado no daba tiempo
+                     a verse. El primer toque marca la hoja y enseña de qué va;
+                     el segundo abre la ficha. */
+                  onClick={() => {
+                    if (encima === n.id) onCardClick(card);
+                    else setEncima(n.id);
+                  }}
+                  aria-expanded={encima === n.id}
                   style={{ left: `${n.x}%`, top: `${n.y}%` }}
                   className="absolute flex min-h-[44px] min-w-[44px] -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-1.5"
                 >
                   <span
-                    className="flex h-11 w-11 items-center justify-center border border-[#F5F0E8]/30 bg-[#2A1F12]/70 text-[#F5F0E8] backdrop-blur-[2px]"
+                    className={`flex h-11 w-11 items-center justify-center border backdrop-blur-[2px] transition-colors ${
+                      encima === n.id
+                        ? "border-[#E8B4BE] bg-[#7C2D3E]/90 text-[#F5F0E8]"
+                        : "border-[#F5F0E8]/30 bg-[#2A1F12]/70 text-[#F5F0E8]"
+                    }`}
                     style={{ borderRadius: "58% 42% 46% 54% / 48% 56% 44% 52%" }}
                   >
                     {Icono && <Icono className="h-4 w-4" />}
@@ -284,7 +292,9 @@ const CepaHub = ({ cards, onCardClick }: Props) => {
         </div>
 
         <p className="mt-2 px-6 font-mono text-[9px] uppercase tracking-[0.14em] text-[#F5F0E8]/55">
-          ← Desliza la cepa →
+          {encima
+            ? "Toca otra vez la hoja marcada para abrirla"
+            : "← Desliza la cepa · toca una hoja →"}
         </p>
 
         <div className="mt-8 px-6">
