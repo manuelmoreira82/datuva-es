@@ -209,7 +209,7 @@ const Index = () => {
       className="min-h-screen"
       style={{
         background:
-          "linear-gradient(180deg, #F5F0E8 0%, #EDE0C8 7%, #D9B274 18%, #B07C43 30%, #7A4E2A 45%, #4A2E1F 62%, #2A1A16 78%, #14100F 92%, #0B0A14 100%)",
+          "linear-gradient(180deg, #F5F0E8 0%, #EDE0C8 6%, #D9B274 12%, #9A6438 18%, #3A2418 25%, #2C1C15 42%, #241711 62%, #1A1210 82%, #0B0A14 100%)",
       }}
     >
       {/* El hero arranca en cream: sin esto los enlaces son cream sobre cream. */}

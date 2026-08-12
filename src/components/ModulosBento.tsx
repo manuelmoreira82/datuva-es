@@ -9,32 +9,27 @@ interface Props {
   onCardClick: (card: SectionCard) => void;
 }
 
-/* Módulos que además de la ficha llevan la foto de sección de fondo. Se eligen a
-   mano y son pocos a propósito: si todas las tarjetas llevan imagen, vuelve a no
-   destacar ninguna, que era justo el problema de la versión anterior. */
-const CON_FOTO = new Set(["normativa", "costes", "vendimia"]);
-
 /**
  * Rejilla de módulos. Sustituye a las 10 secciones de pantalla completa de
  * ScrollNarrative, que repetían la misma plantilla diez veces y obligaban a
  * ~10 scrolls antes de llegar a cualquier argumento de venta.
  *
- * Las tarjetas tienen tres pesos distintos —captura de app a doble ancho, foto de
- * sección, y ficha compacta— para que la rejilla tenga jerarquía en vez de diez
- * cajas idénticas. Cada una lleva su número de estación: el recorrido parcela →
- * vendimia → bodega → embotellado → expediciones es real, así que numerarlo
+ * Los módulos van sueltos sobre el fondo, sin caja ni borde: la rejilla de
+ * tarjetas dibujaba una cuadrícula que competía con el degradado de la página.
+ * La jerarquía la dan el espacio y el tamaño — los que tienen captura de la app
+ * ocupan doble ancho. Cada uno lleva su número de estación: el recorrido parcela
+ * → vendimia → bodega → embotellado → expediciones es real, así que numerarlo
  * informa, no decora.
  */
 const ModulosBento = ({ cards, onCardClick }: Props) => {
   return (
     <section id="modulos" className="relative overflow-hidden py-28 md:py-44">
-      <Aforo oscuro={false} />
+      <Aforo />
 
       <div className="container relative z-10 mx-auto px-6 md:px-10 lg:pl-20">
         <EncabezadoSeccion
           codigo="03"
           etiqueta="La plataforma"
-          oscuro={false}
           titulo={
             <>
               Nueve módulos.
@@ -49,10 +44,9 @@ const ModulosBento = ({ cards, onCardClick }: Props) => {
         {/* grid-flow-dense: sin él, una tarjeta de doble ancho que no cabe en el
             hueco restante salta de fila y deja un agujero. Con dense, una tarjeta
             simple posterior rellena ese hueco. */}
-        <div className="grid auto-rows-[minmax(0,auto)] grid-flow-row-dense grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5 lg:grid-cols-3">
+        <div className="grid auto-rows-[minmax(0,auto)] grid-flow-row-dense grid-cols-1 gap-x-10 gap-y-14 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-14 lg:gap-y-20">
           {cards.map((card, idx) => {
             const destacada = !!card.captura;
-            const conFoto = !destacada && CON_FOTO.has(card.id);
             const Icono = card.icono;
             const resumen = card.resumen ?? card.features[0]?.text ?? "";
             const numero = String(idx + 1).padStart(2, "0");
@@ -66,25 +60,10 @@ const ModulosBento = ({ cards, onCardClick }: Props) => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.45, delay: Math.min(idx, 6) * 0.05 }}
-                className={`group relative flex flex-col overflow-hidden border border-mosto/20 bg-barrica-oscura p-7 text-left transition-colors duration-300 hover:border-mosto/55 hover:bg-barrica md:p-9 ${
+                className={`group relative flex flex-col text-left transition-opacity duration-300 hover:opacity-100 md:pr-6 lg:opacity-90 ${
                   destacada ? "sm:col-span-2" : ""
                 }`}
               >
-                {/* Foto de sección al fondo, muy apagada: da textura sin competir
-                    con el texto. */}
-                {conFoto && (
-                  <>
-                    <img
-                      src={card.image}
-                      alt=""
-                      aria-hidden="true"
-                      loading="lazy"
-                      decoding="async"
-                      className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.13] transition-transform duration-700 group-hover:scale-105"
-                    />
-                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0B0A14] via-[#0B0A14]/85 to-[#0B0A14]/55" />
-                  </>
-                )}
 
                 <div className="relative mb-4 flex items-start justify-between gap-3">
                   <div className="flex items-center gap-3">
@@ -112,7 +91,7 @@ const ModulosBento = ({ cards, onCardClick }: Props) => {
                 </p>
 
                 {destacada && (
-                  <div className="relative mt-6 overflow-hidden border border-mosto/25">
+                  <div className="relative mt-7 overflow-hidden">
                     <img
                       src={card.captura}
                       alt={`Datuva — ${card.subtitle}`}
@@ -133,7 +112,7 @@ const ModulosBento = ({ cards, onCardClick }: Props) => {
           })}
         </div>
 
-        <p className="mt-10 font-mono text-[11px] uppercase tracking-[0.16em] text-[#2A1A16]/60">
+        <p className="mt-16 font-mono text-[11px] uppercase tracking-[0.16em] text-cream/35">
           Capturas reales de la aplicación. Sin retoques, sin demos falsas.
         </p>
       </div>

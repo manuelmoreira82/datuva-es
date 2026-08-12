@@ -4,13 +4,12 @@ import Aforo from "@/components/Aforo";
 const DemoAppSection = () => {
   return (
     <section id="demo-app" className="relative overflow-hidden py-28 md:py-44">
-      <Aforo oscuro={false} />
+      <Aforo />
 
       <div className="container relative z-10 mx-auto px-6 md:px-10 lg:pl-20">
         <EncabezadoSeccion
           codigo="02"
           etiqueta="Demo interactiva · 2 minutos"
-          oscuro={false}
           titulo="Esto es lo que vas a usar cada día"
           descripcion="Bodega, campo, embotellado y cumplimiento normativo. Sin Excel y sin papeles."
           className="mb-14 md:mb-16"

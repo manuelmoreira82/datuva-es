@@ -173,6 +173,22 @@
     }
   }
 
+  /* La gota que baja por el aforo del hero. El descenso, en pequeño. */
+  .gota {
+    animation: gotaCae 7s cubic-bezier(0.5, 0, 0.75, 0.35) infinite;
+  }
+
+  @keyframes gotaCae {
+    0% { transform: translateY(0); opacity: 0; }
+    8% { opacity: 1; }
+    82% { opacity: 1; }
+    100% { transform: translateY(var(--recorrido, 320px)); opacity: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gota { animation: none; opacity: 0; }
+  }
+
   /* Cifras y códigos alineados en columna. */
   .cifras {
     font-variant-numeric: tabular-nums;

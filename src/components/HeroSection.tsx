@@ -71,6 +71,12 @@ const HeroSection = () => {
             de la bodega —y una pantalla real de la app, /bodega/aforos— así que
             sirve de índice del recorrido en vez de una línea decorativa. */}
         <ol className="relative hidden flex-col justify-between py-2 lg:flex" aria-label="Recorrido del vino">
+          {/* La gota: recorre el aforo de la viña a la botella, en bucle. */}
+          <span
+            aria-hidden="true"
+            className="gota pointer-events-none absolute left-[3px] top-4 h-1.5 w-1.5 rounded-full bg-[#7A2E38]"
+            style={{ ["--recorrido" as string]: "calc(100% - 3rem)" }}
+          />
           {ESTACIONES.map(({ nombre, claro }) => {
             const encendida = nombre === estacionActiva;
             const tinta = claro ? "#3A2A16" : "#F5F0E8";
