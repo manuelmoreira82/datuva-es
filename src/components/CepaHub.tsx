@@ -49,8 +49,14 @@ const NODOS: { id: string; x: number; y: number }[] = [
   { id: "rrhh", x: 89, y: 38 },
 ];
 
+/* Foto de la cepa. Se sirve desde `public/`, no se importa, para que la web
+   siga funcionando mientras el fichero no exista: si no carga, `onError` deja el
+   dibujo vectorial de reserva. En cuanto se deje `public/cepa.jpg`, aparece. */
+const FOTO_CEPA = "/cepa.jpg";
+
 const CepaHub = ({ cards, onCardClick }: Props) => {
   const { abrir } = useContactDialog();
+  const [hayFoto, setHayFoto] = useState(false);
   // La invitación se apaga en cuanto se toca o se pasa por encima una vez.
   const [tocada, setTocada] = useState(false);
   const [encima, setEncima] = useState<string | null>(null);
@@ -62,26 +68,48 @@ const CepaHub = ({ cards, onCardClick }: Props) => {
       id="cepa"
       className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden px-6 py-24 md:px-10"
     >
-      <div className="container relative mx-auto">
+      {/* La cepa de verdad, si está. */}
+      <img
+        src={FOTO_CEPA}
+        alt=""
+        aria-hidden="true"
+        onLoad={() => setHayFoto(true)}
+        onError={() => setHayFoto(false)}
+        className={`pointer-events-none absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
+          hayFoto ? "opacity-100" : "opacity-0"
+        }`}
+      />
+      {/* Velo: sin esto el texto compite con las hojas y no se lee. */}
+      {hayFoto && (
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(100deg, rgba(20,14,10,0.72) 0%, rgba(20,14,10,0.45) 42%, rgba(20,14,10,0.3) 100%)",
+          }}
+        />
+      )}
+      <div className="container relative z-10 mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="mb-10 max-w-xl md:mb-4"
         >
-          <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#4A2E1F]">
+          <p className={`font-mono text-[11px] uppercase tracking-[0.22em] ${hayFoto ? "text-[#D9B274]" : "text-[#4A2E1F]"}`}>
             Software para bodegas españolas
           </p>
           <h1
-            className="mt-4 font-serif text-[2.6rem] font-normal leading-[0.9] tracking-[-0.035em] text-[#1a1208] md:text-[4.2rem]"
+            className={`mt-4 font-serif text-[2.6rem] font-normal leading-[0.9] tracking-[-0.035em] md:text-[4.2rem] ${hayFoto ? "text-[#F5F0E8]" : "text-[#1a1208]"}`}
           >
             Toca la cepa.
           </h1>
-          <p className="mt-4 max-w-md text-base leading-relaxed text-[#3A2A16]/85">
+          <p className={`mt-4 max-w-md text-base leading-relaxed ${hayFoto ? "text-[#F5F0E8]/85" : "text-[#3A2A16]/85"}`}>
             Cada racimo es una parte de tu bodega. Ábrelo y ves exactamente qué
             hace Datuva ahí — con capturas reales de la aplicación.
           </p>
-          <p className="mt-5 inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.18em] text-[#7C2D3E]">
+          <p className={`mt-5 inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.18em] ${hayFoto ? "text-[#E8B4BE]" : "text-[#7C2D3E]"}`}>
             <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-[#7C2D3E]" />
             Pasa por encima o pincha en cualquiera
           </p>
@@ -92,7 +120,9 @@ const CepaHub = ({ cards, onCardClick }: Props) => {
           <svg
             viewBox="0 0 1000 560"
             aria-hidden="true"
-            className="absolute inset-0 h-full w-full"
+            className={`absolute inset-0 h-full w-full transition-opacity duration-500 ${
+              hayFoto ? "opacity-0" : "opacity-100"
+            }`}
             fill="none"
           >
             {/* Tronco */}
@@ -148,14 +178,20 @@ const CepaHub = ({ cards, onCardClick }: Props) => {
               >
                 {/* El racimo */}
                 <span
-                  className={`relative flex h-14 w-14 items-center justify-center rounded-full bg-[#4A2E1F] text-[#EDE0C8] shadow-lg shadow-[#4A2E1F]/30 transition-all duration-300 group-hover:scale-110 group-hover:bg-[#7C2D3E] group-focus-visible:ring-2 group-focus-visible:ring-[#1a1208] group-focus-visible:ring-offset-2 ${
-                    tocada ? "" : "racimo-late"
-                  }`}
-                  style={{ animationDelay: `${i * 0.26}s` }}
+                  className={`relative flex h-16 w-16 items-center justify-center border transition-all duration-300 group-hover:scale-110 group-focus-visible:ring-2 group-focus-visible:ring-offset-2 ${
+                    hayFoto
+                      ? "border-[#EDE0C8]/25 bg-[#5E6B3A]/55 text-[#F5F0E8] backdrop-blur-[2px] group-hover:bg-[#7C2D3E]/75 group-focus-visible:ring-[#F5F0E8]"
+                      : "border-transparent bg-[#4A2E1F] text-[#EDE0C8] shadow-lg shadow-[#4A2E1F]/30 group-hover:bg-[#7C2D3E] group-focus-visible:ring-[#1a1208]"
+                  } ${tocada ? "" : "racimo-late"}`}
+                  style={{
+                    animationDelay: `${i * 0.26}s`,
+                    // Silueta de hoja: lóbulos irregulares, no un círculo.
+                    borderRadius: "58% 42% 46% 54% / 48% 56% 44% 52%",
+                  }}
                 >
                   {Icono && <Icono className="h-5 w-5" />}
                 </span>
-                <span className="whitespace-nowrap font-mono text-[10px] uppercase tracking-[0.16em] text-[#3A2A16] transition-colors group-hover:text-[#7C2D3E]">
+                <span className={`whitespace-nowrap font-mono text-[10px] uppercase tracking-[0.16em] transition-colors ${hayFoto ? "text-[#F5F0E8] [text-shadow:0_1px_3px_rgba(0,0,0,0.7)] group-hover:text-[#E8B4BE]" : "text-[#3A2A16] group-hover:text-[#7C2D3E]"}`}>
                   {card.subtitle}
                 </span>
 
@@ -201,13 +237,13 @@ const CepaHub = ({ cards, onCardClick }: Props) => {
           <button
             type="button"
             onClick={() => abrir("cepa")}
-            className="inline-flex items-center bg-[#1a1208] px-8 py-4 text-sm font-medium text-[#F5F0E8] transition-transform hover:scale-[1.02]"
+            className={`inline-flex items-center px-8 py-4 text-sm font-medium transition-transform hover:scale-[1.02] ${hayFoto ? "bg-[#F5F0E8] text-[#1a1208]" : "bg-[#1a1208] text-[#F5F0E8]"}`}
           >
             Solicitar demo
           </button>
           <a
             href="#anuncio"
-            className="inline-flex items-center border border-[#1a1208]/35 px-7 py-4 text-sm text-[#1a1208] transition-colors hover:border-[#1a1208]"
+            className={`inline-flex items-center border px-7 py-4 text-sm transition-colors ${hayFoto ? "border-[#F5F0E8]/40 text-[#F5F0E8] hover:border-[#F5F0E8]" : "border-[#1a1208]/35 text-[#1a1208] hover:border-[#1a1208]"}`}
           >
             O baja y te lo contamos
           </a>
