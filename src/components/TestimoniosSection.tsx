@@ -36,11 +36,11 @@ const TestimoniosSection = () => {
           className="mb-16 md:mb-20"
         />
 
-        <div className="grid gap-4 md:grid-cols-3 md:gap-5">
+        <div className="grid gap-x-10 gap-y-12 md:grid-cols-3 lg:gap-x-14">
           {testimonios.map((t, i) => (
             <div
               key={i}
-              className="relative flex flex-col border border-mosto/20 bg-barrica-oscura p-8 md:p-9"
+              className="relative flex flex-col"
             >
               <Quote className="mb-5 h-7 w-7 text-gold/30" />
               <p className="font-serif text-lg font-normal leading-snug text-cream">

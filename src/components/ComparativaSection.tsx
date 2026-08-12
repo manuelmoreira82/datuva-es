@@ -38,7 +38,7 @@ const ComparativaSection = () => {
         />
 
         {/* Table */}
-        <div className="overflow-x-auto border border-mosto/20 bg-barrica-oscura p-6 md:p-8">
+        <div className="overflow-x-auto">
           <table className="w-full">
             <thead>
               <tr className="border-b-2 border-cream/25">

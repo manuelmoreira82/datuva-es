@@ -56,7 +56,7 @@ const ROISection = () => {
 
         {/* Cifras en fila, separadas por hairlines: se leen como el renglón de un
             libro de cuentas, que es de lo que hablan. */}
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-12">
           {costes.map((c, i) => (
             <motion.div
               key={i}
@@ -64,7 +64,7 @@ const ROISection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.5, delay: i * 0.08 }}
-              className="flex flex-col border border-mosto/20 bg-barrica-oscura p-7 md:p-9"
+              className="flex flex-col"
             >
               <c.icon className="mb-6 h-5 w-5 text-gold/70" aria-hidden="true" />
               <div
