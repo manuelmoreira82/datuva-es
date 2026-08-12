@@ -22,7 +22,7 @@ const StatusIcon = ({ status }: { status: string }) => {
 
 const ComparativaSection = () => {
   return (
-    <section id="comparativa" className="relative bg-[#0B0A14] py-28 text-cream md:py-44">
+    <section id="comparativa" className="relative py-28 text-cream md:py-44">
       <Aforo />
       <div className="container relative mx-auto px-6 md:px-10 lg:pl-20">
         <EncabezadoSeccion
@@ -38,7 +38,7 @@ const ComparativaSection = () => {
         />
 
         {/* Table */}
-        <div className="max-w-4xl mx-auto overflow-x-auto">
+        <div className="overflow-x-auto border border-mosto/20 bg-barrica-oscura p-6 md:p-8">
           <table className="w-full">
             <thead>
               <tr className="border-b-2 border-cream/25">

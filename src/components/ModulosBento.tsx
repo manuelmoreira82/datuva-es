@@ -27,13 +27,14 @@ const CON_FOTO = new Set(["normativa", "costes", "vendimia"]);
  */
 const ModulosBento = ({ cards, onCardClick }: Props) => {
   return (
-    <section id="modulos" className="relative overflow-hidden bg-[#0B0A14] py-28 md:py-44">
-      <Aforo />
+    <section id="modulos" className="relative overflow-hidden py-28 md:py-44">
+      <Aforo oscuro={false} />
 
       <div className="container relative z-10 mx-auto px-6 md:px-10 lg:pl-20">
         <EncabezadoSeccion
           codigo="03"
           etiqueta="La plataforma"
+          oscuro={false}
           titulo={
             <>
               Nueve módulos.
@@ -132,7 +133,7 @@ const ModulosBento = ({ cards, onCardClick }: Props) => {
           })}
         </div>
 
-        <p className="mt-10 font-mono text-[11px] uppercase tracking-[0.16em] text-cream/35">
+        <p className="mt-10 font-mono text-[11px] uppercase tracking-[0.16em] text-[#2A1A16]/60">
           Capturas reales de la aplicación. Sin retoques, sin demos falsas.
         </p>
       </div>

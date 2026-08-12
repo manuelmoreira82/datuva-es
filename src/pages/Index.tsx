@@ -200,7 +200,18 @@ const Index = () => {
   const [activeCard, setActiveCard] = useState<SectionCard | null>(null);
 
   return (
-    <div className="min-h-screen bg-[#0B0A14]">
+    /* El descenso es de la PÁGINA, no del hero. La luz de la viña arriba, la
+       oscuridad de la bodega abajo, recorriendo los ~11.900 px de la home. Las
+       secciones van transparentes encima. Los cortes están puestos para que la
+       transición de claro a oscuro caiga dentro de la demo (02) y ninguna
+       sección quede a medio camino con el texto ilegible. */
+    <div
+      className="min-h-screen"
+      style={{
+        background:
+          "linear-gradient(180deg, #F5F0E8 0%, #EDE0C8 7%, #D9B274 18%, #B07C43 30%, #7A4E2A 45%, #4A2E1F 62%, #2A1A16 78%, #14100F 92%, #0B0A14 100%)",
+      }}
+    >
       {/* El hero arranca en cream: sin esto los enlaces son cream sobre cream. */}
       <Navbar sobreClaro />
       <HeroSection />

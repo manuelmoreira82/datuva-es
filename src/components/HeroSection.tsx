@@ -27,8 +27,8 @@ const ESTACIONES = [
   { nombre: "Viña", claro: true },
   { nombre: "Vendimia", claro: true },
   { nombre: "Depósito", claro: true },
-  { nombre: "Barrica", claro: false },
-  { nombre: "Botella", claro: false },
+  { nombre: "Barrica", claro: true },
+  { nombre: "Botella", claro: true },
 ];
 
 /* El recorrido, pantalla a pantalla. Cada una es una captura REAL de la app y
@@ -62,11 +62,8 @@ const HeroSection = () => {
   return (
     <section
       id="inicio"
+      /* Sin fondo propio: lo pone la página, que es quien hace el descenso. */
       className="relative min-h-[100svh] overflow-hidden"
-      style={{
-        background:
-          "linear-gradient(180deg, #F5F0E8 0%, #EADCC2 22%, #C79A55 42%, #7A4E2A 60%, #331F18 78%, #0B0A14 100%)",
-      }}
     >
       <div className="container mx-auto grid min-h-[100svh] grid-cols-1 gap-8 px-6 pb-14 pt-28 md:px-10 md:pb-20 md:pt-36 lg:grid-cols-[80px_1.05fr_0.85fr] lg:gap-10">
         {/* ── El aforo ──────────────────────────────────────────────────────
@@ -128,7 +125,7 @@ const HeroSection = () => {
 
           <div>
             <h1
-              className="font-serif font-normal leading-[0.85] tracking-[-0.04em] text-[#1a1208] lg:text-cream"
+              className="font-serif font-normal leading-[0.85] tracking-[-0.04em] text-[#1a1208]"
               style={{ fontSize: "clamp(3rem, 9.5vw, 8rem)" }}
             >
               a la botella
@@ -137,7 +134,7 @@ const HeroSection = () => {
             <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
               <a
                 href="#demo-app"
-                className="group inline-flex items-center gap-3 bg-cream px-8 py-4 text-sm font-medium text-[#1a1208] transition-transform hover:scale-[1.02]"
+                className="group inline-flex items-center gap-3 bg-[#1a1208] px-8 py-4 text-sm font-medium text-[#F5F0E8] transition-transform hover:scale-[1.02]"
               >
                 Ver Datuva funcionando
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -145,13 +142,13 @@ const HeroSection = () => {
               <button
                 type="button"
                 onClick={() => abrir("hero")}
-                className="inline-flex items-center justify-center border border-[#1a1208]/35 px-7 py-4 text-sm text-[#1a1208] transition-colors hover:border-[#1a1208] lg:border-cream/30 lg:text-cream/85 lg:hover:border-cream lg:hover:text-cream"
+                className="inline-flex items-center justify-center border border-[#1a1208]/35 px-7 py-4 text-sm text-[#1a1208] transition-colors hover:border-[#1a1208]"
               >
                 Solicitar demo
               </button>
             </div>
 
-            <p className="mt-8 text-xs text-[#3A2A16]/75 lg:text-cream/50">
+            <p className="mt-8 text-xs text-[#3A2A16]/75">
               SILICIE, INFOVI y libros JCyL preparados en formato oficial · El Bierzo
             </p>
           </div>
@@ -183,11 +180,11 @@ const HeroSection = () => {
                 <span
                   key={i}
                   className="h-px w-8 transition-colors duration-500"
-                  style={{ background: i === activa ? "#C9A227" : "rgba(245,240,232,0.25)" }}
+                  style={{ background: i === activa ? "#7A4E2A" : "rgba(58,42,22,0.25)" }}
                 />
               ))}
             </div>
-            <p className="mt-3 h-8 text-center font-mono text-[9px] uppercase tracking-[0.2em] text-cream/45">
+            <p className="mt-3 h-8 text-center font-mono text-[9px] uppercase tracking-[0.2em] text-[#3A2A16]/70">
               {PANTALLAS[activa].pie}
             </p>
           </div>
