@@ -2,14 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Fraunces (display) + IBM Plex Sans (texto) + IBM Plex Mono (códigos y cifras).
-   Sustituyen a Playfair Display + Inter. Fraunces es un serif variable con
-   `SOFT` y `WONK` que le da carácter agrícola sin caer en el serif de alto
-   contraste de catálogo; Plex aporta el registro técnico que pide un libro de
-   bodega, y su mono es el que numera secciones y alinea cifras.
-   OJO: la app comparte identidad con la web y sigue en Playfair + Inter. Hasta
-   que se toque la app, las dos no van a juego. */
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+/* Las fuentes se cargan con <link> en index.html, NO con @import.
+   Un @import colocado detrás de las directivas @tailwind se descarta en el
+   build —CSS exige que @import preceda a cualquier otra regla— y así es como
+   la web llevaba tiempo renderizando con Georgia y la fuente del sistema en
+   lugar de con su tipografía. */
 
 @layer base {
   :root {
