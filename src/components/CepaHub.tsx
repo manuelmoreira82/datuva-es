@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import type { SectionCard } from "@/types/modulos";
 import { useContactDialog } from "@/components/ContactDialog";
+import { HOJAS } from "@/components/cepaHojas";
 
 /**
  * La cepa navegable: primera pantalla de la web.
@@ -30,19 +31,11 @@ interface Props {
   onCardClick: (card: SectionCard) => void;
 }
 
-/* Centro de la hoja donde va cada menú, en % del lienzo 3:2.
-   Medidas sobre `public/cepa.webp`. */
-const NODOS: { id: string; x: number; y: number }[] = [
-  { id: "normativa", x: 62.5, y: 11.0 },
-  { id: "vendimia", x: 40.5, y: 33.5 },
-  { id: "bodega", x: 61.0, y: 33.0 },
-  { id: "costes", x: 75.0, y: 39.0 },
-  { id: "campo", x: 31.0, y: 47.0 },
-  { id: "expediciones", x: 66.0, y: 54.0 },
-  { id: "rrhh", x: 84.0, y: 54.0 },
-  { id: "laboratorio", x: 36.0, y: 58.5 },
-  { id: "embotellado", x: 50.5, y: 64.5 },
-  { id: "proveedores", x: 75.5, y: 64.5 },
+/* Orden de aparición. La posición de cada uno NO se escribe a mano: sale del
+   centroide de su hoja, medido sobre la fotografía en `cepaHojas.ts`. */
+const ORDEN = [
+  "normativa", "vendimia", "bodega", "costes", "campo",
+  "expediciones", "rrhh", "laboratorio", "embotellado", "proveedores",
 ];
 
 const CepaHub = ({ cards, onCardClick }: Props) => {
@@ -51,7 +44,11 @@ const CepaHub = ({ cards, onCardClick }: Props) => {
   const [tocada, setTocada] = useState(false);
   const [encima, setEncima] = useState<string | null>(null);
   const porId = new Map(cards.map((c) => [c.id, c]));
-  const nodos = NODOS.filter((n) => porId.has(n.id));
+  const nodos = ORDEN.filter((id) => porId.has(id) && HOJAS[id]).map((id) => ({
+    id,
+    x: HOJAS[id].cx,
+    y: HOJAS[id].cy,
+  }));
 
   const textoIntro = (
     <>
@@ -78,7 +75,7 @@ const CepaHub = ({ cards, onCardClick }: Props) => {
       <img
         src="/cepa.webp"
         alt="Cepa vieja de viñedo en El Bierzo"
-        className="pointer-events-none absolute inset-0 h-full w-full object-cover"
+        className="pointer-events-none absolute inset-0 h-full w-full object-cover object-[60%_center] md:object-center"
       />
       {/* Velo: sin esto el texto compite con las hojas. Más denso a la izquierda,
           que es donde cae el titular. */}
@@ -94,6 +91,39 @@ const CepaHub = ({ cards, onCardClick }: Props) => {
       {/* ── Escritorio: lienzo con la proporción de la foto ─────────────────── */}
       <div className="relative z-10 hidden w-full md:block">
         <div className="relative mx-auto aspect-[3/2] w-full max-w-[1500px]">
+          {/* Las hojas de verdad, recortadas de la foto. Un filo tenue siempre,
+              para que se vea que son seleccionables; encendidas al señalarlas. */}
+          <svg
+            viewBox="0 0 100 100"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 h-full w-full"
+          >
+            <defs>
+              <filter id="brilloHoja" x="-30%" y="-30%" width="160%" height="160%">
+                <feGaussianBlur stdDeviation="1.1" result="b" />
+                <feMerge>
+                  <feMergeNode in="b" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
+            {nodos.map((n) => {
+              const activa = encima === n.id;
+              return (
+                <polygon
+                  key={n.id}
+                  points={HOJAS[n.id].puntos}
+                  vectorEffect="non-scaling-stroke"
+                  filter={activa ? "url(#brilloHoja)" : undefined}
+                  style={{ transition: "fill 0.28s ease, stroke 0.28s ease" }}
+                  fill={activa ? "rgba(124,45,62,0.55)" : "rgba(245,240,232,0.04)"}
+                  stroke={activa ? "rgba(232,180,190,0.95)" : "rgba(245,240,232,0.22)"}
+                  strokeWidth={activa ? 2 : 1}
+                />
+              );
+            })}
+          </svg>
           <motion.div
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
@@ -176,39 +206,83 @@ const CepaHub = ({ cards, onCardClick }: Props) => {
         </div>
       </div>
 
-      {/* ── Móvil: lista ───────────────────────────────────────────────────── */}
-      <div className="relative z-10 w-full px-6 py-28 md:hidden">
-        {textoIntro}
+      {/* ── Móvil: la cepa se desplaza con el dedo ────────────────────────
+          Miniaturizar la foto a 390 px dejaría las hojas a 30 px y las zonas de
+          toque solapadas. En vez de eso se muestra a más del doble de ancho
+          dentro de un carril con desplazamiento horizontal: las hojas conservan
+          su tamaño y cada menú tiene una zona de toque de 44 px, que es el
+          mínimo para el dedo. Debajo queda la lista completa, porque el gesto de
+          arrastrar no lo descubre todo el mundo. */}
+      <div className="relative z-10 w-full py-24 md:hidden">
+        <div className="px-6">{textoIntro}</div>
 
-        <ul className="mt-8 grid grid-cols-2 gap-2">
-          {nodos.map((n) => {
-            const card = porId.get(n.id)!;
-            const Icono = card.icono;
-            return (
-              <li key={n.id}>
+        <div className="mt-8 overflow-x-auto overscroll-x-contain pb-2">
+          <div className="relative aspect-[3/2] w-[240vw] max-w-none">
+            {nodos.map((n) => {
+              const card = porId.get(n.id)!;
+              const Icono = card.icono;
+              return (
                 <button
+                  key={n.id}
                   type="button"
                   onClick={() => onCardClick(card)}
-                  className="flex w-full items-center gap-2.5 border border-[#F5F0E8]/25 bg-[#2A1F12]/60 px-3 py-3.5 text-left backdrop-blur-[2px] transition-colors active:bg-[#7C2D3E]/70"
+                  style={{ left: `${n.x}%`, top: `${n.y}%` }}
+                  className="absolute flex min-h-[44px] min-w-[44px] -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-1.5"
                 >
-                  {Icono && <Icono className="h-4 w-4 shrink-0 text-[#E8B4BE]" />}
-                  <span className="font-mono text-[10px] uppercase leading-tight tracking-[0.12em] text-[#F5F0E8]">
+                  <span
+                    className="flex h-11 w-11 items-center justify-center border border-[#F5F0E8]/35 bg-[#2A1F12]/75 text-[#F5F0E8] backdrop-blur-[2px] active:bg-[#7C2D3E]/85"
+                    style={{ borderRadius: "58% 42% 46% 54% / 48% 56% 44% 52%" }}
+                  >
+                    {Icono && <Icono className="h-4 w-4" />}
+                  </span>
+                  <span className="whitespace-nowrap font-mono text-[8px] uppercase tracking-[0.12em] text-[#F5F0E8] [text-shadow:0_1px_4px_rgba(0,0,0,0.9)]">
                     {card.subtitle}
                   </span>
                 </button>
-              </li>
-            );
-          })}
-        </ul>
+              );
+            })}
+          </div>
+        </div>
 
-        <button
-          type="button"
-          onClick={() => abrir("cepa")}
-          className="mt-8 inline-flex w-full items-center justify-center bg-[#F5F0E8] px-7 py-4 text-sm font-medium text-[#1a1208]"
-        >
-          Solicitar demo
-        </button>
+        <p className="mt-2 px-6 font-mono text-[9px] uppercase tracking-[0.14em] text-[#F5F0E8]/55">
+          ← Desliza la cepa →
+        </p>
+
+        <div className="mt-10 px-6">
+          <p className="mb-3 font-mono text-[9px] uppercase tracking-[0.16em] text-[#D9B274]">
+            Todas las áreas
+          </p>
+          <ul className="grid grid-cols-2 gap-2">
+            {nodos.map((n) => {
+              const card = porId.get(n.id)!;
+              const Icono = card.icono;
+              return (
+                <li key={n.id}>
+                  <button
+                    type="button"
+                    onClick={() => onCardClick(card)}
+                    className="flex w-full items-center gap-2.5 border border-[#F5F0E8]/25 bg-[#2A1F12]/60 px-3 py-3.5 text-left backdrop-blur-[2px] active:bg-[#7C2D3E]/70"
+                  >
+                    {Icono && <Icono className="h-4 w-4 shrink-0 text-[#E8B4BE]" />}
+                    <span className="font-mono text-[10px] uppercase leading-tight tracking-[0.12em] text-[#F5F0E8]">
+                      {card.subtitle}
+                    </span>
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+
+          <button
+            type="button"
+            onClick={() => abrir("cepa")}
+            className="mt-8 inline-flex w-full items-center justify-center bg-[#F5F0E8] px-7 py-4 text-sm font-medium text-[#1a1208]"
+          >
+            Solicitar demo
+          </button>
+        </div>
       </div>
+
     </section>
   );
 };
