@@ -117,9 +117,9 @@ const CepaHub = ({ cards, onCardClick }: Props) => {
                   vectorEffect="non-scaling-stroke"
                   filter={activa ? "url(#brilloHoja)" : undefined}
                   style={{ transition: "fill 0.28s ease, stroke 0.28s ease" }}
-                  fill={activa ? "rgba(124,45,62,0.55)" : "rgba(245,240,232,0.04)"}
-                  stroke={activa ? "rgba(232,180,190,0.95)" : "rgba(245,240,232,0.22)"}
-                  strokeWidth={activa ? 2 : 1}
+                  fill={activa ? "rgba(124,45,62,0.62)" : "transparent"}
+                  stroke={activa ? "rgba(232,180,190,0.95)" : "transparent"}
+                  strokeWidth={activa ? 2 : 0}
                 />
               );
             })}
@@ -237,16 +237,20 @@ const CepaHub = ({ cards, onCardClick }: Props) => {
               aria-hidden="true"
               className="pointer-events-none absolute inset-0 h-full w-full"
             >
-              {nodos.map((n) => (
-                <polygon
-                  key={n.id}
-                  points={HOJAS[n.id].puntos}
-                  vectorEffect="non-scaling-stroke"
-                  fill="rgba(245,240,232,0.05)"
-                  stroke="rgba(245,240,232,0.3)"
-                  strokeWidth={1}
-                />
-              ))}
+              {nodos.map((n) => {
+                const activa = encima === n.id;
+                return (
+                  <polygon
+                    key={n.id}
+                    points={HOJAS[n.id].puntos}
+                    vectorEffect="non-scaling-stroke"
+                    style={{ transition: "fill 0.2s ease, stroke 0.2s ease" }}
+                    fill={activa ? "rgba(124,45,62,0.62)" : "transparent"}
+                    stroke={activa ? "rgba(232,180,190,0.95)" : "transparent"}
+                    strokeWidth={activa ? 2 : 0}
+                  />
+                );
+              })}
             </svg>
             {nodos.map((n) => {
               const card = porId.get(n.id)!;
@@ -256,11 +260,15 @@ const CepaHub = ({ cards, onCardClick }: Props) => {
                   key={n.id}
                   type="button"
                   onClick={() => onCardClick(card)}
+                  onPointerDown={() => setEncima(n.id)}
+                  onPointerUp={() => setEncima(null)}
+                  onPointerCancel={() => setEncima(null)}
+                  onPointerLeave={() => setEncima(null)}
                   style={{ left: `${n.x}%`, top: `${n.y}%` }}
                   className="absolute flex min-h-[44px] min-w-[44px] -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-1.5"
                 >
                   <span
-                    className="flex h-11 w-11 items-center justify-center border border-[#F5F0E8]/35 bg-[#2A1F12]/75 text-[#F5F0E8] backdrop-blur-[2px] active:bg-[#7C2D3E]/85"
+                    className="flex h-11 w-11 items-center justify-center border border-[#F5F0E8]/30 bg-[#2A1F12]/70 text-[#F5F0E8] backdrop-blur-[2px]"
                     style={{ borderRadius: "58% 42% 46% 54% / 48% 56% 44% 52%" }}
                   >
                     {Icono && <Icono className="h-4 w-4" />}
