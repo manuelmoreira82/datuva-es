@@ -88,7 +88,7 @@ const Navbar = ({ sobreClaro: forzarClaro }: { sobreClaro?: boolean } = {}) => {
       </div>
 
       {isMobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-[#0B0A14]/97 backdrop-blur-md shadow-lg p-6 animate-fade-in">
+        <div className="md:hidden absolute top-full left-0 right-0 bg-[#0B0A14]/95 backdrop-blur-md shadow-lg p-6 animate-fade-in-up">
           <div className="flex flex-col gap-4">
             <a
               href="#modulos"
