@@ -21,7 +21,7 @@ const PoliticaCookies = () => {
             Política de Cookies
           </h1>
           <p className="text-muted-foreground mb-8">
-            Última actualización: Abril 2026
+            Última actualización: Septiembre 2026
           </p>
 
           <section className="mb-8">
@@ -36,12 +36,8 @@ const PoliticaCookies = () => {
 
             <h3 className="text-lg font-medium text-foreground mt-6 mb-3">2.1 Cookies técnicas (necesarias)</h3>
             <p className="text-foreground/80 leading-relaxed mb-3">
-              Son aquellas que permiten al usuario la navegación a través del sitio web y la utilización de las diferentes opciones o servicios que en ella existen. Incluyen:
+              Son las estrictamente necesarias para el correcto funcionamiento del sitio y están exentas de consentimiento (artículo 22.2 de la LSSI-CE). En este sitio se limitan al almacenamiento local que recuerda si ya has visto el aviso de cookies, para no mostrártelo en cada visita. No recogen datos con fines publicitarios ni de seguimiento.
             </p>
-            <ul className="list-disc pl-6 text-foreground/80 space-y-2">
-              <li><strong>Cookies de sesión:</strong> Permiten gestionar y controlar la sesión del usuario.</li>
-              <li><strong>Cookies de preferencias:</strong> Almacenan las preferencias del usuario, como la aceptación de cookies y uso de datos.</li>
-            </ul>
 
             <h3 className="text-lg font-medium text-foreground mt-6 mb-3">2.2 Cookies analíticas</h3>
             <p className="text-foreground/80 leading-relaxed">
@@ -64,15 +60,9 @@ const PoliticaCookies = () => {
                 <tbody>
                   <tr className="border-b border-border/50">
                     <td className="p-3 text-foreground/80">datuva-cookies-accepted</td>
-                    <td className="p-3 text-foreground/80">Técnica</td>
-                    <td className="p-3 text-foreground/80">Persistente</td>
-                    <td className="p-3 text-foreground/80">Registra la aceptación de cookies técnicas</td>
-                  </tr>
-                  <tr className="border-b border-border/50">
-                    <td className="p-3 text-foreground/80">datuva-data-accepted</td>
-                    <td className="p-3 text-foreground/80">Técnica</td>
-                    <td className="p-3 text-foreground/80">Persistente</td>
-                    <td className="p-3 text-foreground/80">Registra la aceptación de la política de privacidad</td>
+                    <td className="p-3 text-foreground/80">Técnica (almacenamiento local)</td>
+                    <td className="p-3 text-foreground/80">Hasta que borres los datos del navegador</td>
+                    <td className="p-3 text-foreground/80">Recuerda que ya has visto el aviso de cookies</td>
                   </tr>
                 </tbody>
               </table>
@@ -82,7 +72,7 @@ const PoliticaCookies = () => {
           <section className="mb-8">
             <h2 className="text-xl font-semibold text-foreground mb-4">4. ¿Cómo gestionar las cookies?</h2>
             <p className="text-foreground/80 leading-relaxed mb-4">
-              Al acceder al sitio web por primera vez, se mostrará un banner informativo sobre el uso de cookies donde podrá aceptar o rechazar su uso. También puede configurar su navegador para aceptar o rechazar todas las cookies, o para que le avise cuando un sitio web intente establecer una cookie:
+              Al acceder al sitio web por primera vez se muestra un aviso informativo sobre el almacenamiento técnico que utilizamos. Como solo empleamos almacenamiento necesario, no se solicita consentimiento; si en el futuro incorporáramos cookies de analítica o de terceros, se te pediría tu consentimiento y podrías aceptarlas o rechazarlas en igualdad de condiciones. En todo caso, puedes configurar tu navegador para gestionar o eliminar el almacenamiento de los sitios que visitas:
             </p>
             <ul className="list-disc pl-6 text-foreground/80 space-y-2">
               <li><strong>Google Chrome:</strong> Configuración → Privacidad y seguridad → Cookies y otros datos de sitios</li>
