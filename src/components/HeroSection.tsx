@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { useContactDialog } from "@/components/ContactDialog";
+import { waHref } from "@/lib/contacto";
 import appCapturaMenu from "@/assets/app-screenshot-menu.jpg";
 import appCapturaMapa from "@/assets/app-screenshot-map.jpg";
 import appCapturaAnaliticas from "@/assets/app-screenshot-analytics.jpg";
@@ -56,7 +56,6 @@ function usePantallaActiva() {
 }
 
 const HeroSection = () => {
-  const { abrir } = useContactDialog();
   const activa = usePantallaActiva();
   const estacionActiva = PANTALLAS[activa].estacion;
   return (
@@ -145,13 +144,14 @@ const HeroSection = () => {
                 Ver Datuva funcionando
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </a>
-              <button
-                type="button"
-                onClick={() => abrir("hero")}
+              <a
+                href={waHref()}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center justify-center border border-[#1a1208]/35 px-7 py-4 text-sm text-[#1a1208] transition-colors hover:border-[#1a1208]"
               >
                 Solicitar demo
-              </button>
+              </a>
             </div>
 
             <p className="mt-8 text-xs text-[#3A2A16]/75">

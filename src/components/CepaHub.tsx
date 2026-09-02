@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import type { SectionCard } from "@/types/modulos";
-import { useContactDialog } from "@/components/ContactDialog";
+import { waHref } from "@/lib/contacto";
 import { HOJAS } from "@/components/cepaHojas";
 
 /**
@@ -43,7 +43,6 @@ const ORDEN = [
 ];
 
 const CepaHub = ({ cards, onCardClick }: Props) => {
-  const { abrir } = useContactDialog();
   // La invitación se apaga en cuanto se toca o se pasa por encima una vez.
   const [tocada, setTocada] = useState(false);
   const [encima, setEncima] = useState<string | null>(null);
@@ -210,13 +209,14 @@ const CepaHub = ({ cards, onCardClick }: Props) => {
           })}
 
           <div className="absolute bottom-[3%] left-[4%] flex items-center gap-3">
-            <button
-              type="button"
-              onClick={() => abrir("cepa")}
+            <a
+              href={waHref()}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center bg-[#F5F0E8] px-7 py-3.5 text-sm font-medium text-[#1a1208] transition-transform hover:scale-[1.02]"
             >
               Solicitar demo
-            </button>
+            </a>
             <a
               href="#anuncio"
               className="inline-flex items-center border border-[#F5F0E8]/40 px-6 py-3.5 text-sm text-[#F5F0E8] transition-colors hover:border-[#F5F0E8]"
@@ -330,13 +330,14 @@ const CepaHub = ({ cards, onCardClick }: Props) => {
         </p>
 
         <div className="mt-8 px-6">
-          <button
-            type="button"
-            onClick={() => abrir("cepa")}
+          <a
+            href={waHref()}
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex w-full items-center justify-center bg-[#F5F0E8] px-7 py-4 text-sm font-medium text-[#1a1208]"
           >
             Solicitar demo
-          </button>
+          </a>
         </div>
       </div>
     </section>
