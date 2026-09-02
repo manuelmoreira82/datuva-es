@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useContactDialog } from "@/components/ContactDialog";
+import { waHref } from "@/lib/contacto";
 import Logo from "@/components/Logo";
 
 /* La barra se adapta al tramo del descenso en el que esté: clara sobre la luz de
@@ -12,7 +12,6 @@ const Navbar = ({ sobreClaro: forzarClaro }: { sobreClaro?: boolean } = {}) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [enZonaClara, setEnZonaClara] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { abrir } = useContactDialog();
   const sobreClaro = forzarClaro ?? enZonaClara;
 
   useEffect(() => {
@@ -73,8 +72,10 @@ const Navbar = ({ sobreClaro: forzarClaro }: { sobreClaro?: boolean } = {}) => {
         </div>
 
         <div className="hidden md:flex items-center">
-          <Button variant="contact" size="default" onClick={() => abrir("navbar")}>
-            Solicitar demo
+          <Button variant="contact" size="default" asChild>
+            <a href={waHref()} target="_blank" rel="noopener noreferrer">
+              Solicitar demo
+            </a>
           </Button>
         </div>
 
@@ -88,7 +89,7 @@ const Navbar = ({ sobreClaro: forzarClaro }: { sobreClaro?: boolean } = {}) => {
       </div>
 
       {isMobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-[#0B0A14]/97 backdrop-blur-md shadow-lg p-6 animate-fade-in">
+        <div className="md:hidden absolute top-full left-0 right-0 bg-[#0B0A14]/95 backdrop-blur-md shadow-lg p-6 animate-fade-in-up">
           <div className="flex flex-col gap-4">
             <a
               href="#modulos"
@@ -112,15 +113,15 @@ const Navbar = ({ sobreClaro: forzarClaro }: { sobreClaro?: boolean } = {}) => {
               Contacto
             </a>
             <hr className="border-[#F5F0E8]/15 my-2" />
-            <Button
-              variant="contact"
-              className="w-full"
-              onClick={() => {
-                setIsMobileMenuOpen(false);
-                abrir("navbar-movil");
-              }}
-            >
-              Solicitar demo
+            <Button variant="contact" className="w-full" asChild>
+              <a
+                href={waHref()}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Solicitar demo
+              </a>
             </Button>
           </div>
         </div>

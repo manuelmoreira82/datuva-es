@@ -1,12 +1,10 @@
-import { ArrowRight, Mail, Phone, User } from "lucide-react";
+import { ArrowRight, MessageCircle, Phone, User } from "lucide-react";
 import Aforo from "@/components/Aforo";
 import { Button } from "@/components/ui/button";
-import { useContactDialog } from "@/components/ContactDialog";
+import { waHref, TEL_CONTACTO, TEL_CONTACTO_LEGIBLE } from "@/lib/contacto";
 import CopaFinal from "@/components/CopaFinal";
 
 const CTAFinalSection = () => {
-  const { abrir } = useContactDialog();
-
   return (
     <section id="demo" className="relative overflow-hidden py-28 text-cream md:py-44">
       <Aforo />
@@ -32,11 +30,13 @@ const CTAFinalSection = () => {
           <Button
             variant="contact"
             size="lg"
-            onClick={() => abrir("cta-final")}
+            asChild
             className="h-auto gap-3 px-10 py-6 font-mono text-xs uppercase tracking-[0.14em]"
           >
-            Quiero ver la demo
-            <ArrowRight className="w-5 h-5" />
+            <a href={waHref()} target="_blank" rel="noopener noreferrer">
+              Quiero ver la demo
+              <ArrowRight className="w-5 h-5" />
+            </a>
           </Button>
 
           <div className="mt-14 border-t border-cream/20 pt-10">
@@ -48,13 +48,13 @@ const CTAFinalSection = () => {
                 <span className="text-cream/65 text-sm">Director General / Fundador</span>
               </div>
               <div className="flex flex-col items-center gap-4 text-sm text-cream/65 sm:flex-row">
-                <a href="tel:+34627130891" className="flex items-center gap-2 hover:text-cream transition-colors">
+                <a href={`tel:${TEL_CONTACTO}`} className="flex items-center gap-2 hover:text-cream transition-colors">
                   <Phone className="w-4 h-4" />
-                  627 130 891
+                  {TEL_CONTACTO_LEGIBLE}
                 </a>
-                <a href="mailto:manuelmoreira@datuva.es" className="flex items-center gap-2 hover:text-cream transition-colors">
-                  <Mail className="w-4 h-4" />
-                  manuelmoreira@datuva.es
+                <a href={waHref()} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-cream transition-colors">
+                  <MessageCircle className="w-4 h-4" />
+                  WhatsApp
                 </a>
               </div>
             </div>

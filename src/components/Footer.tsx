@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import Logo from "@/components/Logo";
-import { Instagram, Mail, Phone } from "lucide-react";
+import { Instagram, MessageCircle, Phone } from "lucide-react";
+import { waHref, TEL_CONTACTO, TEL_CONTACTO_LEGIBLE } from "@/lib/contacto";
 
 const Footer = () => {
   return (
@@ -22,18 +23,20 @@ const Footer = () => {
               @datuva.es
             </a>
             <a
-              href="mailto:manuelmoreira@datuva.es"
+              href={waHref()}
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center gap-2 hover:text-primary-foreground transition-colors"
             >
-              <Mail className="w-4 h-4" />
-              manuelmoreira@datuva.es
+              <MessageCircle className="w-4 h-4" />
+              WhatsApp
             </a>
             <a
-              href="tel:+34627130891"
+              href={`tel:${TEL_CONTACTO}`}
               className="flex items-center gap-2 hover:text-primary-foreground transition-colors"
             >
               <Phone className="w-4 h-4" />
-              627 130 891
+              {TEL_CONTACTO_LEGIBLE}
             </a>
           </div>
         </div>
