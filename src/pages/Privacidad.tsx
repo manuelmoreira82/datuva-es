@@ -23,7 +23,7 @@ const Privacidad = () => {
             Política de Privacidad
           </h1>
           <p className="text-muted-foreground mb-8">
-            Última actualización: Enero 2025
+            Última actualización: Septiembre 2026
           </p>
 
           <section className="mb-8">
@@ -33,7 +33,7 @@ const Privacidad = () => {
             </p>
             <div className="bg-muted/50 p-4 rounded-lg my-4">
               <p className="text-foreground/80"><strong>Identidad:</strong> Manuel Moreira / Datuva</p>
-              <p className="text-foreground/80"><strong>Correo electrónico:</strong> Manuelmoreira@datuva.es</p>
+              <p className="text-foreground/80"><strong>Correo electrónico:</strong> manuelmoreira@datuva.es</p>
               <p className="text-foreground/80"><strong>Ubicación:</strong> El Bierzo, León, España</p>
             </div>
           </section>
@@ -79,6 +79,17 @@ const Privacidad = () => {
             <p className="text-foreground/80 leading-relaxed">
               Los datos de producción, empleados, proveedores y clientes que las bodegas introduzcan en Datuva son tratados por cuenta del Responsable (la Bodega) y conforme a sus instrucciones.
             </p>
+
+            <h3 className="text-lg font-medium text-foreground mt-6 mb-3">3.3 Datos de contacto de visitantes de la web</h3>
+            <p className="text-foreground/80 leading-relaxed mb-3">
+              Si contactas con nosotros a través de la web (por teléfono o WhatsApp), tratamos únicamente los datos que decidas facilitarnos —tu nombre, tu teléfono y el contenido de tu mensaje— con la finalidad de atender tu consulta y, si lo solicitas, prepararte una demostración del servicio.
+            </p>
+            <ul className="list-disc pl-6 text-foreground/80 space-y-2">
+              <li><strong>Finalidad:</strong> atender tu solicitud de información o de demostración.</li>
+              <li><strong>Base legal:</strong> tu consentimiento y la aplicación de medidas precontractuales a petición tuya (art. 6.1.a y 6.1.b del RGPD).</li>
+              <li><strong>Conservación:</strong> durante la gestión de tu solicitud y, si no llega a iniciarse una relación contractual, el tiempo necesario para atender posibles responsabilidades.</li>
+              <li><strong>Contacto por WhatsApp:</strong> si nos escribes por WhatsApp, la comunicación se realiza a través de WhatsApp Ireland Ltd. (grupo Meta), conforme a sus propias condiciones, lo que puede implicar una transferencia internacional de datos a EE. UU. amparada en el marco de adecuación vigente. Si prefieres evitarlo, puedes contactarnos por teléfono o por correo electrónico.</li>
+            </ul>
           </section>
 
           <section className="mb-8">
@@ -127,8 +138,8 @@ const Privacidad = () => {
             <h2 className="text-xl font-semibold text-foreground mb-4">8. Derechos de los Interesados</h2>
             <p className="text-foreground/80 leading-relaxed mb-4">
               Puedes ejercer tus derechos de acceso, rectificación, supresión, oposición, limitación y portabilidad escribiendo a{" "}
-              <a href="mailto:Manuelmoreira@datuva.es" className="text-primary hover:underline">
-                Manuelmoreira@datuva.es
+              <a href="mailto:manuelmoreira@datuva.es" className="text-primary hover:underline">
+                manuelmoreira@datuva.es
               </a>.
             </p>
             <p className="text-foreground/80 leading-relaxed">
@@ -139,7 +150,7 @@ const Privacidad = () => {
           <section className="mb-8">
             <h2 className="text-xl font-semibold text-foreground mb-4">9. Transferencias Internacionales</h2>
             <p className="text-foreground/80 leading-relaxed">
-              Los datos se alojan en servidores ubicados en la Unión Europea. En caso de que fuera necesaria alguna transferencia internacional, se realizaría únicamente a países con decisión de adecuación o con las garantías apropiadas según el RGPD.
+              Los datos se alojan en servidores ubicados en la Unión Europea. La única excepción es el canal de contacto por WhatsApp descrito en el apartado 3.3, que puede implicar un tratamiento fuera de la UE por parte del grupo Meta bajo el marco de adecuación aplicable. Cualquier otra transferencia internacional que fuera necesaria se realizaría únicamente a países con decisión de adecuación o con las garantías apropiadas según el RGPD.
             </p>
           </section>
 
@@ -153,8 +164,8 @@ const Privacidad = () => {
           <section className="mt-12 pt-8 border-t border-border">
             <p className="text-muted-foreground text-sm">
               Para cualquier consulta sobre privacidad, contacta con nosotros en{" "}
-              <a href="mailto:Manuelmoreira@datuva.es" className="text-primary hover:underline">
-                Manuelmoreira@datuva.es
+              <a href="mailto:manuelmoreira@datuva.es" className="text-primary hover:underline">
+                manuelmoreira@datuva.es
               </a>
             </p>
           </section>

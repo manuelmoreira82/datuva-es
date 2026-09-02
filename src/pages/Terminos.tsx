@@ -108,8 +108,8 @@ const Terminos = () => {
           <section className="mt-12 pt-8 border-t border-border">
             <p className="text-muted-foreground text-sm">
               Para cualquier consulta sobre estos términos, contacta con nosotros en{" "}
-              <a href="mailto:Manuelmoreira@datuva.es" className="text-primary hover:underline">
-                Manuelmoreira@datuva.es
+              <a href="mailto:manuelmoreira@datuva.es" className="text-primary hover:underline">
+                manuelmoreira@datuva.es
               </a>
             </p>
           </section>
