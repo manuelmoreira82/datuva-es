@@ -38,6 +38,9 @@ const CTAFinalSection = () => {
               <ArrowRight className="w-5 h-5" />
             </a>
           </Button>
+          <p className="mt-5 text-sm text-cream/60">
+            Desde <span className="cifras font-semibold text-gold">150 €/mes</span> + IVA
+          </p>
 
           <div className="mt-14 border-t border-cream/20 pt-10">
             <div className="flex flex-col items-center gap-4">
