@@ -88,7 +88,8 @@ const ROISection = () => {
           className="mt-14 max-w-2xl text-lg leading-relaxed text-cream/75"
         >
           Con Datuva, desde{" "}
-          <span className="cifras font-semibold text-gold">150 €/mes</span>{" "}
+          <span className="cifras font-semibold text-gold">150 €/mes</span>
+          <span className="text-cream/60"> + IVA</span>{" "}
           eliminas el riesgo, recuperas horas y tomas decisiones con datos reales.
           No es un gasto, es la inversión más rentable de tu bodega.
         </motion.p>
