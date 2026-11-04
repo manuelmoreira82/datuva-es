@@ -70,5 +70,5 @@ hex sueltos. Playfair Display + Inter.
 - **nov-2026 (rama `portada-nueva`)**: portada nueva desde el concepto «Datuva Signature»
   (`src/pages/Index.tsx` + `src/portada/`). three.js, GSAP y Lenis (aprobados por el
   fundador) se cargan con `import()` tras el primer pintado en `src/portada/escena.ts`.
-  Vuelve el `ContactDialog` (CTA «Solicitar demo»). Ojo: `.portada` usa
+  CTAs a WhatsApp, sin formulario (decisión del fundador). Ojo: `.portada` usa
   `overflow-x: clip`, no `hidden` — `hidden` rompe los `position: sticky`.

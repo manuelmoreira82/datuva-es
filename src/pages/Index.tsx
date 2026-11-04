@@ -3,7 +3,6 @@ import FAQSection from "@/components/FAQSection";
 import Footer from "@/components/Footer";
 import CookieBanner from "@/components/CookieBanner";
 import WhatsAppButton from "@/components/WhatsAppButton";
-import { useContactDialog } from "@/components/ContactDialog";
 import { waHref, TEL_CONTACTO, TEL_CONTACTO_LEGIBLE } from "@/lib/contacto";
 import IntroLogo from "@/portada/IntroLogo";
 import logoLockup from "@/assets/datuva-logo-lockup.webp";
@@ -69,7 +68,6 @@ const Copiar = ({ texto, selId }: { texto: string; selId: string }) => {
 
 const Index = () => {
   const raiz = useRef<HTMLDivElement>(null);
-  const { abrir } = useContactDialog();
   const [lite] = useState(detectarLite);
   const [reduce] = useState(detectarReduce);
   const [conIntro] = useState(() => !lite && !reduce);
@@ -127,9 +125,9 @@ const Index = () => {
             <li><a href="#botella">La botella</a></li>
             <li><a href="#bierzo">El Bierzo</a></li>
           </ul>
-          <button type="button" className="btn lleno" onClick={() => abrir("portada-nav")}>
+          <a className="btn lleno" href={waHref()} target="_blank" rel="noopener noreferrer">
             Solicitar demo
-          </button>
+          </a>
         </div>
       </nav>
 
@@ -471,11 +469,8 @@ const Index = () => {
               </div>
               <div className="lateral">
                 <p className="precio" style={{ margin: 0 }}>Desde <b>150 €/mes</b> + IVA</p>
-                <button type="button" className="btn lleno" onClick={() => abrir("portada-cierre")}>
-                  Solicitar demo
-                </button>
-                <a className="btn sec" href={waHref()} target="_blank" rel="noopener noreferrer">
-                  O escríbenos por WhatsApp
+                <a className="btn lleno" href={waHref()} target="_blank" rel="noopener noreferrer">
+                  Escribir por WhatsApp
                 </a>
                 <div className="contacto">
                   <div className="fila-tel">

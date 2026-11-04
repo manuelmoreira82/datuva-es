@@ -64,7 +64,7 @@ export function iniciarPortada(raiz: HTMLElement, { lite, reduce, logo, base }: 
     tickLenis = (t: number) => lenis!.raf(t * 1000);
     gsap.ticker.add(tickLenis);
     gsap.ticker.lagSmoothing(0);
-    // El diálogo de contacto (Radix) bloquea el scroll del body: Lenis también.
+    // Si un diálogo de Radix bloquea el scroll del body, Lenis también se para.
     const obs = new MutationObserver(() => {
       if (document.body.hasAttribute("data-scroll-locked")) lenis!.stop();
       else lenis!.start();
