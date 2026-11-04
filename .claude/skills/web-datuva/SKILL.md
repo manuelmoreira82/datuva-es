@@ -72,3 +72,6 @@ hex sueltos. Playfair Display + Inter.
   fundador) se cargan con `import()` tras el primer pintado en `src/portada/escena.ts`.
   CTAs a WhatsApp, sin formulario (decisión del fundador). Ojo: `.portada` usa
   `overflow-x: clip`, no `hidden` — `hidden` rompe los `position: sticky`.
+- **nov-2026**: la portada usa Playfair Display / Inter / DM Mono **alojadas en
+  `public/fonts/`** (licencias OFL-*.txt al lado). No cargarlas desde Google Fonts:
+  la Política de Privacidad y la de Cookies dicen que no hay terceros (salvo WhatsApp).
