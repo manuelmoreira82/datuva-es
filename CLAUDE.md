@@ -50,7 +50,8 @@ Negro `#0B0A14` · dorado `#C9A227` · cream `#F5F0E8` · azul oscuro `#1B2A4A`
 titulares y CTAs de un color que no es de la marca.
 
 ## Trampas conocidas
-- **`og-image.png` pesa 1,1 MB.** Por encima de ~300 KB WhatsApp no muestra miniatura.
+- **Imagen al compartir: `public/og-image.jpg`, 1200×630, ~78 KB.** Mantenerla por debajo
+  de ~300 KB: por encima WhatsApp no enseña la miniatura (canal de captación).
 - **`www.datuva.es` (CNAME) vs `datuva.es` (canonical y sitemap):** incoherente, sin
   decidir cuál es el canónico.
 - **`ROISection` publica un precio** («desde 150 €/mes»), decisión del fundador. No

@@ -48,8 +48,8 @@ description: Punto de entrada para trabajar la landing comercial datuva.es — c
 
 ## Trampas conocidas de la web
 
-- **`og-image.png` pesa 1,1 MB** — por encima de ~300 KB WhatsApp no muestra miniatura
-  al compartir, y WhatsApp es canal de captación. Objetivo: < 300 KB a 1200×630.
+- **Imagen al compartir: `public/og-image.jpg`, 1200×630, ~78 KB.** Mantenerla por debajo
+  de ~300 KB: por encima WhatsApp no enseña la miniatura (canal de captación).
 - **Canónico incoherente**: el CNAME usa `www.datuva.es`, pero el `<link canonical>` de
   `index.html` y el `sitemap.xml` usan `datuva.es` sin www. Para Google son dos sitios;
   hay que elegir uno. Sin decidir.

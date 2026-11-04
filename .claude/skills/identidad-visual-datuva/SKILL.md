@@ -53,9 +53,8 @@ Playfair Display (display) + Inter (texto), cargadas desde Google Fonts en
 
 ## Trampas de assets
 
-- **`og-image.png` pesa 1,1 MB.** Por encima de ~300 KB WhatsApp no renderiza la
-  miniatura al compartir, y WhatsApp es canal de captación. Objetivo: < 300 KB
-  manteniendo 1200×630.
+- **Imagen al compartir: `public/og-image.jpg`, 1200×630, ~78 KB.** Mantenerla por debajo
+  de ~300 KB: por encima WhatsApp no enseña la miniatura (canal de captación).
 - Hay assets sin usar y pesados en `src/assets` (`datuva-logo.jpg` 1,7 MB,
   `hero-bodega.jpg` 2,3 MB). **No afectan al bundle** — Vite solo empaqueta lo
   importado — pero engordan el repo. No los borres sin comprobar que nadie los importa.
