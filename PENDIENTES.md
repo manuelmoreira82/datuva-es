@@ -89,6 +89,10 @@ repositorio:
 
 ## Hecho y verificado
 
+- Portada (rama `portada-nueva`): tipografías del concepto alojadas en `public/fonts/`
+  (latin + latin-ext, licencia SIL OFL). Verificado con Playwright: 0 peticiones a
+  fonts.googleapis.com / fonts.gstatic.com.
+
 - Copy de SILICIE / INFOVI / libros JCyL precisada: Datuva **prepara y exporta**,
   la presentación la hace la bodega o su gestoría. Antes la web contradecía a los
   propios Términos y Condiciones.
