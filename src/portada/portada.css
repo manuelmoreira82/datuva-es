@@ -1,14 +1,14 @@
 /* Portada (ruta «/»). Portado del concepto «Datuva Signature».
    Todo va colgado de `.portada` para no tocar el resto de páginas ni los
-   componentes de shadcn. Tipografías: las del sistema, como el resto de la web
-   (ver tailwind.config.ts); el concepto cargaba Playfair/Inter/DM Mono de
-   Google Fonts y aquí se ha mantenido la decisión del repo. */
+   componentes de shadcn. Tipografías del concepto (Playfair Display, Inter,
+   DM Mono), cargadas con <link> en index.html; el resto de páginas sigue con
+   las del sistema (tailwind.config.ts). */
 .portada{color-scheme:dark;
   --negro:#0B0A14; --negro-2:#13111c; --oro:#C9A227; --crema:#F5F0E8; --vino:#7C2D3E;
   --vino-hondo:#3a0f1a; --azul:#1B2A4A; --gris:#aaa59d; --linea:rgba(245,240,232,.14);
-  --display:Georgia,"Times New Roman",serif;
-  --texto:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",sans-serif;
-  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --display:"Playfair Display",Georgia,"Times New Roman",serif;
+  --texto:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --mono:"DM Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
   --ease:cubic-bezier(.16,1,.3,1);}
 .portada *{box-sizing:border-box}
 html.lenis,html.lenis body{height:auto}
@@ -290,3 +290,7 @@ html.lenis.lenis-smooth{scroll-behavior:auto!important}
 @media (max-width:860px){.portada #t1{top:max(15svh,150px)}}
 /* en móvil los pasos caen encima de la botella: un velo para que se lean */
 @media (max-width:860px){.portada .pasos{right:16px;padding:18px 0 0;background:linear-gradient(180deg,rgba(11,10,20,0),rgba(11,10,20,.82) 18%)}}
+/* los componentes compartidos (FAQ, pie) usan las clases de Tailwind: dentro de la portada, las fuentes del concepto */
+.portada .font-serif{font-family:var(--display)}
+.portada .font-sans{font-family:var(--texto)}
+.portada .font-mono{font-family:var(--mono)}

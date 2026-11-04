@@ -62,7 +62,7 @@ const Footer = () => {
             </div>
 
             <p className="text-sm text-cream/45">
-              C/ Yedra 3, Villafranca del Bierzo, León 24500
+              Villafranca del Bierzo, León
             </p>
           </div>
 

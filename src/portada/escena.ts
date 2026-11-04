@@ -407,13 +407,13 @@ export function iniciarPortada(raiz: HTMLElement, { lite, reduce, logo, base }: 
         g.drawImage(logoImg, 512 - w / 2, 65, w, h);
       } else {
         g.fillStyle = "#C9A227";
-        g.font = '500 92px Georgia, "Times New Roman", serif';
+        g.font = '500 92px "Playfair Display", Georgia, serif';
         g.fillText("DATUVA", 512, 172);
       }
-      g.font = 'italic 400 46px Georgia, "Times New Roman", serif';
+      g.font = 'italic 400 46px "Playfair Display", Georgia, serif';
       g.fillStyle = "#7C2D3E";
       g.fillText("Vino tinto · Añada 2026", 512, 290);
-      g.font = "500 24px ui-monospace, Menlo, Consolas, monospace";
+      g.font = '500 24px "DM Mono", ui-monospace, monospace';
       g.fillStyle = "#0B0A14";
       g.fillText("LOTE L2026E1", 512, 350);
       g.fillStyle = "#6b665e";
@@ -430,6 +430,7 @@ export function iniciarPortada(raiz: HTMLElement, { lite, reduce, logo, base }: 
     etiqueta.rotation.y = 0.5;
     botella.add(etiqueta);
     pintarEtiqueta();
+    if (document.fonts) document.fonts.ready.then(pintarEtiqueta);
 
     const capsula = new THREE.Mesh(
       new THREE.CylinderGeometry(0.152, 0.152, 0.26, 48),

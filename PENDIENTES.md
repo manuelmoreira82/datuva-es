@@ -87,17 +87,6 @@ repositorio:
 
 ---
 
-## 7. Portada nueva (rama `portada-nueva`) — REVISAR ANTES DE MERGEAR
-
-- **Dirección en el pie:** el `Footer` (sin tocar) sigue mostrando «C/ Yedra 3»; en la
-  portada el texto solo dice «Villafranca del Bierzo, León». Decidir si el pie la
-  mantiene (el Aviso Legal sí debe llevarla).
-- **Tipografía:** el concepto usaba Playfair Display / Inter / DM Mono de Google Fonts;
-  la portada usa las fuentes del sistema, como el resto de la web. Cambiarlo es
-  decisión de marca.
-
----
-
 ## Hecho y verificado
 
 - Copy de SILICIE / INFOVI / libros JCyL precisada: Datuva **prepara y exporta**,
