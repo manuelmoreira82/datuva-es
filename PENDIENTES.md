@@ -1,6 +1,6 @@
 # Pendientes — datuva.es
 
-Última actualización: 7 de agosto de 2026.
+Última actualización: 4 de noviembre de 2026.
 
 ---
 
@@ -48,12 +48,10 @@ Si algún día se completa:
 
 ---
 
-## 3. `og-image.png` pesa 1,1 MB — PENDIENTE
+## 3. `og-image` — HECHO (4-nov-2026)
 
-Por encima de unos 300 KB, WhatsApp no renderiza la miniatura al compartir el
-enlace. Siendo WhatsApp un canal de captación, conviene comprimirla.
-
-Objetivo: menos de 300 KB manteniendo 1200×630.
+Ahora es `public/og-image.jpg`, 1200×630, ~78 KB (antes PNG de 1,1 MB y 1376×768,
+que además no coincidía con el tamaño declarado en `index.html`). Mismo diseño.
 
 ---
 
