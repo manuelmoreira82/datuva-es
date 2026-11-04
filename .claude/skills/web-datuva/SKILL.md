@@ -67,3 +67,8 @@ Negro `#0B0A14` · dorado `#C9A227` · cream `#F5F0E8` · azul `#1B2A4A` · vino
 hex sueltos. Playfair Display + Inter.
 
 *(añade aquí cada cambio real que se haga en la web, con fecha)*
+- **nov-2026 (rama `portada-nueva`)**: portada nueva desde el concepto «Datuva Signature»
+  (`src/pages/Index.tsx` + `src/portada/`). three.js, GSAP y Lenis (aprobados por el
+  fundador) se cargan con `import()` tras el primer pintado en `src/portada/escena.ts`.
+  Vuelve el `ContactDialog` (CTA «Solicitar demo»). Ojo: `.portada` usa
+  `overflow-x: clip`, no `hidden` — `hidden` rompe los `position: sticky`.
